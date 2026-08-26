@@ -6,12 +6,12 @@
     <title>Vortex AI - Engineered by Raja Jazib Hussain</title>
     <style>
         :root {
-            --bg-base: #050509;
-            --sidebar-bg: #090a10;
-            --panel-bg: rgba(18, 20, 32, 0.75);
-            --border-glass: rgba(255, 255, 255, 0.07);
-            --text-main: #f1f3f9;
-            --text-muted: #8b92a5;
+            --bg-base: #030408;
+            --sidebar-bg: #07080f;
+            --panel-bg: rgba(13, 15, 26, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --accent-glow: #6366f1;
         }
 
@@ -20,6 +20,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -28,19 +30,18 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
-            /* Cinematic deep ambient glow background */
             background-image: 
-                radial-gradient(circle at 20% -10%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 110%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
-            animation: appEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                radial-gradient(circle at 15% -10%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 110%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+            animation: appEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes appEntrance {
-            0% { opacity: 0; filter: blur(8px); }
-            100% { opacity: 1; filter: blur(0); }
+            0% { opacity: 0; transform: scale(0.99); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Sidebar Styling */
+        /* Sidebar */
         .sidebar {
             width: 280px;
             background-color: var(--sidebar-bg);
@@ -49,7 +50,7 @@
             flex-direction: column;
             padding: 20px;
             z-index: 100;
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
         }
 
         .brand-box {
@@ -70,7 +71,7 @@
             font-weight: 900;
             font-size: 20px;
             color: white;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
             position: relative;
         }
 
@@ -126,7 +127,7 @@
         }
 
         .nav-item:hover, .nav-item.active {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.06);
             color: #ffffff;
             border: 1px solid var(--border-glass);
         }
@@ -142,8 +143,8 @@
 
         /* Quota Widget */
         .usage-widget {
-            background: rgba(99, 102, 241, 0.04);
-            border: 1px solid rgba(99, 102, 241, 0.15);
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.18);
             padding: 12px;
             border-radius: 12px;
             margin-bottom: 15px;
@@ -206,7 +207,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 30px;
-            background: rgba(5, 5, 9, 0.85);
+            background: rgba(3, 4, 8, 0.85);
             backdrop-filter: blur(20px);
         }
 
@@ -256,7 +257,33 @@
             line-height: 1.6;
         }
 
-        /* Clean Modern Message Bubbles (No loud baby-blue colors) */
+        /* Quick Suggestions Chips */
+        .quick-chips {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .chip {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-glass);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chip:hover {
+            border-color: var(--accent-glow);
+            color: #fff;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Message Bubbles */
         .message-bubble {
             max-width: 78%;
             padding: 16px 20px;
@@ -267,9 +294,9 @@
         }
 
         .message-bubble.user {
-            background: #1e2230;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #f1f3f9;
+            background: #181c2b;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
@@ -277,9 +304,33 @@
         .message-bubble.ai {
             background: var(--panel-bg);
             border: 1px solid var(--border-glass);
-            color: #f1f3f9;
+            color: #f8fafc;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
+        }
+
+        /* Gemini-Style Thinking 3 Dots Animation */
+        .thinking-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+        }
+
+        .thinking-dots span {
+            width: 8px;
+            height: 8px;
+            background-color: #818cf8;
+            border-radius: 50%;
+            animation: bounceDot 1.4s infinite ease-in-out both;
+        }
+
+        .thinking-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .thinking-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounceDot {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
         }
 
         .ai-disclaimer {
@@ -361,7 +412,7 @@
             position: absolute;
             bottom: 45px;
             left: 0;
-            background: #0b0f19;
+            background: #07080f;
             border: 1px solid var(--border-glass);
             border-radius: 12px;
             padding: 8px;
@@ -402,13 +453,13 @@
             background: #4f46e5;
         }
 
-        /* Live Voice Mode Modal (3 Waveform Lines UI) */
+        /* Live Voice Mode Modal */
         .live-voice-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(5, 5, 9, 0.95);
+            background: rgba(3, 4, 8, 0.96);
             backdrop-filter: blur(25px);
             justify-content: center;
             align-items: center;
@@ -454,7 +505,7 @@
         }
 
         .modal-card {
-            background: #0b0f19;
+            background: #07080f;
             border: 1px solid var(--border-glass);
             border-radius: 20px;
             width: 520px;
@@ -465,7 +516,7 @@
 
         .modal-card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; font-weight: 700; }
         .modal-card label { font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-        .modal-card input, .modal-card select { width: 100%; background: #050509; border: 1px solid var(--border-glass); padding: 12px; color: white; border-radius: 10px; font-size: 14px; outline: none; }
+        .modal-card input, .modal-card select { width: 100%; background: #030408; border: 1px solid var(--border-glass); padding: 12px; color: white; border-radius: 10px; font-size: 14px; outline: none; }
         .modal-close { background: #374151; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; margin-top: 20px; float: right; }
 
         @media (max-width: 768px) {
@@ -515,7 +566,7 @@
     <div class="main-workspace">
         <div class="top-header">
             <div class="model-selector">
-                ⚡ Vortex-6.0 Executive Intelligence
+                ⚡ Vortex-7.0 Ultra Intelligence
             </div>
             <div style="font-size: 12px; color: #34d399; font-weight: 600;">
                 Brand: Raja Jazib Hussain
@@ -525,13 +576,20 @@
         <div class="chat-container" id="chat-container">
             <div class="welcome-banner" id="welcome-banner">
                 <h1>Vortex AI Intelligence</h1>
-                <p>Advanced reasoning, realistic vehicle and photo enhancement, structured definitions, and real-time voice integration, engineered by Raja Jazib Hussain.</p>
+                <p>Advanced conversational reasoning, realistic photo and vehicle enhancements, and real-time voice integration, engineered by Raja Jazib Hussain.</p>
+                
+                <div class="quick-chips">
+                    <div class="chip" onclick="sendQuickPrompt('Hi')">👋 Say Hello</div>
+                    <div class="chip" onclick="sendQuickPrompt('Enhance my car photo realistically')">🚗 Realistc Car Edit</div>
+                    <div class="chip" onclick="sendQuickPrompt('Explain quantum physics simply')">💡 Explain a Topic</div>
+                    <div class="chip" onclick="sendQuickPrompt('Who made this AI?')">🛠️ Developer Info</div>
+                </div>
             </div>
         </div>
 
         <div class="input-area-wrapper">
             <div class="input-box-container">
-                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request definitions, or enhance photos realistically..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
+                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request code, or enhance photos realistically..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
                 
                 <div class="input-toolbar">
                     <div class="tool-btns-left">
@@ -554,7 +612,7 @@
         </div>
     </div>
 
-    <!-- Live Voice Mode Modal (3 Waveform Lines) -->
+    <!-- Live Voice Mode Modal -->
     <div class="live-voice-overlay" id="liveVoiceModal">
         <h2 style="color: white; margin-bottom: 10px; font-weight: 700;">Vortex Live Voice Assistant</h2>
         <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 14px;">Real-time natural voice conversation across all languages...</p>
@@ -570,7 +628,7 @@
         <button onclick="closeLiveVoice()" style="background: #ef4444; color: white; border: none; padding: 12px 28px; border-radius: 20px; font-weight: bold; cursor: pointer;">End Live Session</button>
     </div>
 
-    <!-- Panoflex & Realistic Photo Studio Modal -->
+    <!-- Studio Modal -->
     <div class="modal-overlay" id="studioModal">
         <div class="modal-card">
             <h3>🎨 Panoflex & Realistic Photo Studio</h3>
@@ -614,9 +672,9 @@
             <p style="font-size:13px; color:var(--text-muted);">Unlock unlimited access via JazzCash / EasyPaisa:</p>
             
             <div style="display:flex; flex-direction:column; gap:10px; margin:15px 0;">
-                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Weekly VIP: PKR 900</div>
-                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Monthly Pass: PKR 2,500</div>
-                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Yearly Unlimited: PKR 8,000</div>
+                <div style="background:#030408; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Weekly VIP: PKR 900</div>
+                <div style="background:#030408; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Monthly Pass: PKR 2,500</div>
+                <div style="background:#030408; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Yearly Unlimited: PKR 8,000</div>
             </div>
             <p style="font-size:12px; background:rgba(16,185,129,0.05); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
                 <strong>JazzCash/EasyPaisa:</strong> 0300-XXXXXXX (Raja Jazib Hussain)
@@ -656,11 +714,13 @@
                     }
                 }
                 appendMessage(`[Uploaded File for Realistic Editing: ${file.name}]`, 'user');
-                setTimeout(() => {
-                    let aiReply = `File <em>${file.name}</em> has been processed with high-end realistic rendering. Lighting, textures, and details have been adjusted naturally without artificial distortion.<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
-                    appendMessage(aiReply, 'ai');
-                }, 900);
+                showThinkingAndReply(`File <em>${file.name}</em> has been processed with high-end realistic rendering. Lighting, textures, and details have been adjusted naturally without artificial distortion.`);
             }
+        }
+
+        function sendQuickPrompt(text) {
+            document.getElementById('user-input').value = text;
+            sendMessage();
         }
 
         function sendMessage() {
@@ -673,33 +733,47 @@
             input.value = '';
             input.style.height = 'auto';
 
+            // Generate smart response logic
+            let responseText = "";
+            const lowerText = text.toLowerCase();
+
+            if(lowerText.includes('who made') || lowerText.includes('created you') || lowerText.includes('developer') || lowerText.includes('kis ne banaya')) {
+                responseText = `I was engineered and created by <strong>Raja Jazib Hussain</strong>.`;
+            } 
+            else if(lowerText === 'hi' || lowerText === 'hello' || lowerText === 'salam') {
+                responseText = `Hello! Main aapki kya madad kar sakta hoon?`;
+            }
+            else if(lowerText.includes('definition') || lowerText.includes('define') || lowerText.includes('what is')) {
+                responseText = `Here is a clear and comprehensive breakdown of <strong>${text}</strong>:<br><br>` +
+                               `• <strong>Core Concept:</strong> A precise structural and functional explanation tailored for deep understanding.<br>` +
+                               `• <strong>Key Breakdown:</strong> Explains the fundamental principles clearly.<br>` +
+                               `• <strong>Practical Example:</strong> A fully labeled real-world illustration showing how it applies in context.`;
+            } 
+            else if(lowerText.includes('car') || lowerText.includes('bike') || lowerText.includes('photo') || lowerText.includes('dress') || lowerText.includes('coat') || lowerText.includes('shoes') || lowerText.includes('enhance')) {
+                responseText = `Your request for realistic image enhancement has been processed. Lighting shadows, color grading, and textures have been refined with 100% realism so it looks completely natural.`;
+            } 
+            else {
+                responseText = `I have analyzed your request regarding "${text}". Everything has been structured with high executive precision under Raja Jazib Hussain's platform framework.`;
+            }
+
+            showThinkingAndReply(responseText);
+        }
+
+        function showThinkingAndReply(finalHtml) {
+            const chatContainer = document.getElementById('chat-container');
+            
+            // Create thinking bubble with 3 dots
+            const thinkingMsg = document.createElement('div');
+            thinkingMsg.className = `message-bubble ai`;
+            thinkingMsg.innerHTML = `<div class="thinking-dots"><span></span><span></span><span></span></div>`;
+            chatContainer.appendChild(thinkingMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Simulate Gemini thinking delay (1.2 seconds)
             setTimeout(() => {
-                let responseText = "";
-                const lowerText = text.toLowerCase();
-
-                // Handle Creator Question
-                if(lowerText.includes('who made') || lowerText.includes('created you') || lowerText.includes('developer') || lowerText.includes('kis ne banaya')) {
-                    responseText = `I was engineered and created by <strong>Raja Jazib Hussain</strong>.`;
-                } 
-                // Handle Definitions naturally
-                else if(lowerText.includes('definition') || lowerText.includes('define') || lowerText.includes('what is')) {
-                    responseText = `Here is a clear and comprehensive breakdown of <strong>${text}</strong>:<br><br>` +
-                                   `• <strong>Core Concept:</strong> A precise structural and functional explanation tailored for deep understanding.<br>` +
-                                   `• <strong>Key Breakdown:</strong> Explains the fundamental principles clearly.<br>` +
-                                   `• <strong>Practical Example:</strong> A fully labeled real-world illustration showing how it applies in context.`;
-                } 
-                // Handle Realistic Photo/Vehicle/Clothing requests
-                else if(lowerText.includes('car') || lowerText.includes('bike') || lowerText.includes('photo') || lowerText.includes('dress') || lowerText.includes('coat') || lowerText.includes('shoes') || lowerText.includes('enhance')) {
-                    responseText = `Your request for realistic image enhancement has been processed. Lighting shadows, color grading, and textures have been refined with 100% realism so it looks completely natural.`;
-                } 
-                // General intelligent response
-                else {
-                    responseText = `I have analyzed your request regarding "${text}". Everything has been structured with high executive precision under Raja Jazib Hussain's platform framework.`;
-                }
-
-                responseText += `<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
-                appendMessage(responseText, 'ai');
-            }, 900);
+                thinkingMsg.innerHTML = finalHtml + `<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1200);
         }
 
         function appendMessage(text, sender) {
@@ -752,9 +826,9 @@
             let output = `<strong>🎨 Studio Render Complete (${cat}):</strong><br>` +
                          `• <strong>Subject:</strong> ${title}<br>` +
                          `• <strong>Enhancement Details:</strong> ${details || 'High-end realistic blending'}<br>` +
-                         `<em>Processed with professional photorealistic grading and natural textures under Raja Jazib Hussain.</em>` +
-                         `<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
-            appendMessage(output, 'ai');
+                         `<em>Processed with professional photorealistic grading and natural textures under Raja Jazib Hussain.</em>`;
+            
+            showThinkingAndReply(output);
         }
 
         function switchTab(tab) {
