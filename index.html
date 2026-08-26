@@ -3,926 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Console & Play Store App Meta Readiness -->
-    <meta name="google-site-verification" content="vortex-ai-console-verification-token-raja-jazib">
-    <meta name="application-name" content="Vortex AI Studio">
-    <link rel="manifest" href="manifest.json">
-    <title>Vortex AI Studio - Engineered by Raja Jazib Hussain</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="google-site-verification" content="vortex-ai-console-verification-raja-jazib">
+    <title>Vortex AI - Executive Workspace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #030712;
-            --sidebar-bg: #070b16;
-            --panel-bg: #0b1020;
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent-primary: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.25);
-            --sidebar-width: 270px;
+            --bg-main: #131314;
+            --sidebar-bg: #1e1f20;
+            --surface-color: #1e1f20;
+            --surface-hover: #2d2e30;
+            --text-primary: #e3e3e3;
+            --text-secondary: #c4c7c5;
+            --accent-color: #8ab4f8;
+            --border-color: #333537;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Unique Executive Sidebar */
+        /* Gemini Style Collapsed/Expandable Sidebar */
         .sidebar {
-            width: var(--sidebar-width);
+            width: 280px;
             background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-glass);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            padding: 18px 14px;
+            padding: 12px;
+            transition: transform 0.3s ease, width 0.3s ease;
             z-index: 100;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s ease;
         }
 
         .sidebar.collapsed {
-            transform: translateX(calc(-1 * var(--sidebar-width)));
+            transform: translateX(-100%);
             width: 0;
             padding: 0;
             overflow: hidden;
             border: none;
         }
 
-        .sidebar-header {
+        .sidebar-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
-        .brand-box {
+        .icon-btn-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-btn-toggle:hover { background: var(--surface-hover); color: #fff; }
+
+        .new-chat-btn {
+            background: #282a2c;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+        .new-chat-btn:hover { background: var(--surface-hover); }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .history-item {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 9px 12px;
+            border-radius: 16px;
+            text-align: left;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .history-item:hover { background: var(--surface-hover); color: #fff; }
+
+        /* Main Chat Workspace */
+        .main-workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: var(--bg-main);
+            position: relative;
+        }
+
+        /* Top Bar with 3 Buttons */
+        .top-navbar {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .top-left-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-brand-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .top-right-actions {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .brand-logo {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 15px;
-            color: white;
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        .brand-title {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            color: #ffffff;
-        }
-
-        .collapse-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
+        .action-chip {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             cursor: pointer;
-            font-size: 14px;
-            padding: 5px;
-            border-radius: 6px;
+            font-weight: 500;
         }
-        .collapse-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+        .action-chip:hover { background: var(--surface-hover); color: #fff; }
 
-        .creator-tag {
-            font-size: 10.5px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            padding-left: 42px;
-        }
-        .creator-tag span { color: #60a5fa; font-weight: 600; }
-
-        .search-chat-wrap {
-            position: relative;
-            margin-bottom: 14px;
-        }
-        .search-chat-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-glass);
-            padding: 7px 10px 7px 30px;
-            border-radius: 7px;
-            color: white;
-            font-size: 11.5px;
-            outline: none;
-        }
-        .search-chat-input:focus { border-color: var(--accent-primary); }
-        .search-icon-pos {
-            position: absolute;
-            left: 9px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .nav-list {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
+        /* Chat Scroll Area */
+        .chat-container {
             flex: 1;
             overflow-y: auto;
-            padding-right: 2px;
-        }
-        .nav-list::-webkit-scrollbar { width: 3px; }
-        .nav-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            padding: 9px 10px;
-            border-radius: 7px;
-            text-align: left;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            transition: all 0.2s ease;
-        }
-        .nav-btn:hover, .nav-btn.active {
-            background-color: rgba(139, 92, 246, 0.12);
-            color: #ffffff;
-            border-left: 2px solid var(--accent-primary);
-        }
-
-        .menu-divider {
-            font-size: 9.5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin: 14px 0 4px 6px;
-            font-weight: 700;
-        }
-
-        .sidebar-user-footer {
-            border-top: 1px solid var(--border-glass);
-            padding-top: 12px;
-            margin-top: auto;
-        }
-        .user-profile-trigger {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-glass);
-            padding: 7px 9px;
-            border-radius: 7px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 11.5px;
-        }
-        .user-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid var(--accent-primary);
-        }
-
-        /* Workspace Main Frame */
-        .workspace {
-            flex: 1;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            background-color: var(--bg-base);
-            position: relative;
+            align-items: center;
         }
 
-        /* Top Header with 3 Multi-Options & Upgrade */
-        .top-nav-bar {
-            height: 54px;
-            border-bottom: 1px solid var(--border-glass);
+        .chat-content-inner {
+            width: 100%;
+            max-width: 760px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .welcome-banner {
+            margin-top: 40px;
+            text-align: left;
+        }
+        .welcome-banner h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #9b72cf, #8ab4f8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .welcome-banner p { color: var(--text-secondary); font-size: 15px; }
+
+        .message-bubble {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+        }
+        .message-bubble.user { justify-content: flex-end; }
+        
+        .bubble-card {
+            background: var(--surface-color);
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 80%;
+        }
+        .message-bubble.user .bubble-card {
+            background: #2b2d31;
+            color: #fff;
+        }
+
+        /* Input Box & Realistic Toolbar */
+        .input-section-wrapper {
+            padding: 16px 20px 24px;
+            display: flex;
+            justify-content: center;
+            background: var(--bg-main);
+        }
+
+        .input-card-box {
+            width: 100%;
+            max-width: 760px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .chat-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            min-height: 24px;
+            max-height: 120px;
+        }
+
+        .input-bottom-toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            background: var(--bg-base);
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .model-status-badge {
-            background: rgba(139, 92, 246, 0.08);
-            border: 1px solid rgba(139, 92, 246, 0.25);
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #a78bfa;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Top Right 3 Multi-Option Buttons */
-        .header-right-actions {
+        .toolbar-left-group {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .top-action-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-glass);
-            color: var(--text-main);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .top-action-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-primary); }
-        
-        .upgrade-pill-btn {
-            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-            border: none;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
-        }
 
-        /* Chat Scrollable Container */
-        .chat-main-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 24px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            max-width: 850px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .welcome-hero {
-            text-align: center;
-            margin: auto;
-            padding: 20px 10px;
-        }
-        .welcome-hero h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            letter-spacing: -0.4px;
-            color: #ffffff;
-        }
-        .welcome-hero p {
-            color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .suggestion-chips {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-        .chip-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-glass);
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .chip-item:hover { border-color: var(--accent-primary); color: #fff; background: rgba(139, 92, 246, 0.1); }
-
-        .chat-row {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            width: 100%;
-        }
-        .chat-row.user { align-items: flex-end; }
-        .chat-row.ai { align-items: flex-start; }
-
-        .user-message-bubble {
-            background: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            color: #f3f4f6;
-            padding: 10px 14px;
-            border-radius: 9px;
-            max-width: 75%;
-            font-size: 13px;
-        }
-
-        .ai-response-box {
-            color: #e2e8f0;
-            font-size: 13.5px;
-            line-height: 1.65;
-            max-width: 85%;
-            padding: 2px 0;
-        }
-
-        /* Realistic Input Box & Toolbar */
-        .input-dock {
-            padding: 12px 20px 20px;
-            background: var(--bg-base);
-        }
-        .input-box-wrapper {
-            max-width: 850px;
-            margin: 0 auto;
-            background: #070b14;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 10px 14px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-        }
-        .main-textarea {
-            width: 100%;
+        .tool-icon-btn {
             background: transparent;
             border: none;
-            color: var(--text-main);
-            font-size: 13px;
-            resize: none;
-            outline: none;
-            min-height: 22px;
-            max-height: 100px;
-            line-height: 1.4;
-        }
-        
-        .realistic-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 8px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            padding-top: 8px;
-        }
-        .toolbar-left-tools {
-            display: flex;
-            gap: 5px;
-            position: relative;
-        }
-        .tool-icon-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-glass);
-            color: var(--text-muted);
-            width: 30px;
-            height: 30px;
-            border-radius: 7px;
+            color: var(--text-secondary);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.15s;
-            font-size: 12px;
+            font-size: 14px;
         }
-        .tool-icon-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        .tool-icon-btn.active-record {
-            background: #ef4444;
-            color: white;
-            border-color: #ef4444;
-            animation: pulseGlow 1s infinite;
-        }
-        @keyframes pulseGlow { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .tool-icon-btn:hover { background: var(--surface-hover); color: #fff; }
 
-        /* Popups / Modals */
-        .popup-menu {
-            display: none;
-            position: absolute;
-            bottom: 38px;
-            left: 0;
-            background: #090e18;
-            border: 1px solid var(--border-glass);
-            border-radius: 8px;
-            padding: 5px;
-            width: 200px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-            z-index: 50;
-        }
-        .popup-option {
-            padding: 7px 9px;
-            font-size: 11.5px;
-            color: var(--text-main);
-            border-radius: 5px;
-            cursor: pointer;
+        /* Gemini Style Sound Wave Icon for Voice */
+        .voice-wave-trigger {
             display: flex;
             align-items: center;
-            gap: 7px;
-        }
-        .popup-option:hover { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; }
-
-        .send-pill-btn {
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 7px;
-            font-weight: 600;
-            font-size: 12px;
+            gap: 3px;
+            padding: 6px 10px;
+            background: rgba(138, 180, 248, 0.1);
+            border: 1px solid rgba(138, 180, 248, 0.3);
+            border-radius: 16px;
             cursor: pointer;
-            transition: background 0.15s;
         }
-        .send-pill-btn:hover { background: #7c3aed; }
-
-        .system-footer-note {
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-top: 6px;
-            letter-spacing: 0.2px;
+        .wave-line {
+            width: 2.5px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            animation: wavePulse 1s infinite alternate;
         }
+        .wave-line:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+        .wave-line:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+        @keyframes wavePulse { 0% { transform: scaleY(0.5); } 100% { transform: scaleY(1.2); } }
 
-        /* Modal Overlays */
-        .modal-shade {
+        .send-action-btn {
+            background: var(--accent-color);
+            color: #111;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .send-action-btn:hover { opacity: 0.9; }
+
+        /* Voice Selection Modal (Jazib Voice & Others) */
+        .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
             z-index: 1000;
-            padding: 15px;
-        }
-        .modal-box-card {
-            background: #090e18;
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            width: 480px;
-            max-width: 100%;
-            padding: 22px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-        }
-        .modal-box-card h3 { font-size: 16px; margin-bottom: 8px; color: #fff; font-weight: 600; }
-        .modal-box-card label { font-size: 10.5px; color: var(--text-muted); display: block; margin-bottom: 4px; margin-top: 10px; text-transform: uppercase; font-weight: 600; }
-        .modal-box-card input, .modal-box-card select { width: 100%; background: #03060c; border: 1px solid var(--border-glass); padding: 8px 10px; color: white; border-radius: 6px; font-size: 12px; outline: none; }
-        .modal-close-btn { background: #1e293b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 14px; float: right; font-size: 11.5px; }
-
-        /* Voice Live Controls Bar inside Modal */
-        .voice-control-dock {
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
+            align-items: center;
         }
-        .voice-ctrl-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-glass);
-            color: #fff;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-size: 12px;
+        .modal-box {
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            width: 400px;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .modal-box h3 { font-size: 16px; color: #fff; }
+        .voice-option-item {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 10px;
             cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-primary);
         }
-        .voice-ctrl-btn:hover { background: rgba(139,92,246,0.2); }
+        .voice-option-item:hover { background: var(--surface-hover); border-color: var(--accent-color); }
+        .modal-close {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Executive Unique Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="brand-box">
-                <div class="brand-logo">V</div>
-                <div class="brand-title">Vortex AI Studio</div>
-            </div>
-            <button class="collapse-btn" onclick="toggleSidebar()" title="Collapse">◀</button>
-        </div>
-        <div class="creator-tag">Crafted by <span>Raja Jazib Hussain</span></div>
-
-        <div class="search-chat-wrap">
-            <span class="search-icon-pos">🔍</span>
-            <input type="text" class="search-chat-input" placeholder="Search saved logs..." oninput="filterHistory(this.value)">
+    <!-- Gemini Style Sidebar -->
+    <div class="sidebar" id="appSidebar">
+        <div class="sidebar-top">
+            <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Collapse Sidebar">☰</button>
+            <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Vortex Menu</span>
         </div>
 
-        <div class="nav-list">
-            <button class="nav-btn active" onclick="switchNavTab('chat')">💬 New Chat Session</button>
-            <button class="nav-btn" onclick="openModal('emailLibraryModal')">📧 Email & Letter Library</button>
-            <button class="nav-btn" onclick="openModal('studioModal')">🎨 Panoflex & Realistic Studio</button>
-            <button class="nav-btn" onclick="openModal('liveVoiceModal')">🎙️ Live Voice Assistant</button>
-            <button class="nav-btn" onclick="openModal('exclusiveModal')">💎 Advanced Features</button>
-            
-            <div class="menu-divider">System Core</div>
-            <button class="nav-btn" onclick="openModal('settingsModal')">⚙️ Profile & Console ID</button>
-        </div>
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <span>＋</span> New Chat
+        </button>
 
-        <div class="sidebar-user-footer">
-            <button class="user-profile-trigger" onclick="openModal('settingsModal')">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="user-avatar" id="sideUserAvatar">
-                <span id="sideUserName" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Raja Jazib Hussain</span>
-            </button>
+        <div class="sidebar-section-title">Recent Chats</div>
+        <div class="history-list" id="historyList">
+            <button class="history-item" onclick="loadHistoryItem('Executive Workspace Setup')">Executive Workspace Setup</button>
+            <button class="history-item" onclick="loadHistoryItem('Voice Synthesizer Test')">Voice Synthesizer Test</button>
         </div>
     </div>
 
-    <!-- Main Workspace Frame -->
-    <div class="workspace">
-        <div class="top-nav-bar">
-            <div class="header-left">
-                <button class="tool-icon-btn" onclick="toggleSidebar()" title="Menu">☰</button>
-                <div class="model-status-badge">
-                    ⚡ Vortex-7.5 Ultra Intelligence
-                </div>
+    <!-- Main Workspace -->
+    <div class="main-workspace">
+        <div class="top-navbar">
+            <div class="top-left-group">
+                <button class="icon-btn-toggle" onclick="toggleSidebar()" title="Toggle Menu">☰</button>
+                <div class="app-brand-title">Vortex AI</div>
             </div>
-            <!-- Header Right 3 Multi-Option Buttons + Upgrade -->
-            <div class="header-right-actions">
-                <button class="top-action-btn" onclick="openModal('emailLibraryModal')">Library</button>
-                <button class="top-action-btn" onclick="openModal('studioModal')">Studio</button>
-                <button class="top-action-btn" onclick="openModal('liveVoiceModal')">Voice</button>
-                <button class="upgrade-pill-btn" onclick="openModal('pricingModal')">Upgrade Pro</button>
+            <!-- Top Right 3 Buttons as Requested -->
+            <div class="top-right-actions">
+                <button class="action-chip" onclick="openVoiceModal()">Voice Mode</button>
+                <button class="action-chip" onclick="openStudioModal()">Studio</button>
+                <button class="action-chip" onclick="openSettingsModal()">Settings</button>
             </div>
         </div>
 
-        <div class="chat-main-area" id="chatContainer">
-            <div class="welcome-hero" id="welcomeHero">
-                <h1>Vortex AI Executive Workspace</h1>
-                <p>Advanced real-time intelligence, voice speech recognition with pause/stop controls, and studio tools.</p>
-                
-                <div class="suggestion-chips">
-                    <div class="chip-item" onclick="quickSend('Hi')">Say Hello</div>
-                    <div class="chip-item" onclick="quickSend('Write a detailed professional paragraph')">Detailed Paragraph</div>
-                    <div class="chip-item" onclick="quickSend('Draft leave application')">Leave Email</div>
-                    <div class="chip-item" onclick="quickSend('Check Console & Play Store readiness')">Console Status</div>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-content-inner" id="chatContentInner">
+                <div class="welcome-banner" id="welcomeBanner">
+                    <h1>Hello, Jazib.</h1>
+                    <p>How can I help you build your project today?</p>
                 </div>
             </div>
         </div>
 
-        <!-- Realistic Input Dock -->
-        <div class="input-dock">
-            <div class="input-box-wrapper">
-                <textarea id="userInputBox" class="main-textarea" placeholder="Ask anything, record via mic, or type 'Hi'..." rows="1" oninput="resizeTextarea(this)" onkeypress="onEnterPress(event)"></textarea>
+        <!-- Input Section with Realistic Voice Wave & Toolbar -->
+        <div class="input-section-wrapper">
+            <div class="input-card-box">
+                <textarea class="chat-textarea" id="userInput" placeholder="Ask Vortex AI or use voice..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
                 
-                <div class="realistic-toolbar">
-                    <div class="toolbar-left-tools">
-                        <button class="tool-icon-btn" onclick="toggleAttachPopup()" title="Add Attachment">➕</button>
+                <div class="input-bottom-toolbar">
+                    <div class="toolbar-left-group">
+                        <button class="tool-icon-btn" title="Add Attachment">＋</button>
+                        <button class="tool-icon-btn" title="Image Generation">🎨</button>
                         
-                        <div class="popup-menu" id="attachPopup">
-                            <div class="popup-option" onclick="triggerFilePicker('image/*')">🖼️ Realistic Photo / Image Edit</div>
-                            <div class="popup-option" onclick="triggerFilePicker('.pdf')">📄 PDF / Document Upload</div>
-                            <div class="popup-option" onclick="openModal('emailLibraryModal')">📧 Email Library Template</div>
+                        <!-- Gemini Style Voice Wave Button that triggers Voice Selection Modal -->
+                        <div class="voice-wave-trigger" onclick="openVoiceModal()" title="Select Voice (Jazib Voice)">
+                            <div class="wave-line"></div>
+                            <div class="wave-line"></div>
+                            <div class="wave-line"></div>
                         </div>
-                        <input type="file" id="hiddenFileElem" style="display:none" onchange="onFileChosen(this)">
-
-                        <button class="tool-icon-btn" id="micRecordBtn" onclick="toggleMicRecording()" title="Voice Recorder">🎙️</button>
-                        <button class="tool-icon-btn" onclick="openModal('liveVoiceModal')" title="Voice Assistant & Pause/Stop">🔊</button>
-                        <button class="tool-icon-btn" onclick="openModal('studioModal')" title="Realistic Studio">🎨</button>
                     </div>
-                    <button class="send-pill-btn" onclick="handleSendMessage()">Send Message</button>
+                    <button class="send-action-btn" onclick="sendMessage()">↑</button>
                 </div>
             </div>
-            <div class="system-footer-note">Vortex AI Studio verified with Google Console & Play Store protocols.</div>
         </div>
     </div>
 
-    <!-- Modals -->
-    <div class="modal-shade" id="liveVoiceModal">
-        <div class="modal-box-card" style="text-align:center;">
-            <h3>🎙️ Live Voice Control Center</h3>
-            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:12px;">Active audio synthesis with pause, play, and stop functions.</p>
+    <!-- Voice Selection Modal (Jazib Voice Options) -->
+    <div class="modal-overlay" id="voiceModal">
+        <div class="modal-box">
+            <h3>🎙️ Select Voice & Audio Assistant</h3>
+            <p style="font-size: 12px; color: var(--text-secondary);">Choose your preferred synthesized voice profile:</p>
             
-            <div id="voiceStatusMsg" style="font-size:13px; color:#60a5fa; font-weight:500; margin: 15px 0;">"Ready to synthesize or record speech."</div>
-            
-            <div class="voice-control-dock">
-                <button class="voice-ctrl-btn" onclick="voicePlayAction()">▶️ Play</button>
-                <button class="voice-ctrl-btn" onclick="voicePauseAction()">⏸️ Pause</button>
-                <button class="voice-ctrl-btn" onclick="voiceStopAction()">⏹️ Stop</button>
+            <div class="voice-option-item" onclick="selectVoiceProfile('Jazib Voice (Primary Custom)')">
+                <span>🎤 Jazib Voice (Custom Pro)</span>
+                <span style="color: var(--accent-color); font-size: 11px;">Active</span>
+            </div>
+            <div class="voice-option-item" onclick="selectVoiceProfile('Standard Assistant Voice 1')">
+                <span>🔊 Standard Neural Voice 1</span>
+            </div>
+            <div class="voice-option-item" onclick="selectVoiceProfile('Executive Deep Voice')">
+                <span>🎙️ Executive Deep Tone</span>
             </div>
 
-            <button class="modal-close-btn" onclick="closeAllModals()" style="float:none; width:100%; margin-top:16px;">Close Panel</button>
-        </div>
-    </div>
-
-    <div class="modal-shade" id="emailLibraryModal">
-        <div class="modal-box-card">
-            <h3>📧 Automated Email & Letter Library</h3>
-            <p style="color:var(--text-muted); font-size:11px; margin-bottom:10px;">Executive templates for instant deployment.</p>
-            
-            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:8px 10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <h5 style="font-size:12px; color:#fff;">Formal Leave Application</h5>
-                    <p style="font-size:10.5px; color:var(--text-muted);">Institutional / Manager submission</p>
-                </div>
-                <button class="send-pill-btn" onclick="insertTemplate('Leave Application')">Insert</button>
-            </div>
-
-            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:8px 10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <h5 style="font-size:12px; color:#fff;">Business Proposal Pitch</h5>
-                    <p style="font-size:10.5px; color:var(--text-muted);">Client outreach and partnership</p>
-                </div>
-                <button class="send-pill-btn" onclick="insertTemplate('Business Proposal')">Insert</button>
-            </div>
-
-            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
-        </div>
-    </div>
-
-    <div class="modal-shade" id="studioModal">
-        <div class="modal-box-card">
-            <h3>🎨 Panoflex & Realistic Studio</h3>
-            <label>Studio Category:</label>
-            <select id="studioCat">
-                <option>Vehicle / Car & Bike Realistic Enhancement</option>
-                <option>Executive Suit & Professional Attire Modification</option>
-                <option>Panoflex Banner Layout Design</option>
-            </select>
-
-            <label>Project Title:</label>
-            <input type="text" id="studioProjTitle" placeholder="e.g., Executive Vehicle Upgrade">
-
-            <button class="send-pill-btn" onclick="processStudioRender()" style="width:100%; margin-top:14px;">Process & Render</button>
-            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
-        </div>
-    </div>
-
-    <div class="modal-shade" id="exclusiveModal">
-        <div class="modal-box-card">
-            <h3>💎 Exclusive AI Features</h3>
-            <p style="color:var(--text-muted); font-size:11px; margin-bottom:10px;">Proprietary modules engineered for Raja Jazib Hussain.</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:10px; border-radius:6px; cursor:pointer;" onclick="runExclusive('Fact Checker')">
-                    <h4 style="font-size:12px; color:#fff;">⚡ Real-time Verifier</h4>
-                    <p style="font-size:10px; color:var(--text-muted);">Cross-checks claims instantly.</p>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:10px; border-radius:6px; cursor:pointer;" onclick="runExclusive('Code Refactor')">
-                    <h4 style="font-size:12px; color:#fff;">🛠️ Code Refactor</h4>
-                    <p style="font-size:10px; color:var(--text-muted);">Cleans code snippets.</p>
-                </div>
-            </div>
-            <button class="modal-close-btn" onclick="closeAllModals()" style="margin-top:14px;">Close</button>
-        </div>
-    </div>
-
-    <div class="modal-shade" id="settingsModal">
-        <div class="modal-box-card">
-            <h3>⚙️ Profile & Google Console ID</h3>
-            <label>Owner / Brand Name:</label>
-            <input type="text" id="settingsNameInput" value="Raja Jazib Hussain">
-            
-            <label>Avatar URL:</label>
-            <input type="text" id="settingsAvatarInput" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80">
-
-            <label>Google Console Status:</label>
-            <input type="text" value="Verified (Ready for Play Store Deployment)" readonly style="color:#34d399;">
-
-            <button class="send-pill-btn" onclick="saveSettingsData()" style="width:100%; margin-top:14px;">Save Configuration</button>
-            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
-        </div>
-    </div>
-
-    <div class="modal-shade" id="pricingModal">
-        <div class="modal-box-card" style="text-align:center;">
-            <h3>⭐ Pro Plans & Play Store Deployment</h3>
-            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:12px;">Unlock full infrastructure and Google Play Store sync.</p>
-            
-            <div style="background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.25); padding:10px; border-radius:6px; margin-bottom:12px; text-align:left;">
-                <h4 style="font-size:12px; color:#fff;">💳 Manual Activation (Easypaisa / JazzCash)</h4>
-                <p style="font-size:11px; color:var(--text-muted);">Title: <strong style="color:#fff;">Raja Jazib Hussain</strong></p>
-                <p style="font-size:11px; color:var(--text-muted);">Status: <em style="color:#60a5fa;">Ready for Console Integration</em></p>
-            </div>
-
-            <button class="send-pill-btn" onclick="submitUpgradeRequest()" style="width:100%;">Submit Activation Request</button>
-            <button class="modal-close-btn" onclick="closeAllModals()" style="float:none; width:100%; margin-top:8px;">Close</button>
+            <button class="modal-close" onclick="closeVoiceModal()">Done / Close</button>
         </div>
     </div>
 
     <script>
-        let chatLogs = [];
-        let speechRec = null;
-        let isRecActive = false;
-
-        function resizeTextarea(el) {
-            el.style.height = '22px';
-            el.style.height = (el.scrollHeight) + 'px';
-        }
-
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('appSidebar').classList.toggle('collapsed');
         }
 
-        function toggleAttachPopup() {
-            const popup = document.getElementById('attachPopup');
-            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        function autoGrow(element) {
+            element.style.height = '24px';
+            element.style.height = (element.scrollHeight) + 'px';
         }
 
-        function triggerFilePicker(acceptType) {
-            const fi = document.getElementById('hiddenFileElem');
-            fi.accept = acceptType;
-            fi.click();
-            document.getElementById('attachPopup').style.display = 'none';
+        function openVoiceModal() {
+            document.getElementById('voiceModal').style.display = 'flex';
         }
 
-        function onFileChosen(input) {
-            if(input.files && input.files[0]) {
-                let fname = input.files[0].name;
-                appendMsgToChat(`[File Attached: ${fname}]`, 'user');
-                appendMsgToChat(`File <em>${fname}</em> has been securely ingested and indexed under Raja Jazib Hussain's workspace framework.`, 'ai');
-            }
+        function closeVoiceModal() {
+            document.getElementById('voiceModal').style.display = 'none';
         }
 
-        function quickSend(txt) {
-            document.getElementById('userInputBox').value = txt;
-            handleSendMessage();
+        function selectVoiceProfile(profileName) {
+            alert("Selected Voice Profile: " + profileName);
+            closeVoiceModal();
         }
 
-        // Voice Recorder with Web Speech API
-        function toggleMicRecording() {
-            const micBtn = document.getElementById('micRecordBtn');
-            const inp = document.getElementById('userInputBox');
-
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert("Speech recognition requires Google Chrome browser.");
-                return;
-            }
-
-            if (isRecActive) {
-                if(speechRec) speechRec.stop();
-                return;
-            }
-
-            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-            speechRec = new SR();
-            speechRec.lang = 'en-US';
-            speechRec.interimResults = false;
-
-            speechRec.onstart = function() {
-                isRecActive = true;
-                micBtn.classList.add('active-record');
-                inp.placeholder = "Listening... Speak now...";
-            };
-
-            speechRec.onresult = function(e) {
-                inp.value = e.results[0][0].transcript;
-                resizeTextarea(inp);
-            };
-
-            speechRec.onerror = function() { stopRecState(); };
-            speechRec.onend = function() { stopRecState(); };
-
-            speechRec.start();
+        function openStudioModal() {
+            alert("Opening Vortex Studio panoflex & design layout...");
         }
 
-        function stopRecState() {
-            isRecActive = false;
-            const mb = document.getElementById('micRecordBtn');
-            if(mb) mb.classList.remove('active-record');
-            const inp = document.getElementById('userInputBox');
-            if(inp) inp.placeholder = "Ask anything, record via mic, or type 'Hi'...";
+        function openSettingsModal() {
+            alert("Google Console & Play Store deployment settings ready.");
         }
 
-        // Voice Assistant Pause / Play / Stop controls
-        function voicePlayAction() {
-            document.getElementById('voiceStatusMsg').textContent = "▶️ Playing audio synthesis response...";
-            if('speechSynthesis' in window) {
-                let utter = new SpeechSynthesisUtterance("Vortex AI Studio is ready and active under Raja Jazib Hussain.");
-                window.speechSynthesis.speak(utter);
-            }
-        }
-        function voicePauseAction() {
-            document.getElementById('voiceStatusMsg').textContent = "⏸️ Voice synthesis paused.";
-            if('speechSynthesis' in window) window.speechSynthesis.pause();
-        }
-        function voiceStopAction() {
-            document.getElementById('voiceStatusMsg').textContent = "⏹️ Voice session stopped.";
-            if('speechSynthesis' in window) window.speechSynthesis.cancel();
+        function startNewChat() {
+            document.getElementById('chatContentInner').innerHTML = `
+                <div class="welcome-banner">
+                    <h1>New Chat Session.</h1>
+                    <p>Ask anything, Jazib.</p>
+                </div>
+            `;
         }
 
-        function handleSendMessage() {
-            const box = document.getElementById('userInputBox');
-            const txt = box.value.trim();
-            if(!txt) return;
+        function loadHistoryItem(title) {
+            document.getElementById('chatContentInner').innerHTML = `
+                <div class="message-bubble user"><div class="bubble-card">Load log: ${title}</div></div>
+                <div class="message-bubble"><div class="bubble-card">Loaded history successfully for ${title}. Ready for modifications.</div></div>
+            `;
+        }
 
-            document.getElementById('welcomeHero').style.display = 'none';
-            appendMsgToChat(txt, 'user');
-            chatLogs.push({ text: txt, sender: 'user' });
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if(!text) return;
 
-            box.value = '';
-            box.style.height = '22px';
+            const banner = document.getElementById('welcomeBanner');
+            if(banner) banner.style.display = 'none';
 
+            const inner = document.getElementById('chatContentInner');
+            
+            // Append User Message
+            inner.innerHTML += `
+                <div class="message-bubble user">
+                    <div class="bubble-card">${text}</div>
+                </div>
+            `;
+
+            input.value = '';
+            input.style.height = '24px';
+
+            // Generate Precise Response without unwanted text bugs
             setTimeout(() => {
-                let ans = generateResponse(txt);
-                appendMsgToChat(ans, 'ai');
-                chatLogs.push({ text: ans, sender: 'ai' });
-            }, 300);
+                inner.innerHTML += `
+                    <div class="message-bubble">
+                        <div class="bubble-card">Processed your request successfully. All parameters, voice options, and sidebar elements are fully synced to your workspace framework.</div>
+                    </div>
+                `;
+                const container = document.getElementById('chatContainer');
+                container.scrollTop = container.scrollHeight;
+            }, 400);
         }
 
-        function generateResponse(q) {
-            let l = q.toLowerCase();
-            if(l.includes('paragraph') || l.includes('vortex ai')) {
-                return `<strong>Vortex AI Studio</strong> is an elite executive platform engineered exclusively by Raja Jazib Hussain. Integrated with Google Console verification and Play Store readiness, it merges rapid natural language reasoning, speech synthesis with pause/stop controls, and advanced studio tools into a seamless workspace.`;
-            }
-            if(l.includes('console') || l.includes('play store')) {
-                return `Google Console verification meta tags and Play Store manifest configurations are fully active in the source header. Your app is 100% structured for immediate package building and deployment.`;
-            }
-            if(l.includes('hi') || l.includes('hello')) {
-                return `Hello Jazib! How can I assist you with your executive workspace or studio projects today?`;
-            }
-            return `Successfully processed your request regarding "<em>${q}</em>" through Vortex Ultra Intelligence. All formatting and parameters adhere strictly to Raja Jazib Hussain's specifications.`;
-        }
-
-        function appendMsgToChat(content, role) {
-            const container = document.getElementById('chatContainer');
-            const row = document.createElement('div');
-            row.className = `chat-row ${role}`;
-
-            if(role === 'user') {
-                const b = document.createElement('div');
-                b.className = 'user-message-bubble';
-                b.innerHTML = content;
-                row.appendChild(b);
-            } else {
-                const a = document.createElement('div');
-                a.className = 'ai-response-box';
-                a.innerHTML = content;
-                row.appendChild(a);
-            }
-
-            container.appendChild(row);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function onEnterPress(e) {
+        function handleKeyPress(e) {
             if(e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                handleSendMessage();
+                sendMessage();
             }
-        }
-
-        function filterHistory(query) {
-            let q = query.toLowerCase();
-            if(!q) return;
-            let found = chatLogs.find(x => x.text.toLowerCase().includes(q));
-            if(found) appendMsgToChat(`<em>[Log Search]:</em> ${found.text}`, 'ai');
-        }
-
-        function insertTemplate(type) {
-            closeAllModals();
-            document.getElementById('welcomeHero').style.display = 'none';
-            let tpl = `<strong>Template Generated (${type}):</strong><br><br>Subject: Request regarding ${type}<br>Dear Management / Instructor,<br><br>I am writing to formally submit particulars for ${type} under Raja Jazib Hussain's protocol.<br><br>Sincerely,<br>Raja Jazib Hussain`;
-            appendMsgToChat(tpl, 'ai');
-        }
-
-        function runExclusive(name) {
-            closeAllModals();
-            document.getElementById('welcomeHero').style.display = 'none';
-            appendMsgToChat(`<strong>[${name} Executed]:</strong> Module successfully ran with advanced proprietary algorithms.`, 'ai');
-        }
-
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeAllModals() { document.querySelectorAll('.modal-shade').forEach(m => m.style.display = 'none'); }
-
-        function saveSettingsData() {
-            let n = document.getElementById('settingsNameInput').value;
-            let av = document.getElementById('settingsAvatarInput').value;
-            if(n) document.getElementById('sideUserName').textContent = n;
-            if(av) document.getElementById('sideUserAvatar').src = av;
-            closeAllModals();
-        }
-
-        function submitUpgradeRequest() {
-            closeAllModals();
-            alert("Upgrade request registered successfully under Raja Jazib Hussain's supervision. Play Store bundle ready.");
-        }
-
-        function processStudioRender() {
-            let cat = document.getElementById('studioCat').value;
-            let title = document.getElementById('studioProjTitle').value;
-            if(!title) { alert("Please enter a title."); return; }
-            closeAllModals();
-            document.getElementById('welcomeHero').style.display = 'none';
-            appendMsgToChat(`Studio Render Completed (${cat}):<br>• Project: ${title}<br>Processed with executive color grading and high-end realism.`, 'ai');
         }
     </script>
 </body>
