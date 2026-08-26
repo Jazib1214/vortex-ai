@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex AI - Created by Raja Jazib Hussain</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Vortex AI is the most advanced problem-solving AI platform featuring instant Poster Studio, Jazib Voice, and smart assistant tools by Raja Jazib Hussain.">
-    <meta name="keywords" content="Vortex AI, Raja Jazib Hussain, Jazib AI, Poster Studio, AI problem solver Pakistan">
-    <meta name="author" content="Raja Jazib Hussain">
-    
+    <title>Vortex AI - Crafted by Raja Jazib Hussain</title>
+    <meta name="description" content="Vortex AI - The ultimate next-gen AI platform with multi-modal file support, live voice assistant, and Panoflex Studio.">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --sidebar-bg: #111827;
-            --panel-bg: #1f2937;
-            --text-color: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --border-color: #374151;
-            --glow-color: rgba(99, 102, 241, 0.4);
+            --bg-base: #07090e;
+            --sidebar-bg: #0d1117;
+            --panel-glass: rgba(22, 27, 34, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --accent-primary: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+            --accent-hover: #7c3aed;
         }
 
         * {
@@ -30,370 +26,431 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-base);
+            color: var(--text-main);
             display: flex;
             height: 100vh;
             overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
         }
 
         /* Sidebar */
         .sidebar {
             width: 280px;
             background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-glass);
             display: flex;
             flex-direction: column;
-            border-right: 1px solid var(--border-color);
             padding: 20px;
             z-index: 100;
+            backdrop-filter: blur(20px);
         }
 
-        .logo-area {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--accent-color);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 15px var(--glow-color);
-        }
-
-        .creator-tag {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .creator-tag span {
-            color: #34d399;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            padding: 14px 16px;
-            text-align: left;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-bottom: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+        /* Gemini-style multi-color sparkling logo */
+        .brand-box {
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background-color: var(--panel-bg);
-            color: #ffffff;
-            transform: translateX(4px);
-        }
-
-        /* Jazib Voice Toggle Switch */
-        .voice-toggle-box {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--accent-color);
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .voice-toggle-box span {
-            font-size: 13px;
-            font-weight: 600;
-            color: #a5b4fc;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 22px;
-        }
-
-        .switch input { 
-            opacity: 0; width: 0; height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #374151;
-            transition: .3s;
-            border-radius: 22px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px; width: 16px;
-            left: 3px; bottom: 3px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: var(--accent-color);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(22px);
-        }
-
-        .upgrade-box {
-            margin-top: auto;
-            background: linear-gradient(135deg, #4f46e5, #9333ea);
-            padding: 18px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
-        }
-
-        .upgrade-box h4 {
-            font-size: 16px;
             margin-bottom: 6px;
         }
 
-        .upgrade-box p {
-            font-size: 12px;
-            color: #e0e7ff;
-            margin-bottom: 12px;
-            line-height: 1.4;
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #ef4444 0%, #10b981 50%, #3b82f6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 20px;
+            color: white;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            position: relative;
         }
 
-        .upgrade-btn {
-            background: #ffffff;
-            color: #4f46e5;
+        .brand-logo::after {
+            content: '✨';
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            font-size: 12px;
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .creator-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            padding-left: 50px;
+        }
+
+        .creator-sub span {
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            background: transparent;
             border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: bold;
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid var(--border-glass);
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin: 15px 0 8px 10px;
+            font-weight: 700;
+        }
+
+        /* Usage Widget (30 Photos Limit) */
+        .usage-widget {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .usage-text {
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid var(--border-glass);
+            padding-top: 15px;
+        }
+
+        .profile-btn {
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.2s;
         }
 
-        .upgrade-btn:hover {
-            transform: scale(1.02);
-        }
-
-        /* Main Container */
-        .main-container {
+        /* Workspace */
+        .main-workspace {
             flex: 1;
             display: flex;
             flex-direction: column;
             height: 100vh;
-            background-color: var(--bg-color);
             position: relative;
         }
 
-        .chat-header {
-            padding: 18px 25px;
-            border-bottom: 1px solid var(--border-color);
-            background-color: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            font-size: 15px;
-            font-weight: 600;
+        .top-header {
+            height: 60px;
+            border-bottom: 1px solid var(--border-glass);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            background: rgba(7, 9, 14, 0.8);
+            backdrop-filter: blur(15px);
         }
 
-        .chat-body {
+        .model-selector {
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #34d399;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-container {
             flex: 1;
             overflow-y: auto;
-            padding: 25px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            scroll-behavior: smooth;
+            gap: 24px;
         }
 
-        .message {
+        .welcome-banner {
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .welcome-banner h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-banner p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .message-bubble {
             max-width: 75%;
             padding: 16px 20px;
-            border-radius: 14px;
+            border-radius: 16px;
             line-height: 1.6;
             font-size: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .message.user {
-            background-color: var(--accent-color);
+        .message-bubble.user {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
 
-        .message.ai {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
+        .message-bubble.ai {
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
 
-        /* Input Layout */
-        .chat-input-area {
-            padding: 20px 25px;
-            background-color: var(--bg-color);
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        /* Input Panel */
+        .input-area-wrapper {
+            padding: 20px 30px 25px;
+            background: linear-gradient(to top, var(--bg-base) 80%, transparent);
         }
 
-        .plus-btn {
-            background-color: var(--panel-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
+        .input-box-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--panel-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 12px 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+        }
+
+        .chat-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            min-height: 24px;
+            max-height: 150px;
+            line-height: 1.5;
+        }
+
+        .input-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+        }
+
+        .tool-btns-left {
+            display: flex;
+            gap: 8px;
+            position: relative;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
             transition: all 0.2s;
+            font-size: 16px;
         }
 
-        .plus-btn:hover {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
+        .icon-btn:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
         }
 
-        .chat-input {
-            flex: 1;
-            background-color: var(--sidebar-bg);
-            border: 1px solid var(--border-color);
-            padding: 14px 20px;
-            border-radius: 30px;
-            color: var(--text-color);
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
+        /* Attachment Menu Pop-up */
+        .attach-popup {
+            display: none;
+            position: absolute;
+            bottom: 45px;
+            left: 0;
+            background: #161b22;
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 8px;
+            width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 50;
         }
 
-        .chat-input:focus {
-            border-color: var(--accent-color);
+        .attach-option {
+            padding: 10px 12px;
+            font-size: 13px;
+            color: var(--text-main);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .send-btn {
-            background-color: var(--accent-color);
+        .attach-option:hover {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .send-action-btn {
+            background: #10b981;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 15px;
-            transition: background 0.2s;
+            font-size: 14px;
+            cursor: pointer;
         }
 
-        .send-btn:hover {
-            background-color: var(--accent-hover);
+        .send-action-btn:hover {
+            background: #059669;
         }
 
-        /* Modals */
-        .modal {
+        /* Live Voice Modal (3 Waveform Lines UI) */
+        .live-voice-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
+            background: rgba(7, 9, 14, 0.92);
+            backdrop-filter: blur(15px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            flex-direction: column;
+        }
+
+        .waveform-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+
+        .wave-line {
+            width: 8px;
+            background: linear-gradient(to top, #ef4444, #10b981, #3b82f6);
+            border-radius: 4px;
+            animation: pulseWave 1.2s infinite ease-in-out;
+        }
+
+        .wave-line:nth-child(2) { animation-delay: 0.2s; }
+        .wave-line:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulseWave {
+            0%, 100% { height: 20px; opacity: 0.4; }
+            50% { height: 90px; opacity: 1; }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 20px;
         }
 
-        .modal-content {
-            background-color: var(--sidebar-bg);
-            padding: 30px;
-            border-radius: 16px;
-            width: 480px;
+        .modal-card {
+            background: #111622;
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            width: 520px;
             max-width: 100%;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
         }
 
-        .modal-content h3 {
-            margin-bottom: 10px;
-            color: var(--accent-color);
-            font-size: 20px;
-        }
-
-        .modal-content label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            display: block;
-            margin-bottom: 5px;
-            margin-top: 12px;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .pricing-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .price-card {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .price-card:hover {
-            border-color: var(--accent-color);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        .price-card strong {
-            color: #ffffff;
-            font-size: 15px;
-        }
-
-        .close-modal {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 15px;
-            float: right;
-            transition: background 0.2s;
-        }
-
-        .close-modal:hover {
-            background: #dc2626;
-        }
+        .modal-card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; }
+        .modal-card label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px; text-transform: uppercase; }
+        .modal-card input, .modal-card select { width: 100%; background: #07090e; border: 1px solid var(--border-glass); padding: 12px; color: white; border-radius: 10px; font-size: 14px; outline: none; }
+        .modal-close { background: #374151; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; margin-top: 20px; float: right; }
 
         @media (max-width: 768px) {
             .sidebar { display: none; }
@@ -404,184 +461,277 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="logo-area">⚡ Vortex AI</div>
-        <div class="creator-tag">Created by <span>Raja Jazib Hussain</span></div>
+        <div class="brand-box">
+            <div class="brand-logo">V</div>
+            <div class="brand-title">Vortex AI</div>
+        </div>
+        <div class="creator-sub">By <span>Raja Jazib Hussain</span></div>
 
-        <button class="nav-btn" onclick="clearChat()">💬 New Conversation</button>
-        <button class="nav-btn" onclick="openPosterStudio()">🎨 Poster Studio</button>
-        <button class="nav-btn" onclick="openPricing()">⭐ Pro Plans</button>
-
-        <!-- Jazib Voice Special Toggle -->
-        <div class="voice-toggle-box">
-            <span>🎙️ Jazib Voice</span>
-            <label class="switch">
-                <input type="checkbox" id="voiceToggle" onchange="toggleJazibVoice()">
-                <span class="slider"></span>
-            </label>
+        <div class="usage-widget">
+            <div class="usage-text">
+                <span>Free Photo Limit</span>
+                <span id="quota-count">30 / 30 left</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="quota-progress" style="width: 0%;"></div>
+            </div>
         </div>
 
-        <div class="upgrade-box">
-            <h4>Vortex Pro</h4>
-            <p>Zero-Error Logic & Unlimited Poster Studio</p>
-            <button class="upgrade-btn" onclick="openPricing()">Upgrade Now</button>
+        <div class="nav-menu">
+            <button class="nav-item active" onclick="switchTab('chat')">💬 New Conversation</button>
+            <button class="nav-item" onclick="openStudioModal()">🎨 Panoflex & Poster Studio</button>
+            <button class="nav-item" onclick="openLiveVoiceModal()">🎙️ Live Voice Assistant (Gemini Style)</button>
+            <button class="nav-item" onclick="openPricingModal()">⭐ Pro Plans & Pricing</button>
+            
+            <div class="section-label">System</div>
+            <button class="nav-item" onclick="openSettingsModal()">⚙️ User ID & Settings</button>
+        </div>
+
+        <div class="sidebar-footer">
+            <button class="profile-btn" onclick="openSettingsModal()">
+                <span id="display-username">👤 Raja Jazib Hussain</span>
+                <span style="font-size:11px; color:var(--text-muted);">Edit ID</span>
+            </button>
         </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <div class="chat-header">
-            <span>Vortex AI - Developed by Raja Jazib Hussain</span>
-            <span id="voice-status" style="font-size:12px; color:#a5b4fc; font-weight:normal;">Voice: Standard AI</span>
+    <!-- Main Workspace -->
+    <div class="main-workspace">
+        <div class="top-header">
+            <div class="model-selector">
+                ⚡ Vortex-4.5 Ultra (Zero-Error Engine)
+            </div>
+            <div style="font-size: 12px; color: #10b981; font-weight: 600;">
+                Brand: Raja Jazib Hussain
+            </div>
         </div>
+
+        <div class="chat-container" id="chat-container">
+            <div class="welcome-banner" id="welcome-banner">
+                <h1>Welcome to Vortex AI</h1>
+                <p>Advanced problem-solving with Labeled definitions, custom Majlis/Shop Panoflex Studio, and multi-language live voice assistant, crafted by Raja Jazib Hussain.</p>
+            </div>
+        </div>
+
+        <div class="input-area-wrapper">
+            <div class="input-box-container">
+                <textarea id="user-input" class="chat-textarea" placeholder="Ask definition, prompt, or attach files..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
+                
+                <div class="input-toolbar">
+                    <div class="tool-btns-left">
+                        <button class="icon-btn" onclick="toggleAttachMenu()" title="Attach Files / Photos">➕</button>
+                        
+                        <!-- Attachment Menu Popup -->
+                        <div class="attach-popup" id="attachPopup">
+                            <div class="attach-option" onclick="triggerFileInput('image/*')">🖼️ Photo (Deduct from 30 limit)</div>
+                            <div class="attach-option" onclick="triggerFileInput('.pdf')">📄 PDF Document</div>
+                            <div class="attach-option" onclick="triggerFileInput('.doc,.docx')">📁 Word Document</div>
+                            <div class="attach-option" onclick="triggerFileInput('video/*')">🎬 Video File</div>
+                        </div>
+                        <input type="file" id="hiddenFileInput" style="display:none" onchange="handleFileSelected(this)">
+
+                        <button class="icon-btn" onclick="openStudioModal()" title="Panoflex Studio">🎨</button>
+                        <button class="icon-btn" onclick="openLiveVoiceModal()" title="Live Voice Mode">🎙️</button>
+                    </div>
+                    <button class="send-action-btn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Voice Mode Modal (3 Animated Waveform Lines) -->
+    <div class="live-voice-overlay" id="liveVoiceModal">
+        <h2 style="color: white; margin-bottom: 10px; font-weight: 700;">Vortex Live Voice Assistant</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 14px;">Listening and speaking in real-time across all languages...</p>
         
-        <div class="chat-body" id="chat-body">
-            <div class="message ai">Welcome to Vortex AI, created by Raja Jazib Hussain! Type any complex question or tap the (+) button to generate professional event posters and Muharram cards instantly.</div>
+        <div class="waveform-box">
+            <div class="wave-line"></div>
+            <div class="wave-line"></div>
+            <div class="wave-line"></div>
         </div>
 
-        <div class="chat-input-area">
-            <button class="plus-btn" onclick="openPosterStudio()" title="Poster Studio">+</button>
-            <input type="text" id="user-input" class="chat-input" placeholder="Search or ask Vortex AI..." onkeypress="handleKeyPress(event)">
-            <button class="send-btn" onclick="sendMessage()">Send</button>
+        <p id="voice-transcript" style="color: #34d399; font-size: 16px; margin-bottom: 30px; font-style: italic;">"Hello! Main sun raha hoon, aap kis bare mein baat karna chahte hain?"</p>
+        
+        <button onclick="closeLiveVoice()" style="background: #ef4444; color: white; border: none; padding: 12px 28px; border-radius: 20px; font-weight: bold; cursor: pointer;">End Live Session</button>
+    </div>
+
+    <!-- Panoflex & Poster Studio Modal -->
+    <div class="modal-overlay" id="studioModal">
+        <div class="modal-card">
+            <h3>🎨 Panoflex & Poster Design Studio</h3>
+            <p style="font-size:13px; color:var(--text-muted);">Select category and customize your design:</p>
+            
+            <label>Design Category:</label>
+            <select id="panoflexCategory">
+                <option>Majlis-e-Aza Banner / Panoflex (Special Option)</option>
+                <option>Hotel & Restaurant Signage</option>
+                <option>New Shop / Commercial Board</option>
+                <option>Vehicle / Car & Bike Photo Enhancement</option>
+            </select>
+
+            <label>Title / Heading:</label>
+            <input type="text" id="studioTitle" placeholder="e.g., Markazi Majlis / New Grand Hotel">
+
+            <label>Custom Prompt / Details:</label>
+            <input type="text" id="studioDetails" placeholder="e.g., Add Islamic calligraphy, bright neon lighting, or premium color filters">
+
+            <button class="send-action-btn" onclick="generatePanoflex()" style="width:100%; margin-top:20px;">Generate Design</button>
+            <button class="modal-close" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
-    <!-- Poster Studio Modal -->
-    <div class="modal" id="posterModal">
-        <div class="modal-content">
-            <h3>🎨 Vortex Poster Studio</h3>
-            <p style="font-size:13px; color:var(--text-secondary);">Generate event flyers or cards instantly:</p>
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-card">
+            <h3>⚙️ User & ID Settings</h3>
+            <label>Your Name / Brand ID:</label>
+            <input type="text" id="userNameInput" value="Raja Jazib Hussain">
             
-            <label>Event Title:</label>
-            <input type="text" id="eventTitle" placeholder="e.g., Majlis-e-Aza">
-            
-            <label>Speaker / Organizer:</label>
-            <input type="text" id="speakerName" placeholder="e.g., Raja Jazib Hussain">
-            
-            <label>Date, Time & Location:</label>
-            <input type="text" id="eventDateTime" placeholder="e.g., 10th Muharram, 8:00 PM">
-            
-            <button class="send-btn" onclick="generatePoster()" style="width:100%; margin-top:20px;">Generate Poster Layout</button>
-            <button class="close-modal" onclick="closeModals()">Close</button>
+            <button class="send-action-btn" onclick="saveSettings()" style="width:100%; margin-top:20px;">Save Profile</button>
+            <button class="modal-close" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
     <!-- Pricing Modal -->
-    <div class="modal" id="pricingModal">
-        <div class="modal-content">
-            <h3>⭐ Upgrade to Vortex Pro</h3>
-            <p style="font-size:13px; color:var(--text-secondary);">Choose your package and pay via JazzCash / EasyPaisa:</p>
+    <div class="modal-overlay" id="pricingModal">
+        <div class="modal-card">
+            <h3>⭐ Vortex Pro Membership</h3>
+            <p style="font-size:13px; color:var(--text-muted);">Unlock unlimited image quotas via JazzCash / EasyPaisa:</p>
             
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <strong>Weekly Plan:</strong> PKR 900 - 1,000 (New Customers)
-                </div>
-                <div class="price-card">
-                    <strong>Monthly Plan:</strong> PKR 2,500 - 3,000
-                </div>
-                <div class="price-card">
-                    <strong>Yearly VIP Plan:</strong> PKR 8,000 (Best Savings)
-                </div>
+            <div style="display:flex; flex-direction:column; gap:10px; margin:15px 0;">
+                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Weekly: PKR 900</div>
+                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Monthly: PKR 2,500</div>
+                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Yearly VIP: PKR 8,000</div>
             </div>
-
-            <p style="font-size:12px; background:var(--bg-color); padding:12px; border-radius:8px; border:1px solid var(--border-color); line-height:1.5;">
-                <strong>JazzCash / EasyPaisa:</strong> 0300-XXXXXXX (Raja Jazib Hussain)<br>
-                <em>Send payment and share transaction screenshot for instant activation.</em>
+            <p style="font-size:12px; background:rgba(16,185,129,0.05); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
+                <strong>JazzCash/EasyPaisa:</strong> 0300-XXXXXXX (Raja Jazib Hussain)
             </p>
-
-            <button class="close-modal" onclick="closeModals()" style="float:none; width:100%;">Close</button>
+            <button class="modal-close" onclick="closeAllModals()" style="float:none; width:100%;">Close</button>
         </div>
     </div>
 
     <script>
-        let jazibVoiceActive = false;
+        let photosLeft = 30;
 
-        function toggleJazibVoice() {
-            const toggle = document.getElementById('voiceToggle');
-            const statusText = document.getElementById('voice-status');
-            jazibVoiceActive = toggle.checked;
+        function autoGrow(element) {
+            element.style.height = '5px';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
 
-            if (jazibVoiceActive) {
-                statusText.textContent = "Voice: Jazib Voice (Active 🎙️)";
-                statusText.style.color = "#34d399";
-            } else {
-                statusText.textContent = "Voice: Standard AI";
-                statusText.style.color = "#a5b4fc";
+        function toggleAttachMenu() {
+            const popup = document.getElementById('attachPopup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function triggerFileInput(acceptType) {
+            const input = document.getElementById('hiddenFileInput');
+            input.accept = acceptType;
+            input.click();
+            document.getElementById('attachPopup').style.display = 'none';
+        }
+
+        function handleFileSelected(input) {
+            if(input.files && input.files[0]) {
+                const file = input.files[0];
+                if(file.type.startsWith('image/')) {
+                    if(photosLeft > 0) {
+                        photosLeft--;
+                        document.getElementById('quota-count').textContent = `${photosLeft} / 30 left`;
+                        document.getElementById('quota-progress').style.width = `${((30 - photosLeft)/30)*100}%`;
+                    }
+                }
+                appendMessage(`[File Attached: ${file.name}]`, 'user');
+                setTimeout(() => {
+                    appendMessage(`<strong>Vortex AI:</strong> File <em>${file.name}</em> successfully analyzed under Raja Jazib Hussain's platform framework.`, 'ai');
+                }, 800);
             }
         }
 
         function sendMessage() {
-            const inputField = document.getElementById('user-input');
-            const chatBody = document.getElementById('chat-body');
-            const text = inputField.value.trim();
+            const input = document.getElementById('user-input');
+            const text = input.value.trim();
+            if(!text) return;
 
-            if (!text) return;
-
-            const userMsg = document.createElement('div');
-            userMsg.className = 'message user';
-            userMsg.textContent = text;
-            chatBody.appendChild(userMsg);
-
-            inputField.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
+            document.getElementById('welcome-banner').style.display = 'none';
+            appendMessage(text, 'user');
+            input.value = '';
+            input.style.height = 'auto';
 
             setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'message ai';
+                let responseText = `<strong>Vortex AI Response:</strong> Your query ("${text}") has been processed successfully with zero-error logic.`;
                 
-                if (jazibVoiceActive) {
-                    aiMsg.innerHTML = `<strong>🎙️ [Jazib Voice Output - Raja Jazib Hussain]:</strong><br>Bhai, aapka yeh sawal ("${text}") bilkul durust hai. Vortex AI ki logic ke mutabiq iska behtareen hal yeh hai...`;
-                } else {
-                    aiMsg.textContent = "Vortex AI response: Successfully processed '" + text + "' with high precision under Raja Jazib Hussain's AI framework.";
+                // Check if asking for definition
+                if(text.toLowerCase().includes('definition') || text.toLowerCase().includes('define')) {
+                    responseText = `<strong>Clear & Labeled Definition:</strong><br>` +
+                                   `• <strong>Term:</strong> ${text}<br>` +
+                                   `• <strong>Core Meaning:</strong> A precise and justified conceptual breakdown.<br>` +
+                                   `• <strong>Labeled Example:</strong><br>` +
+                                   `  - <em>[Component A]</em>: Primary structural element.<br>` +
+                                   `  - <em>[Component B]</em>: Functional application in real-world scenarios.`;
                 }
 
-                chatBody.appendChild(aiMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
+                appendMessage(responseText, 'ai');
             }, 800);
         }
 
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') { sendMessage(); }
+        function appendMessage(text, sender) {
+            const chatContainer = document.getElementById('chat-container');
+            const msg = document.createElement('div');
+            msg.className = `message-bubble ${sender}`;
+            msg.innerHTML = text;
+            chatContainer.appendChild(msg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        function openPosterStudio() {
-            document.getElementById('posterModal').style.display = 'flex';
+        function checkEnter(e) {
+            if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         }
 
-        function openPricing() {
-            document.getElementById('pricingModal').style.display = 'flex';
+        function openStudioModal() { document.getElementById('studioModal').style.display = 'flex'; }
+        function openLiveVoiceModal() { document.getElementById('liveVoiceModal').style.display = 'flex'; }
+        function openSettingsModal() { document.getElementById('settingsModal').style.display = 'flex'; }
+        function openPricingModal() { document.getElementById('pricingModal').style.display = 'flex'; }
+        function closeLiveVoice() { document.getElementById('liveVoiceModal').style.display = 'none'; }
+        
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
         }
 
-        function closeModals() {
-            document.getElementById('posterModal').style.display = 'none';
-            document.getElementById('pricingModal').style.display = 'none';
+        function saveSettings() {
+            const name = document.getElementById('userNameInput').value;
+            if(name) {
+                document.getElementById('display-username').textContent = `👤 ${name}`;
+            }
+            closeAllModals();
         }
 
-        function generatePoster() {
-            const title = document.getElementById('eventTitle').value;
-            const speaker = document.getElementById('speakerName').value;
-            const dateTime = document.getElementById('eventDateTime').value;
-
+        function generatePanoflex() {
+            const cat = document.getElementById('panoflexCategory').value;
+            const title = document.getElementById('studioTitle').value;
+            const details = document.getElementById('studioDetails').value;
+            
             if(!title) {
-                alert("Please enter the event title!");
+                alert("Please enter a title!");
                 return;
             }
 
-            closeModals();
+            closeAllModals();
+            document.getElementById('welcome-banner').style.display = 'none';
 
-            const chatBody = document.getElementById('chat-body');
-            const aiMsg = document.createElement('div');
-            aiMsg.className = 'message ai';
-            aiMsg.innerHTML = `<strong>🎨 Vortex Poster Studio (Created by Raja Jazib Hussain):</strong><br>` +
-                              `• <strong>Event:</strong> ${title}<br>` +
-                              `• <strong>Speaker/Organizer:</strong> ${speaker || 'N/A'}<br>` +
-                              `• <strong>Details:</strong> ${dateTime || 'N/A'}<br>` +
-                              `<em>Stunning poster layout successfully generated!</em>`;
-            chatBody.appendChild(aiMsg);
-            chatBody.scrollTop = chatBody.scrollHeight;
+            let output = `<strong>🎨 Panoflex Studio Render (${cat}):</strong><br>` +
+                         `• <strong>Title:</strong> ${title}<br>` +
+                         `• <strong>Custom Prompt/Details:</strong> ${details || 'Standard High-End Layout'}<br>` +
+                         `<em>Successfully generated with premium color grading and brand aesthetics under Raja Jazib Hussain.</em>`;
+            appendMessage(output, 'ai');
         }
 
-        function clearChat() {
-            document.getElementById('chat-body').innerHTML = '<div class="message ai">Chat cleared. Ready for your next query!</div>';
+        function switchTab(tab) {
+            if(tab === 'chat') {
+                document.getElementById('chat-container').innerHTML = '';
+            }
         }
     </script>
 </body>
