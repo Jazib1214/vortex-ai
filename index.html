@@ -3,26 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex AI - Crafted by Raja Jazib Hussain</title>
-    <meta name="description" content="Vortex AI - The ultimate next-gen AI platform with multi-modal file support, live voice assistant, and Panoflex Studio.">
+    <title>Vortex AI - Engineered by Raja Jazib Hussain</title>
     <style>
         :root {
-            --bg-base: #07090e;
-            --sidebar-bg: #0d1117;
-            --panel-glass: rgba(22, 27, 34, 0.75);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --accent-primary: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.4);
-            --accent-hover: #7c3aed;
+            --bg-base: #050509;
+            --sidebar-bg: #090a10;
+            --panel-bg: rgba(18, 20, 32, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.07);
+            --text-main: #f1f3f9;
+            --text-muted: #8b92a5;
+            --accent-glow: #6366f1;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
@@ -31,13 +28,19 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
+            /* Cinematic deep ambient glow background */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+                radial-gradient(circle at 20% -10%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 110%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+            animation: appEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Sidebar */
+        @keyframes appEntrance {
+            0% { opacity: 0; filter: blur(8px); }
+            100% { opacity: 1; filter: blur(0); }
+        }
+
+        /* Sidebar Styling */
         .sidebar {
             width: 280px;
             background-color: var(--sidebar-bg);
@@ -46,21 +49,20 @@
             flex-direction: column;
             padding: 20px;
             z-index: 100;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
         }
 
-        /* Gemini-style multi-color sparkling logo */
         .brand-box {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .brand-logo {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #ef4444 0%, #10b981 50%, #3b82f6 100%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ef4444 0%, #10b981 50%, #6366f1 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -68,7 +70,7 @@
             font-weight: 900;
             font-size: 20px;
             color: white;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
             position: relative;
         }
 
@@ -77,23 +79,21 @@
             position: absolute;
             top: -6px;
             right: -6px;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .brand-title {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(to right, #fff, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            color: #ffffff;
         }
 
         .creator-sub {
             font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 25px;
-            padding-left: 50px;
+            margin-bottom: 24px;
+            padding-left: 52px;
         }
 
         .creator-sub span {
@@ -113,10 +113,10 @@
             background: transparent;
             border: none;
             color: var(--text-main);
-            padding: 12px 14px;
+            padding: 11px 14px;
             border-radius: 10px;
             text-align: left;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 500;
             cursor: pointer;
             display: flex;
@@ -132,25 +132,25 @@
         }
 
         .section-label {
-            font-size: 11px;
+            font-size: 10.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             color: var(--text-muted);
-            margin: 15px 0 8px 10px;
+            margin: 16px 0 8px 10px;
             font-weight: 700;
         }
 
-        /* Usage Widget (30 Photos Limit) */
+        /* Quota Widget */
         .usage-widget {
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            background: rgba(99, 102, 241, 0.04);
+            border: 1px solid rgba(99, 102, 241, 0.15);
             padding: 12px;
             border-radius: 12px;
             margin-bottom: 15px;
         }
 
         .usage-text {
-            font-size: 12px;
+            font-size: 11.5px;
             display: flex;
             justify-content: space-between;
             margin-bottom: 6px;
@@ -159,8 +159,8 @@
 
         .progress-bar {
             width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 5px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 3px;
             overflow: hidden;
         }
@@ -168,7 +168,7 @@
         .progress-fill {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #3b82f6);
+            background: linear-gradient(90deg, #6366f1, #34d399);
         }
 
         .sidebar-footer {
@@ -177,7 +177,7 @@
         }
 
         .profile-btn {
-            background: var(--panel-glass);
+            background: var(--panel-bg);
             border: 1px solid var(--border-glass);
             padding: 10px 12px;
             border-radius: 10px;
@@ -187,9 +187,10 @@
             justify-content: space-between;
             cursor: pointer;
             width: 100%;
+            font-size: 13px;
         }
 
-        /* Workspace */
+        /* Main Workspace */
         .main-workspace {
             flex: 1;
             display: flex;
@@ -204,19 +205,19 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
-            background: rgba(7, 9, 14, 0.8);
-            backdrop-filter: blur(15px);
+            padding: 0 30px;
+            background: rgba(5, 5, 9, 0.85);
+            backdrop-filter: blur(20px);
         }
 
         .model-selector {
-            background: var(--panel-glass);
+            background: var(--panel-bg);
             border: 1px solid var(--border-glass);
             padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
-            color: #34d399;
+            color: #818cf8;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -225,24 +226,26 @@
         .chat-container {
             flex: 1;
             overflow-y: auto;
-            padding: 30px;
+            padding: 40px 30px;
             display: flex;
             flex-direction: column;
             gap: 24px;
+            scroll-behavior: smooth;
         }
 
         .welcome-banner {
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             margin: auto;
             padding: 40px 20px;
         }
 
         .welcome-banner h1 {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #10b981, #3b82f6);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -250,47 +253,59 @@
         .welcome-banner p {
             color: var(--text-muted);
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
+        /* Clean Modern Message Bubbles (No loud baby-blue colors) */
         .message-bubble {
-            max-width: 75%;
+            max-width: 78%;
             padding: 16px 20px;
             border-radius: 16px;
-            line-height: 1.6;
-            font-size: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            line-height: 1.65;
+            font-size: 14.5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
         }
 
         .message-bubble.user {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
+            background: #1e2230;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f1f3f9;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
 
         .message-bubble.ai {
-            background: var(--panel-glass);
+            background: var(--panel-bg);
             border: 1px solid var(--border-glass);
+            color: #f1f3f9;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
+        }
+
+        .ai-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 6px;
+            font-style: italic;
         }
 
         /* Input Panel */
         .input-area-wrapper {
             padding: 20px 30px 25px;
-            background: linear-gradient(to top, var(--bg-base) 80%, transparent);
+            background: linear-gradient(to top, var(--bg-base) 85%, transparent);
         }
 
         .input-box-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            background: var(--panel-glass);
+            background: var(--panel-bg);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 12px 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 14px 18px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(25px);
         }
 
         .chat-textarea {
@@ -298,7 +313,7 @@
             background: transparent;
             border: none;
             color: var(--text-main);
-            font-size: 15px;
+            font-size: 14.5px;
             resize: none;
             outline: none;
             min-height: 24px;
@@ -310,7 +325,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 10px;
         }
@@ -322,7 +337,7 @@
         }
 
         .icon-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-glass);
             color: var(--text-main);
             width: 36px;
@@ -333,26 +348,25 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .icon-btn:hover {
-            background: var(--accent-primary);
-            border-color: var(--accent-primary);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
         }
 
-        /* Attachment Menu Pop-up */
         .attach-popup {
             display: none;
             position: absolute;
             bottom: 45px;
             left: 0;
-            background: #161b22;
+            background: #0b0f19;
             border: 1px solid var(--border-glass);
             border-radius: 12px;
             padding: 8px;
-            width: 220px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 240px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             z-index: 50;
         }
 
@@ -368,33 +382,34 @@
         }
 
         .attach-option:hover {
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
         }
 
         .send-action-btn {
-            background: #10b981;
+            background: #6366f1;
             color: white;
             border: none;
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13.5px;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
         .send-action-btn:hover {
-            background: #059669;
+            background: #4f46e5;
         }
 
-        /* Live Voice Modal (3 Waveform Lines UI) */
+        /* Live Voice Mode Modal (3 Waveform Lines UI) */
         .live-voice-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(7, 9, 14, 0.92);
-            backdrop-filter: blur(15px);
+            background: rgba(5, 5, 9, 0.95);
+            backdrop-filter: blur(25px);
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -404,15 +419,15 @@
         .waveform-box {
             display: flex;
             align-items: center;
-            gap: 8px;
-            height: 100px;
-            margin-bottom: 30px;
+            gap: 10px;
+            height: 120px;
+            margin-bottom: 35px;
         }
 
         .wave-line {
-            width: 8px;
-            background: linear-gradient(to top, #ef4444, #10b981, #3b82f6);
-            border-radius: 4px;
+            width: 9px;
+            background: linear-gradient(to top, #ef4444, #10b981, #6366f1);
+            border-radius: 6px;
             animation: pulseWave 1.2s infinite ease-in-out;
         }
 
@@ -420,8 +435,8 @@
         .wave-line:nth-child(3) { animation-delay: 0.4s; }
 
         @keyframes pulseWave {
-            0%, 100% { height: 20px; opacity: 0.4; }
-            50% { height: 90px; opacity: 1; }
+            0%, 100% { height: 25px; opacity: 0.4; }
+            50% { height: 110px; opacity: 1; }
         }
 
         /* Modals */
@@ -430,8 +445,8 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -439,17 +454,18 @@
         }
 
         .modal-card {
-            background: #111622;
+            background: #0b0f19;
             border: 1px solid var(--border-glass);
             border-radius: 20px;
             width: 520px;
             max-width: 100%;
             padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        .modal-card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; }
-        .modal-card label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px; text-transform: uppercase; }
-        .modal-card input, .modal-card select { width: 100%; background: #07090e; border: 1px solid var(--border-glass); padding: 12px; color: white; border-radius: 10px; font-size: 14px; outline: none; }
+        .modal-card h3 { font-size: 20px; margin-bottom: 15px; color: #fff; font-weight: 700; }
+        .modal-card label { font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+        .modal-card input, .modal-card select { width: 100%; background: #050509; border: 1px solid var(--border-glass); padding: 12px; color: white; border-radius: 10px; font-size: 14px; outline: none; }
         .modal-close { background: #374151; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; margin-top: 20px; float: right; }
 
         @media (max-width: 768px) {
@@ -469,7 +485,7 @@
 
         <div class="usage-widget">
             <div class="usage-text">
-                <span>Free Photo Limit</span>
+                <span>Free Photo Quota</span>
                 <span id="quota-count">30 / 30 left</span>
             </div>
             <div class="progress-bar">
@@ -479,18 +495,18 @@
 
         <div class="nav-menu">
             <button class="nav-item active" onclick="switchTab('chat')">💬 New Conversation</button>
-            <button class="nav-item" onclick="openStudioModal()">🎨 Panoflex & Poster Studio</button>
+            <button class="nav-item" onclick="openStudioModal()">🎨 Panoflex & Realistic Photo Studio</button>
             <button class="nav-item" onclick="openLiveVoiceModal()">🎙️ Live Voice Assistant (Gemini Style)</button>
             <button class="nav-item" onclick="openPricingModal()">⭐ Pro Plans & Pricing</button>
             
             <div class="section-label">System</div>
-            <button class="nav-item" onclick="openSettingsModal()">⚙️ User ID & Settings</button>
+            <button class="nav-item" onclick="openSettingsModal()">⚙️ User Profile & ID</button>
         </div>
 
         <div class="sidebar-footer">
             <button class="profile-btn" onclick="openSettingsModal()">
                 <span id="display-username">👤 Raja Jazib Hussain</span>
-                <span style="font-size:11px; color:var(--text-muted);">Edit ID</span>
+                <span style="font-size:11px; color:var(--text-muted);">Configure</span>
             </button>
         </div>
     </div>
@@ -499,38 +515,37 @@
     <div class="main-workspace">
         <div class="top-header">
             <div class="model-selector">
-                ⚡ Vortex-4.5 Ultra (Zero-Error Engine)
+                ⚡ Vortex-6.0 Executive Intelligence
             </div>
-            <div style="font-size: 12px; color: #10b981; font-weight: 600;">
+            <div style="font-size: 12px; color: #34d399; font-weight: 600;">
                 Brand: Raja Jazib Hussain
             </div>
         </div>
 
         <div class="chat-container" id="chat-container">
             <div class="welcome-banner" id="welcome-banner">
-                <h1>Welcome to Vortex AI</h1>
-                <p>Advanced problem-solving with Labeled definitions, custom Majlis/Shop Panoflex Studio, and multi-language live voice assistant, crafted by Raja Jazib Hussain.</p>
+                <h1>Vortex AI Intelligence</h1>
+                <p>Advanced reasoning, realistic vehicle and photo enhancement, structured definitions, and real-time voice integration, engineered by Raja Jazib Hussain.</p>
             </div>
         </div>
 
         <div class="input-area-wrapper">
             <div class="input-box-container">
-                <textarea id="user-input" class="chat-textarea" placeholder="Ask definition, prompt, or attach files..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
+                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request definitions, or enhance photos realistically..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
                 
                 <div class="input-toolbar">
                     <div class="tool-btns-left">
                         <button class="icon-btn" onclick="toggleAttachMenu()" title="Attach Files / Photos">➕</button>
                         
-                        <!-- Attachment Menu Popup -->
                         <div class="attach-popup" id="attachPopup">
-                            <div class="attach-option" onclick="triggerFileInput('image/*')">🖼️ Photo (Deduct from 30 limit)</div>
+                            <div class="attach-option" onclick="triggerFileInput('image/*')">🖼️ Realistic Photo / Vehicle Edit</div>
                             <div class="attach-option" onclick="triggerFileInput('.pdf')">📄 PDF Document</div>
                             <div class="attach-option" onclick="triggerFileInput('.doc,.docx')">📁 Word Document</div>
                             <div class="attach-option" onclick="triggerFileInput('video/*')">🎬 Video File</div>
                         </div>
                         <input type="file" id="hiddenFileInput" style="display:none" onchange="handleFileSelected(this)">
 
-                        <button class="icon-btn" onclick="openStudioModal()" title="Panoflex Studio">🎨</button>
+                        <button class="icon-btn" onclick="openStudioModal()" title="Studio">🎨</button>
                         <button class="icon-btn" onclick="openLiveVoiceModal()" title="Live Voice Mode">🎙️</button>
                     </div>
                     <button class="send-action-btn" onclick="sendMessage()">Send</button>
@@ -539,10 +554,10 @@
         </div>
     </div>
 
-    <!-- Live Voice Mode Modal (3 Animated Waveform Lines) -->
+    <!-- Live Voice Mode Modal (3 Waveform Lines) -->
     <div class="live-voice-overlay" id="liveVoiceModal">
         <h2 style="color: white; margin-bottom: 10px; font-weight: 700;">Vortex Live Voice Assistant</h2>
-        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 14px;">Listening and speaking in real-time across all languages...</p>
+        <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 14px;">Real-time natural voice conversation across all languages...</p>
         
         <div class="waveform-box">
             <div class="wave-line"></div>
@@ -550,32 +565,32 @@
             <div class="wave-line"></div>
         </div>
 
-        <p id="voice-transcript" style="color: #34d399; font-size: 16px; margin-bottom: 30px; font-style: italic;">"Hello! Main sun raha hoon, aap kis bare mein baat karna chahte hain?"</p>
+        <p id="voice-transcript" style="color: #34d399; font-size: 16px; margin-bottom: 30px; font-style: italic;">"Hello! Main sun raha hoon, aap kis topic par baat karna chahte hain?"</p>
         
         <button onclick="closeLiveVoice()" style="background: #ef4444; color: white; border: none; padding: 12px 28px; border-radius: 20px; font-weight: bold; cursor: pointer;">End Live Session</button>
     </div>
 
-    <!-- Panoflex & Poster Studio Modal -->
+    <!-- Panoflex & Realistic Photo Studio Modal -->
     <div class="modal-overlay" id="studioModal">
         <div class="modal-card">
-            <h3>🎨 Panoflex & Poster Design Studio</h3>
-            <p style="font-size:13px; color:var(--text-muted);">Select category and customize your design:</p>
+            <h3>🎨 Panoflex & Realistic Photo Studio</h3>
+            <p style="font-size:13px; color:var(--text-muted);">Select editing or design category:</p>
             
-            <label>Design Category:</label>
+            <label>Studio Category:</label>
             <select id="panoflexCategory">
-                <option>Majlis-e-Aza Banner / Panoflex (Special Option)</option>
-                <option>Hotel & Restaurant Signage</option>
-                <option>New Shop / Commercial Board</option>
-                <option>Vehicle / Car & Bike Photo Enhancement</option>
+                <option>Vehicle / Car & Bike Realistic Enhancement</option>
+                <option>Person Dressing / Coat, Suit & Shoes Modification</option>
+                <option>Majlis-e-Aza Banner / Panoflex Design</option>
+                <option>Hotel & Commercial Shop Signage</option>
             </select>
 
-            <label>Title / Heading:</label>
-            <input type="text" id="studioTitle" placeholder="e.g., Markazi Majlis / New Grand Hotel">
+            <label>Title / Subject Name:</label>
+            <input type="text" id="studioTitle" placeholder="e.g., Sports Car Glow / Professional Suit Modification">
 
-            <label>Custom Prompt / Details:</label>
-            <input type="text" id="studioDetails" placeholder="e.g., Add Islamic calligraphy, bright neon lighting, or premium color filters">
+            <label>Custom Details / Enhancements:</label>
+            <input type="text" id="studioDetails" placeholder="e.g., Make it look 100% natural, cinematic lighting, modern shoes">
 
-            <button class="send-action-btn" onclick="generatePanoflex()" style="width:100%; margin-top:20px;">Generate Design</button>
+            <button class="send-action-btn" onclick="generateStudioWork()" style="width:100%; margin-top:20px;">Process & Render</button>
             <button class="modal-close" onclick="closeAllModals()">Close</button>
         </div>
     </div>
@@ -583,7 +598,7 @@
     <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-card">
-            <h3>⚙️ User & ID Settings</h3>
+            <h3>⚙️ User Profile & ID Settings</h3>
             <label>Your Name / Brand ID:</label>
             <input type="text" id="userNameInput" value="Raja Jazib Hussain">
             
@@ -596,12 +611,12 @@
     <div class="modal-overlay" id="pricingModal">
         <div class="modal-card">
             <h3>⭐ Vortex Pro Membership</h3>
-            <p style="font-size:13px; color:var(--text-muted);">Unlock unlimited image quotas via JazzCash / EasyPaisa:</p>
+            <p style="font-size:13px; color:var(--text-muted);">Unlock unlimited access via JazzCash / EasyPaisa:</p>
             
             <div style="display:flex; flex-direction:column; gap:10px; margin:15px 0;">
-                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Weekly: PKR 900</div>
-                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Monthly: PKR 2,500</div>
-                <div style="background:#07090e; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Yearly VIP: PKR 8,000</div>
+                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Weekly VIP: PKR 900</div>
+                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Monthly Pass: PKR 2,500</div>
+                <div style="background:#050509; border:1px solid var(--border-glass); padding:10px; border-radius:8px;">Yearly Unlimited: PKR 8,000</div>
             </div>
             <p style="font-size:12px; background:rgba(16,185,129,0.05); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
                 <strong>JazzCash/EasyPaisa:</strong> 0300-XXXXXXX (Raja Jazib Hussain)
@@ -640,10 +655,11 @@
                         document.getElementById('quota-progress').style.width = `${((30 - photosLeft)/30)*100}%`;
                     }
                 }
-                appendMessage(`[File Attached: ${file.name}]`, 'user');
+                appendMessage(`[Uploaded File for Realistic Editing: ${file.name}]`, 'user');
                 setTimeout(() => {
-                    appendMessage(`<strong>Vortex AI:</strong> File <em>${file.name}</em> successfully analyzed under Raja Jazib Hussain's platform framework.`, 'ai');
-                }, 800);
+                    let aiReply = `File <em>${file.name}</em> has been processed with high-end realistic rendering. Lighting, textures, and details have been adjusted naturally without artificial distortion.<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
+                    appendMessage(aiReply, 'ai');
+                }, 900);
             }
         }
 
@@ -658,20 +674,32 @@
             input.style.height = 'auto';
 
             setTimeout(() => {
-                let responseText = `<strong>Vortex AI Response:</strong> Your query ("${text}") has been processed successfully with zero-error logic.`;
-                
-                // Check if asking for definition
-                if(text.toLowerCase().includes('definition') || text.toLowerCase().includes('define')) {
-                    responseText = `<strong>Clear & Labeled Definition:</strong><br>` +
-                                   `• <strong>Term:</strong> ${text}<br>` +
-                                   `• <strong>Core Meaning:</strong> A precise and justified conceptual breakdown.<br>` +
-                                   `• <strong>Labeled Example:</strong><br>` +
-                                   `  - <em>[Component A]</em>: Primary structural element.<br>` +
-                                   `  - <em>[Component B]</em>: Functional application in real-world scenarios.`;
+                let responseText = "";
+                const lowerText = text.toLowerCase();
+
+                // Handle Creator Question
+                if(lowerText.includes('who made') || lowerText.includes('created you') || lowerText.includes('developer') || lowerText.includes('kis ne banaya')) {
+                    responseText = `I was engineered and created by <strong>Raja Jazib Hussain</strong>.`;
+                } 
+                // Handle Definitions naturally
+                else if(lowerText.includes('definition') || lowerText.includes('define') || lowerText.includes('what is')) {
+                    responseText = `Here is a clear and comprehensive breakdown of <strong>${text}</strong>:<br><br>` +
+                                   `• <strong>Core Concept:</strong> A precise structural and functional explanation tailored for deep understanding.<br>` +
+                                   `• <strong>Key Breakdown:</strong> Explains the fundamental principles clearly.<br>` +
+                                   `• <strong>Practical Example:</strong> A fully labeled real-world illustration showing how it applies in context.`;
+                } 
+                // Handle Realistic Photo/Vehicle/Clothing requests
+                else if(lowerText.includes('car') || lowerText.includes('bike') || lowerText.includes('photo') || lowerText.includes('dress') || lowerText.includes('coat') || lowerText.includes('shoes') || lowerText.includes('enhance')) {
+                    responseText = `Your request for realistic image enhancement has been processed. Lighting shadows, color grading, and textures have been refined with 100% realism so it looks completely natural.`;
+                } 
+                // General intelligent response
+                else {
+                    responseText = `I have analyzed your request regarding "${text}". Everything has been structured with high executive precision under Raja Jazib Hussain's platform framework.`;
                 }
 
+                responseText += `<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
                 appendMessage(responseText, 'ai');
-            }, 800);
+            }, 900);
         }
 
         function appendMessage(text, sender) {
@@ -708,23 +736,24 @@
             closeAllModals();
         }
 
-        function generatePanoflex() {
+        function generateStudioWork() {
             const cat = document.getElementById('panoflexCategory').value;
             const title = document.getElementById('studioTitle').value;
             const details = document.getElementById('studioDetails').value;
             
             if(!title) {
-                alert("Please enter a title!");
+                alert("Please enter a title or subject!");
                 return;
             }
 
             closeAllModals();
             document.getElementById('welcome-banner').style.display = 'none';
 
-            let output = `<strong>🎨 Panoflex Studio Render (${cat}):</strong><br>` +
-                         `• <strong>Title:</strong> ${title}<br>` +
-                         `• <strong>Custom Prompt/Details:</strong> ${details || 'Standard High-End Layout'}<br>` +
-                         `<em>Successfully generated with premium color grading and brand aesthetics under Raja Jazib Hussain.</em>`;
+            let output = `<strong>🎨 Studio Render Complete (${cat}):</strong><br>` +
+                         `• <strong>Subject:</strong> ${title}<br>` +
+                         `• <strong>Enhancement Details:</strong> ${details || 'High-end realistic blending'}<br>` +
+                         `<em>Processed with professional photorealistic grading and natural textures under Raja Jazib Hussain.</em>` +
+                         `<div class="ai-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>`;
             appendMessage(output, 'ai');
         }
 
