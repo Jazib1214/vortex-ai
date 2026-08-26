@@ -21,8 +21,9 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         body {
@@ -91,7 +92,7 @@
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             padding: 6px;
             border-radius: 6px;
         }
@@ -105,7 +106,7 @@
         }
         .creator-sub span { color: #38bdf8; font-weight: 600; }
 
-        /* Search Chat Input inside Sidebar */
+        /* Chat History Search Bar */
         .chat-search-box {
             position: relative;
             margin-bottom: 16px;
@@ -450,7 +451,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* Modals & Views */
+        /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -478,7 +479,7 @@
         .modal-card input, .modal-card select { width: 100%; background: #030407; border: 1px solid var(--border-glass); padding: 9px 12px; color: white; border-radius: 8px; font-size: 13px; outline: none; }
         .modal-close { background: #1e293b; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px; float: right; font-size: 12px; }
 
-        /* Unique Feature Cards Grid */
+        /* Feature Grid & Cards */
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -497,7 +498,6 @@
         .feature-box h4 { font-size: 12.5px; color: #fff; margin-bottom: 4px; }
         .feature-box p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
 
-        /* Email Library & Draft Styles */
         .email-card {
             background: rgba(255,255,255,0.02);
             border: 1px solid var(--border-glass);
@@ -511,7 +511,7 @@
         .email-info h5 { font-size: 12.5px; color: #fff; }
         .email-info p { font-size: 11px; color: var(--text-muted); }
 
-        /* Live Voice Audio Wave Animation */
+        /* Voice Wave Animation */
         .voice-wave {
             display: flex;
             align-items: center;
@@ -555,7 +555,7 @@
             <input type="text" class="chat-search-input" id="chatSearchInput" placeholder="Search past chats..." oninput="filterChatHistory(this.value)">
         </div>
 
-        <!-- Premium Quota Card -->
+        <!-- Quota Card -->
         <div class="quota-card">
             <div class="quota-header">
                 <span>Free Photo Quota</span>
@@ -607,8 +607,8 @@
                 
                 <div class="quick-chips">
                     <div class="chip" onclick="sendQuickPrompt('Hi')">Say Hello</div>
+                    <div class="chip" onclick="sendQuickPrompt('Can you write a paragraph on AI?')">Write Paragraph</div>
                     <div class="chip" onclick="sendQuickPrompt('Draft a professional leave email')">Email Draft</div>
-                    <div class="chip" onclick="sendQuickPrompt('Use Instant Fact Checker')">Fact Checker</div>
                     <div class="chip" onclick="sendQuickPrompt('Who is your developer?')">Developer Info</div>
                 </div>
             </div>
@@ -616,7 +616,7 @@
 
         <div class="input-area-wrapper">
             <div class="input-box-container">
-                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request code, or type 'Hi'..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
+                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request a paragraph, code, or type 'Hi'..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
                 
                 <div class="input-toolbar">
                     <div class="tool-btns-left">
@@ -642,7 +642,6 @@
 
     <!-- Modals -->
 
-    <!-- Live Voice Modal with Jazib's Custom Voice Simulation -->
     <div class="modal-overlay" id="liveVoiceModal">
         <div class="modal-card" style="text-align:center;">
             <h3>🎙️ Live Voice Assistant</h3>
@@ -662,7 +661,6 @@
         </div>
     </div>
 
-    <!-- Email Library Modal -->
     <div class="modal-overlay" id="emailLibraryModal">
         <div class="modal-card">
             <h3>📧 Automated Email & Letter Library</h3>
@@ -684,19 +682,10 @@
                 <button class="send-action-btn" onclick="insertEmailTemplate('Business Proposal')">Use Template</button>
             </div>
 
-            <div class="email-card">
-                <div class="email-info">
-                    <h5>Academic Progress Summary</h5>
-                    <p>Detailed breakdown for instructor review</p>
-                </div>
-                <button class="send-action-btn" onclick="insertEmailTemplate('Academic Summary')">Use Template</button>
-            </div>
-
             <button class="modal-close" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
-    <!-- Exclusive Unique Features Modal (Free & Pro Unique Tools) -->
     <div class="modal-overlay" id="exclusiveFeaturesModal">
         <div class="modal-card">
             <h3>💎 Vortex Exclusive AI Tools</h3>
@@ -711,21 +700,12 @@
                     <h4>🛠️ Smart Code Refactor</h4>
                     <p>Auto-cleans messy snippets into production-ready syntax.</p>
                 </div>
-                <div class="feature-box" onclick="runExclusiveTool('Urdu-English Hybrid Summarizer')">
-                    <h4>🌐 Bilingual Bridge Pro</h4>
-                    <p>Seamlessly translates complex academic English into clean Urdu context.</p>
-                </div>
-                <div class="feature-box" onclick="runExclusiveTool('Executive Tone Tuner')">
-                    <h4>👔 Executive Tone Tuner</h4>
-                    <p>Converts casual text into high-authority professional language.</p>
-                </div>
             </div>
 
             <button class="modal-close" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
-    <!-- Studio Modal -->
     <div class="modal-overlay" id="studioModal">
         <div class="modal-card">
             <h3>🎨 Realistic Photo Studio</h3>
@@ -734,7 +714,6 @@
                 <option>Vehicle / Car & Bike Realistic Enhancement</option>
                 <option>Person Dressing / Professional Suit Modification</option>
                 <option>Banner / Panoflex Layout Design</option>
-                <option>Commercial Signage & Typography</option>
             </select>
 
             <label>Subject / Project Title:</label>
@@ -748,7 +727,6 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-card">
             <h3>⚙️ User Profile & ID Settings</h3>
@@ -763,11 +741,10 @@
         </div>
     </div>
 
-    <!-- Pricing & Membership Modal with Easypaisa / JazzCash & Raja Jazib Hussain -->
     <div class="modal-overlay" id="pricingModal">
         <div class="modal-card">
             <h3>⭐ Vortex Pro Membership & Upgrade</h3>
-            <p style="color:var(--text-muted); font-size:12px; margin-bottom:12px;">Unlock unlimited photo quotas, custom voice assistants, and advanced cloud storage.</p>
+            <p style="color:var(--text-muted); font-size:12px; margin-bottom:12px;">Unlock unlimited photo quotas and exclusive tools.</p>
             
             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px; font-size:12.5px;">
                 <div style="background:#030407; border:1px solid var(--border-glass); padding:10px; border-radius:8px; display:flex; justify-content:space-between;">
@@ -801,8 +778,7 @@
         }
 
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+            document.getElementById('sidebar').classList.toggle('collapsed');
         }
 
         function toggleAttachMenu() {
@@ -828,7 +804,7 @@
                     }
                 }
                 appendMessage(`[Uploaded File: ${file.name}]`, 'user');
-                appendMessage(`File <em>${file.name}</em> has been processed successfully under Raja Jazib Hussain's executive framework. Visual clarity and definition have been optimized.`, 'ai');
+                appendMessage(`File <em>${file.name}</em> has been processed successfully under Raja Jazib Hussain's executive framework.`, 'ai');
             }
         }
 
@@ -852,17 +828,21 @@
             let responseText = "";
             const lowerText = text.toLowerCase();
 
-            if(lowerText.includes('who made') || lowerText.includes('developer') || lowerText.includes('created you')) {
+            // 18+ and Restricted Content Filter
+            if (lowerText.includes('18+') || lowerText.includes('adult') || lowerText.includes('porn') || lowerText.includes('sex') || lowerText.includes('nude') || lowerText.includes('restricted site')) {
+                responseText = `Restricted by owner Jazib: 18+ content or sites are strictly prohibited. Let's keep things clean and professional!`;
+            }
+            else if(lowerText.includes('who made') || lowerText.includes('developer') || lowerText.includes('created you')) {
                 responseText = `Vortex AI was engineered and developed exclusively by <strong>Raja Jazib Hussain</strong>.`;
             } 
             else if(lowerText === 'hi' || lowerText === 'hello' || lowerText === 'salam') {
                 responseText = `Hello! How can I assist you today?`;
             }
-            else if(lowerText.includes('fact checker')) {
-                responseText = `<strong>⚡ Instant Fact Checker Active:</strong> All parameters verified with zero error under Raja Jazib Hussain's verification protocol.`;
+            else if(lowerText.includes('paragraph') || lowerText.includes('write')) {
+                responseText = `Artificial Intelligence represents a transformative shift in human capability. Under the guidance of Raja Jazib Hussain, Vortex AI delivers high-performance computational analysis, automated workflows, and sophisticated content generation designed to maximize professional productivity and creative excellence.`;
             }
             else {
-                responseText = `I have analyzed your request regarding "${text}". Everything has been structured with high executive precision under Raja Jazib Hussain's platform framework.`;
+                responseText = `I have successfully analyzed your request regarding "${text}". Everything has been organized and processed seamlessly under Raja Jazib Hussain's platform framework.`;
             }
 
             appendMessage(responseText, 'ai');
@@ -898,14 +878,11 @@
         }
 
         function filterChatHistory(query) {
-            // Search filter for chat history log
             const q = query.toLowerCase();
-            const container = document.getElementById('chat-container');
             if(!q) return;
-            
             const match = chatHistoryLog.find(item => item.text.toLowerCase().includes(q));
             if(match) {
-                appendMessage(`<em>[Search Result Match]:</em> ${match.text}`, 'ai');
+                appendMessage(`<em>[Search Match Found]:</em> ${match.text}`, 'ai');
             }
         }
 
@@ -915,7 +892,7 @@
             let template = `<strong>Generated Email Template (${type}):</strong><br><br>` +
                            `Subject: Request regarding ${type}<br>` +
                            `Dear Instructor / Management,<br><br>` +
-                           `I am writing to formally submit details regarding ${type}. Kindly review the attached particulars structured under Raja Jazib Hussain's protocol.<br><br>` +
+                           `I am writing to formally submit details regarding ${type}. Kindly review the particulars structured under Raja Jazib Hussain's protocol.<br><br>` +
                            `Sincerely,<br>Raja Jazib Hussain`;
             appendMessage(template, 'ai');
         }
@@ -951,18 +928,14 @@
         function saveSettings() {
             const name = document.getElementById('userNameInput').value;
             const avatar = document.getElementById('userAvatarInput').value;
-            if(name) {
-                document.getElementById('display-username').textContent = name;
-            }
-            if(avatar) {
-                document.getElementById('sidebar-avatar').src = avatar;
-            }
+            if(name) document.getElementById('display-username').textContent = name;
+            if(avatar) document.getElementById('sidebar-avatar').src = avatar;
             closeAllModals();
         }
 
         function applyForUpgrade() {
             closeAllModals();
-            alert("Application submitted successfully under Raja Jazib Hussain's supervision. Payment coordinator will contact you shortly with the account number.");
+            alert("Application submitted successfully under Raja Jazib Hussain's supervision. Payment coordinator will contact you shortly.");
         }
 
         function generateStudioWork() {
