@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vortex AI - Executive Workspace</title>
     <style>
-        /* Base Reset & Theme */
+        * {
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -17,19 +19,61 @@
             overflow: hidden;
         }
 
-        /* Main Workspace Area */
+        /* Sidebar Menu Layout */
+        .sidebar {
+            width: 260px;
+            background-color: #181818;
+            border-right: 1px solid #282828;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+        }
+        .sidebar h2 {
+            font-size: 16px;
+            color: #ccc;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Main Chat Area */
         .workspace-main {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            height: 100vh;
             position: relative;
+            background-color: #121212;
         }
 
-        /* Chat Input Container */
+        /* Scrollable Message History Container */
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-message {
+            background-color: #1e1e1e;
+            padding: 12px 16px;
+            border-radius: 8px;
+            max-width: 700px;
+            width: fit-content;
+            border: 1px solid #2a2a2a;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Chat Input Dock at the Bottom */
+        .input-dock {
+            padding: 16px 24px 24px 24px;
+            background: linear-gradient(to top, #121212 80%, rgba(18,18,18,0));
+            display: flex;
+            justify-content: center;
+        }
+
         .chat-input-container {
             position: relative;
             display: flex;
@@ -37,11 +81,9 @@
             background-color: #1e1e1e;
             border: 1px solid #333;
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 8px 12px;
             width: 100%;
             max-width: 800px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
         }
 
         .chat-input-container textarea {
@@ -49,27 +91,29 @@
             background: transparent;
             border: none;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
             font-family: inherit;
             resize: none;
             outline: none;
             max-height: 150px;
             overflow-y: auto;
-            padding-left: 110px;
-            padding-right: 40px;
+            padding-left: 95px; /* Space for left action buttons */
+            padding-right: 40px; /* Space for send button */
             line-height: 1.5;
+            padding-top: 6px;
+            padding-bottom: 6px;
         }
 
         .chat-input-container textarea::placeholder {
-            color: #888;
+            color: #777;
         }
 
         .input-actions-left {
             position: absolute;
-            left: 12px;
+            left: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
         }
 
         .action-btn, .send-btn {
@@ -92,13 +136,13 @@
         }
 
         .action-btn .icon, .send-btn .icon {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
         }
 
         .send-btn {
             position: absolute;
-            right: 12px;
+            right: 8px;
             background-color: #3b82f6;
             color: #ffffff;
         }
@@ -107,7 +151,7 @@
             background-color: #2563eb;
         }
 
-        /* Active/Recording state for voice button */
+        /* Active/Recording Voice State */
         .action-btn.voice-trigger.recording {
             color: #ef4444;
             background-color: rgba(239, 68, 68, 0.15);
@@ -123,113 +167,139 @@
 </head>
 <body>
 
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Vortex Menu</h2>
+    </div>
+
+    <!-- Main Workspace -->
     <div class="workspace-main">
-        <div class="chat-input-container">
-            <div class="input-actions-left">
-                <button type="button" class="action-btn" title="Add attachment">
-                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
-                </button>
-                <button type="button" class="action-btn" title="Generate image">
-                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21,19V5C21,3.89 20.1,3 19,3H5C3.9,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19M8.5,13.5L11,16.5L14.5,12L19,18H5M5,5H19V17L14.5,11L11,15.5L8.5,12.5L5,17V5Z"/></svg>
-                </button>
-                <button type="button" class="action-btn voice-trigger" title="Voice Recorder">
-                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/></svg>
+        <!-- Message History Feed -->
+        <div class="chat-history" id="chatHistory">
+            <div class="chat-message">Loaded history successfully for Voice Synthesizer Test. Ready for modifications.</div>
+        </div>
+
+        <!-- Input Dock Area -->
+        <div class="input-dock">
+            <div class="chat-input-container">
+                <!-- Left Action Buttons -->
+                <div class="input-actions-left">
+                    <button type="button" class="action-btn" title="Add attachment">
+                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+                    </button>
+                    <button type="button" class="action-btn" title="Generate image">
+                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21,19V5C21,3.89 20.1,3 19,3H5C3.9,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19M8.5,13.5L11,16.5L14.5,12L19,18H5M5,5H19V17L14.5,11L11,15.5L8.5,12.5L5,17V5Z"/></svg>
+                    </button>
+                    <button type="button" class="action-btn voice-trigger" title="Voice Recorder">
+                        <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/></svg>
+                    </button>
+                </div>
+
+                <!-- Textarea Input -->
+                <textarea id="userInput" placeholder="Ask Vortex AI or use voice..." rows="1"></textarea>
+
+                <!-- Send Button -->
+                <button type="button" class="send-btn" id="sendBtn" title="Send message">
+                    <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/></svg>
                 </button>
             </div>
-
-            <textarea placeholder="Ask Vortex AI or use voice..." rows="1"></textarea>
-
-            <button type="button" class="send-btn" title="Send message">
-                <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/></svg>
-            </button>
         </div>
     </div>
 
+    <!-- Script Integration -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const textarea = document.querySelector('.chat-input-container textarea');
-            const voiceBtn = document.querySelector('.action-btn.voice-trigger');
-            const sendBtn = document.querySelector('.send-btn');
+        const textarea = document.getElementById('userInput');
+        const voiceBtn = document.querySelector('.action-btn.voice-trigger');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatHistory = document.getElementById('chatHistory');
 
-            // Auto-resize textarea box dynamically as text grows
-            textarea.addEventListener('input', function() {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
+        // Auto-resize textarea
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Speech Recognition Setup
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+        let isRecording = false;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => {
+                isRecording = true;
+                voiceBtn.classList.add('recording');
+                textarea.placeholder = "Listening... Speak now...";
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+                textarea.value = transcript;
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                stopRecordingState();
+            };
+
+            recognition.onend = () => {
+                stopRecordingState();
+            };
+        }
+
+        function stopRecordingState() {
+            isRecording = false;
+            voiceBtn.classList.remove('recording');
+            textarea.placeholder = "Ask Vortex AI or use voice...";
+        }
+
+        if (voiceBtn) {
+            voiceBtn.addEventListener('click', () => {
+                if (!recognition) {
+                    alert("Speech recognition is not supported in this browser context. Ensure you are running on localhost or an HTTPS connection.");
+                    return;
+                }
+                if (isRecording) {
+                    recognition.stop();
+                } else {
+                    try {
+                        recognition.start();
+                    } catch (err) {
+                        console.error("Recognition error:", err);
+                    }
+                }
             });
+        }
 
-            // Web Speech API handling for voice features
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            let recognition = null;
-            let isRecording = false;
-
-            if (SpeechRecognition) {
-                recognition = new SpeechRecognition();
-                recognition.continuous = false;
-                recognition.interimResults = true;
-                recognition.lang = 'en-US';
-
-                recognition.onstart = () => {
-                    isRecording = true;
-                    voiceBtn.classList.add('recording');
-                    textarea.placeholder = "Listening... Speak now...";
-                };
-
-                recognition.onresult = (event) => {
-                    const transcript = Array.from(event.results)
-                        .map(result => result[0])
-                        .map(result => result.transcript)
-                        .join('');
-                    textarea.value = transcript;
-                    textarea.style.height = 'auto';
-                    textarea.style.height = (textarea.scrollHeight) + 'px';
-                };
-
-                recognition.onerror = (event) => {
-                    console.error('Speech recognition error:', event.error);
-                    stopRecordingState();
-                };
-
-                recognition.onend = () => {
-                    stopRecordingState();
-                };
+        // Send Message logic
+        function handleSend() {
+            const text = textarea.value.trim();
+            if (text) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'chat-message';
+                msgDiv.textContent = text;
+                chatHistory.appendChild(msgDiv);
+                
+                textarea.value = '';
+                textarea.style.height = 'auto';
+                chatHistory.scrollTop = chatHistory.scrollHeight;
             }
+        }
 
-            function stopRecordingState() {
-                isRecording = false;
-                voiceBtn.classList.remove('recording');
-                textarea.placeholder = "Ask Vortex AI or use voice...";
-            }
-
-            // Voice button trigger listener
-            if (voiceBtn) {
-                voiceBtn.addEventListener('click', () => {
-                    if (!recognition) {
-                        alert("Speech recognition is unavailable or blocked in this browser. Ensure you are testing via localhost or a secure HTTPS deployment.");
-                        return;
-                    }
-
-                    if (isRecording) {
-                        recognition.stop();
-                    } else {
-                        try {
-                            recognition.start();
-                        } catch (err) {
-                            console.error("Recognition conflict error:", err);
-                        }
-                    }
-                });
-            }
-
-            // Message submission action
-            if (sendBtn) {
-                sendBtn.addEventListener('click', () => {
-                    const messageText = textarea.value.trim();
-                    if (messageText) {
-                        console.log("Transmitted prompt:", messageText);
-                        textarea.value = '';
-                        textarea.style.height = 'auto';
-                    }
-                });
+        sendBtn.addEventListener('click', handleSend);
+        textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
             }
         });
     </script>
