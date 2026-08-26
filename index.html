@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex AI - The Ultimate Problem Solver & Poster Studio</title>
+    <!-- SEO Meta Tags taake Google par "Vortex AI" search karne par website rank kare -->
+    <meta name="description" content="Vortex AI is the most advanced problem-solving AI platform featuring instant Poster Studio, Jazib Voice, and smart assistant tools.">
+    <meta name="keywords" content="Vortex AI, Jazib AI, Poster Studio, AI problem solver Pakistan, JazzCash AI subscription">
+    <meta name="author" content="Vortex AI Official">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --sidebar-bg: #111827;
+            --panel-bg: #1f2937;
+            --text-color: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --border-color: #374151;
+            --glow-color: rgba(99, 102, 241, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Responsive Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .logo-area {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 14px 16px;
+            text-align: left;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--panel-bg);
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        /* Jazib Voice Toggle Switch */
+        .voice-toggle-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .voice-toggle-box span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #a5b4fc;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input { 
+            opacity: 0; width: 0; height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #374151;
+            transition: .3s;
+            border-radius: 22px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .upgrade-box {
+            margin-top: auto;
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .upgrade-box h4 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .upgrade-box p {
+            font-size: 12px;
+            color: #e0e7ff;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .upgrade-btn {
+            background: #ffffff;
+            color: #4f46e5;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .upgrade-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Main Container */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: var(--bg-color);
+            position: relative;
+        }
+
+        .chat-header {
+            padding: 18px 25px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 16px 20px;
+            border-radius: 14px;
+            line-height: 1.6;
+            font-size: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .message.user {
+            background-color: var(--accent-color);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        /* Input Layout */
+        .chat-input-area {
+            padding: 20px 25px;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .plus-btn {
+            background-color: var(--panel-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .plus-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .chat-input {
+            flex: 1;
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 30px;
+            color: var(--text-color);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .send-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .send-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--sidebar-bg);
+            padding: 30px;
+            border-radius: 16px;
+            width: 480px;
+            max-width: 100%;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            font-size: 20px;
+        }
+
+        .modal-content label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 5px;
+            margin-top: 12px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .pricing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .price-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .price-card:hover {
+            border-color: var(--accent-color);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .price-card strong {
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .close-modal {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            float: right;
+            transition: background 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-area">⚡ Vortex AI</div>
+        <button class="nav-btn" onclick="clearChat()">💬 New Conversation</button>
+        <button class="nav-btn" onclick="openPosterStudio()">🎨 Poster Studio</button>
+        <button class="nav-btn" onclick="openPricing()">⭐ Pro Plans</button>
+
+        <!-- Jazib Voice Special Toggle -->
+        <div class="voice-toggle-box">
+            <span>🎙️ Jazib Voice</span>
+            <label class="switch">
+                <input type="checkbox" id="voiceToggle" onchange="toggleJazibVoice()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="upgrade-box">
+            <h4>Vortex Pro</h4>
+            <p>Zero-Error Logic & Unlimited Poster Studio</p>
+            <button class="upgrade-btn" onclick="openPricing()">Upgrade Now</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="chat-header">
+            <span>Vortex AI - Search & Problem Solver</span>
+            <span id="voice-status" style="font-size:12px; color:#a5b4fc; font-weight:normal;">Voice: Standard AI</span>
+        </div>
+        
+        <div class="chat-body" id="chat-body">
+            <div class="message ai">Welcome to Vortex AI! Type any complex question or tap the (+) button to generate professional event posters and Muharram cards instantly.</div>
+        </div>
+
+        <div class="chat-input-area">
+            <button class="plus-btn" onclick="openPosterStudio()" title="Poster Studio">+</button>
+            <input type="text" id="user-input" class="chat-input" placeholder="Search or ask Vortex AI..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Poster Studio Modal -->
+    <div class="modal" id="posterModal">
+        <div class="modal-content">
+            <h3>🎨 Vortex Poster Studio</h3>
+            <p style="font-size:13px; color:var(--text-secondary);">Generate event flyers or cards instantly:</p>
+            
+            <label>Event Title:</label>
+            <input type="text" id="eventTitle" placeholder="e.g., Majlis-e-Aza">
+            
+            <label>Speaker / Organizer:</label>
+            <input type="text" id="speakerName" placeholder="e.g., Allama Zameer Naqvi">
+            
+            <label>Date, Time & Location:</label>
+            <input type="text" id="eventDateTime" placeholder="e.g., 10th Muharram, 8:00 PM">
+            
+            <button class="send-btn" onclick="generatePoster()" style="width:100%; margin-top:20px;">Generate Poster Layout</button>
+            <button class="close-modal" onclick="closeModals()">Close</button>
+        </div>
+    </div>
+
+    <!-- Pricing Modal -->
+    <div class="modal" id="pricingModal">
+        <div class="modal-content">
+            <h3>⭐ Upgrade to Vortex Pro</h3>
+            <p style="font-size:13px; color:var(--text-secondary);">Choose your package and pay via JazzCash / EasyPaisa:</p>
+            
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <strong>Weekly Plan:</strong> PKR 900 - 1,000 (New Customers)
+                </div>
+                <div class="price-card">
+                    <strong>Monthly Plan:</strong> PKR 2,500 - 3,000
+                </div>
+                <div class="price-card">
+                    <strong>Yearly VIP Plan:</strong> PKR 8,000 (Best Savings)
+                </div>
+            </div>
+
+            <p style="font-size:12px; background:var(--bg-color); padding:12px; border-radius:8px; border:1px solid var(--border-color); line-height:1.5;">
+                <strong>JazzCash / EasyPaisa:</strong> 0300-XXXXXXX (Jazib)<br>
+                <em>Send payment and share transaction screenshot for instant activation.</em>
+            </p>
+
+            <button class="close-modal" onclick="closeModals()" style="float:none; width:100%;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let jazibVoiceActive = false;
+
+        function toggleJazibVoice() {
+            const toggle = document.getElementById('voiceToggle');
+            const statusText = document.getElementById('voice-status');
+            jazibVoiceActive = toggle.checked;
+
+            if (jazibVoiceActive) {
+                statusText.textContent = "Voice: Jazib Voice (Active 🎙️)";
+                statusText.style.color = "#34d399";
+            } else {
+                statusText.textContent = "Voice: Standard AI";
+                statusText.style.color = "#a5b4fc";
+            }
+        }
+
+        function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const chatBody = document.getElementById('chat-body');
+            const text = inputField.value.trim();
+
+            if (!text) return;
+
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = text;
+            chatBody.appendChild(userMsg);
+
+            inputField.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                
+                if (jazibVoiceActive) {
+                    aiMsg.innerHTML = `<strong>🎙️ [Jazib Voice Output]:</strong><br>Bhai, aapka yeh sawal ("${text}") bilkul durust hai. Vortex AI ki logic ke mutabiq iska behtareen hal yeh hai...`;
+                } else {
+                    aiMsg.textContent = "Vortex AI response: Successfully processed '" + text + "' with high precision and zero-error intelligence.";
+                }
+
+                chatBody.appendChild(aiMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 800);
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') { sendMessage(); }
+        }
+
+        function openPosterStudio() {
+            document.getElementById('posterModal').style.display = 'flex';
+        }
+
+        function openPricing() {
+            document.getElementById('pricingModal').style.display = 'flex';
+        }
+
+        function closeModals() {
+            document.getElementById('posterModal').style.display = 'none';
+            document.getElementById('pricingModal').style.display = 'none';
+        }
+
+        function generatePoster() {
+            const title = document.getElementById('eventTitle').value;
+            const speaker = document.getElementById('speakerName').value;
+            const dateTime = document.getElementById('eventDateTime').value;
+
+            if(!title) {
+                alert("Please enter the event title!");
+                return;
+            }
+
+            closeModals();
+
+            const chatBody = document.getElementById('chat-body');
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'message ai';
+            aiMsg.innerHTML = `<strong>🎨 Vortex Poster Studio - Rendered:</strong><br>` +
+                              `• <strong>Event:</strong> ${title}<br>` +
+                              `• <strong>Speaker:</strong> ${speaker || 'N/A'}<br>` +
+                              `• <strong>Details:</strong> ${dateTime || 'N/A'}<br>` +
+                              `<em>Stunning poster layout successfully generated!</em>`;
+            chatBody.appendChild(aiMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function clearChat() {
+            document.getElementById('chat-body').innerHTML = '<div class="message ai">Chat cleared. Ready for your next query!</div>';
+        }
+    </script>
+</body>
+</html>
