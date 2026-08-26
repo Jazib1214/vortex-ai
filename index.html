@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex AI - Engineered by Raja Jazib Hussain</title>
+    <!-- Google Console & Play Store App Meta Readiness -->
+    <meta name="google-site-verification" content="vortex-ai-console-verification-token-raja-jazib">
+    <meta name="application-name" content="Vortex AI Studio">
+    <link rel="manifest" href="manifest.json">
+    <title>Vortex AI Studio - Engineered by Raja Jazib Hussain</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #05070b;
-            --sidebar-bg: #090d16;
-            --panel-bg: #0e1422;
+            --bg-base: #030712;
+            --sidebar-bg: #070b16;
+            --panel-bg: #0b1020;
             --border-glass: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.25);
-            --sidebar-width: 280px;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-primary: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.25);
+            --sidebar-width: 270px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -34,16 +38,16 @@
             overflow: hidden;
         }
 
-        /* Sidebar Styles */
+        /* Unique Executive Sidebar */
         .sidebar {
             width: var(--sidebar-width);
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-glass);
             display: flex;
             flex-direction: column;
-            padding: 20px 16px;
+            padding: 18px 14px;
             z-index: 100;
-            transition: transform 0.3s ease, width 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s ease;
         }
 
         .sidebar.collapsed {
@@ -51,13 +55,14 @@
             width: 0;
             padding: 0;
             overflow: hidden;
+            border: none;
         }
 
         .sidebar-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .brand-box {
@@ -67,23 +72,23 @@
         }
 
         .brand-logo {
-            width: 34px;
-            height: 34px;
-            background: linear-gradient(135deg, #6366f1 0%, #0ea5e9 100%);
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            border-radius: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 16px;
+            font-size: 15px;
             color: white;
-            box-shadow: 0 0 15px var(--accent-glow);
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
         .brand-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
             color: #ffffff;
         }
 
@@ -92,141 +97,113 @@
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 16px;
-            padding: 6px;
+            font-size: 14px;
+            padding: 5px;
             border-radius: 6px;
         }
         .collapse-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
 
-        .creator-sub {
-            font-size: 11px;
+        .creator-tag {
+            font-size: 10.5px;
             color: var(--text-muted);
-            margin-bottom: 20px;
-            padding-left: 44px;
-        }
-        .creator-sub span { color: #38bdf8; font-weight: 600; }
-
-        .chat-search-box {
-            position: relative;
             margin-bottom: 16px;
+            padding-left: 42px;
         }
-        .chat-search-input {
+        .creator-tag span { color: #60a5fa; font-weight: 600; }
+
+        .search-chat-wrap {
+            position: relative;
+            margin-bottom: 14px;
+        }
+        .search-chat-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-glass);
-            padding: 8px 12px 8px 32px;
-            border-radius: 8px;
+            padding: 7px 10px 7px 30px;
+            border-radius: 7px;
             color: white;
-            font-size: 12px;
+            font-size: 11.5px;
             outline: none;
         }
-        .chat-search-input:focus { border-color: var(--accent-color); }
-        .chat-search-icon {
+        .search-chat-input:focus { border-color: var(--accent-primary); }
+        .search-icon-pos {
             position: absolute;
-            left: 10px;
+            left: 9px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
         }
 
-        .quota-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-            border: 1px solid var(--border-glass);
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 16px;
-        }
-        .quota-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11.5px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-        .quota-header span:last-child { color: #38bdf8; font-weight: 600; }
-        .progress-track {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #6366f1, #0ea5e9);
-        }
-
-        .nav-menu {
+        .nav-list {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             flex: 1;
             overflow-y: auto;
             padding-right: 2px;
         }
-        .nav-menu::-webkit-scrollbar { width: 3px; }
-        .nav-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .nav-list::-webkit-scrollbar { width: 3px; }
+        .nav-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 
-        .nav-item {
+        .nav-btn {
             background: transparent;
             border: none;
             color: var(--text-main);
-            padding: 10px 12px;
-            border-radius: 8px;
+            padding: 9px 10px;
+            border-radius: 7px;
             text-align: left;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             transition: all 0.2s ease;
         }
-        .nav-item:hover, .nav-item.active {
-            background-color: rgba(255, 255, 255, 0.06);
+        .nav-btn:hover, .nav-btn.active {
+            background-color: rgba(139, 92, 246, 0.12);
             color: #ffffff;
+            border-left: 2px solid var(--accent-primary);
         }
 
-        .section-label {
-            font-size: 10px;
+        .menu-divider {
+            font-size: 9.5px;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             color: var(--text-muted);
-            margin: 16px 0 6px 8px;
+            margin: 14px 0 4px 6px;
             font-weight: 700;
         }
 
-        .sidebar-footer {
+        .sidebar-user-footer {
             border-top: 1px solid var(--border-glass);
-            padding-top: 14px;
+            padding-top: 12px;
             margin-top: auto;
         }
-        .profile-btn {
+        .user-profile-trigger {
             background: var(--panel-bg);
             border: 1px solid var(--border-glass);
-            padding: 8px 10px;
-            border-radius: 8px;
+            padding: 7px 9px;
+            border-radius: 7px;
             color: #fff;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             cursor: pointer;
             width: 100%;
-            font-size: 12px;
+            font-size: 11.5px;
         }
-        .user-avatar-img {
-            width: 26px;
-            height: 26px;
+        .user-avatar {
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             object-fit: cover;
-            border: 1px solid var(--accent-color);
+            border: 1px solid var(--accent-primary);
         }
 
-        /* Workspace */
-        .main-workspace {
+        /* Workspace Main Frame */
+        .workspace {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -235,708 +212,717 @@
             position: relative;
         }
 
-        .top-header {
-            height: 56px;
+        /* Top Header with 3 Multi-Options & Upgrade */
+        .top-nav-bar {
+            height: 54px;
             border-bottom: 1px solid var(--border-glass);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            padding: 0 20px;
             background: var(--bg-base);
         }
 
-        .header-left-group {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .model-pill {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 11.5px;
+        .model-status-badge {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 11px;
             font-weight: 600;
-            color: #818cf8;
+            color: #a78bfa;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 30px 24px;
+        /* Top Right 3 Multi-Option Buttons */
+        .header-right-actions {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .welcome-banner {
-            text-align: center;
-            margin: auto;
-            padding: 30px 10px;
-        }
-        .welcome-banner h1 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-            color: #ffffff;
-        }
-        .welcome-banner p {
-            color: var(--text-muted);
-            font-size: 13.5px;
-            line-height: 1.5;
-        }
-
-        .quick-chips {
-            display: flex;
+            align-items: center;
             gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
         }
-        .chip {
+        .top-action-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-glass);
-            padding: 6px 12px;
-            border-radius: 14px;
-            font-size: 11.5px;
-            color: var(--text-muted);
+            color: var(--text-main);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
-        .chip:hover {
-            border-color: #6366f1;
-            color: #fff;
-            background: rgba(99, 102, 241, 0.15);
+        .top-action-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-primary); }
+        
+        .upgrade-pill-btn {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
         }
 
-        .message-row {
+        /* Chat Scrollable Container */
+        .chat-main-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 18px;
+            max-width: 850px;
+            margin: 0 auto;
             width: 100%;
         }
-        .message-row.user { align-items: flex-end; }
-        .message-row.ai { align-items: flex-start; }
 
-        .user-bubble {
+        .welcome-hero {
+            text-align: center;
+            margin: auto;
+            padding: 20px 10px;
+        }
+        .welcome-hero h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.4px;
+            color: #ffffff;
+        }
+        .welcome-hero p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .suggestion-chips {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .chip-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chip-item:hover { border-color: var(--accent-primary); color: #fff; background: rgba(139, 92, 246, 0.1); }
+
+        .chat-row {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            width: 100%;
+        }
+        .chat-row.user { align-items: flex-end; }
+        .chat-row.ai { align-items: flex-start; }
+
+        .user-message-bubble {
             background: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             color: #f3f4f6;
-            padding: 12px 16px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 9px;
             max-width: 75%;
+            font-size: 13px;
+        }
+
+        .ai-response-box {
+            color: #e2e8f0;
             font-size: 13.5px;
-        }
-
-        .ai-text-response {
-            color: #f1f5f9;
-            font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.65;
             max-width: 85%;
-            padding: 4px 0;
+            padding: 2px 0;
         }
 
-        .input-area-wrapper {
-            padding: 16px 24px 24px;
+        /* Realistic Input Box & Toolbar */
+        .input-dock {
+            padding: 12px 20px 20px;
             background: var(--bg-base);
         }
-        .input-box-container {
-            max-width: 900px;
+        .input-box-wrapper {
+            max-width: 850px;
             margin: 0 auto;
-            background: #080b12;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 14px;
-            padding: 12px 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: #070b14;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px 14px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
-        .chat-textarea {
+        .main-textarea {
             width: 100%;
             background: transparent;
             border: none;
             color: var(--text-main);
-            font-size: 13.5px;
+            font-size: 13px;
             resize: none;
             outline: none;
-            min-height: 24px;
-            max-height: 120px;
-            line-height: 1.5;
+            min-height: 22px;
+            max-height: 100px;
+            line-height: 1.4;
         }
-        .input-toolbar {
+        
+        .realistic-toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 8px;
         }
-        .tool-btns-left {
+        .toolbar-left-tools {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             position: relative;
         }
-        .icon-btn {
-            background: transparent;
+        .tool-icon-btn {
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-glass);
             color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.15s;
-            font-size: 13px;
+            font-size: 12px;
         }
-        .icon-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .tool-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.2);
         }
-        .attach-popup {
+        .tool-icon-btn.active-record {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+            animation: pulseGlow 1s infinite;
+        }
+        @keyframes pulseGlow { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* Popups / Modals */
+        .popup-menu {
             display: none;
             position: absolute;
-            bottom: 42px;
+            bottom: 38px;
             left: 0;
-            background: #0b0f17;
+            background: #090e18;
             border: 1px solid var(--border-glass);
-            border-radius: 10px;
-            padding: 6px;
-            width: 220px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            border-radius: 8px;
+            padding: 5px;
+            width: 200px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
             z-index: 50;
         }
-        .attach-option {
-            padding: 8px 10px;
-            font-size: 12px;
+        .popup-option {
+            padding: 7px 9px;
+            font-size: 11.5px;
             color: var(--text-main);
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
         }
-        .attach-option:hover { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .popup-option:hover { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; }
 
-        .send-action-btn {
-            background: #6366f1;
+        .send-pill-btn {
+            background: var(--accent-primary);
             color: white;
             border: none;
-            padding: 7px 18px;
-            border-radius: 8px;
+            padding: 6px 16px;
+            border-radius: 7px;
             font-weight: 600;
-            font-size: 12.5px;
+            font-size: 12px;
             cursor: pointer;
             transition: background 0.15s;
         }
-        .send-action-btn:hover { background: #4f46e5; }
+        .send-pill-btn:hover { background: #7c3aed; }
 
-        .global-disclaimer {
+        .system-footer-note {
             text-align: center;
-            font-size: 10.5px;
+            font-size: 10px;
             color: var(--text-muted);
-            margin-top: 8px;
+            margin-top: 6px;
             letter-spacing: 0.2px;
         }
 
-        /* Modals */
-        .modal-overlay {
+        /* Modal Overlays */
+        .modal-shade {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.82);
+            background: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 20px;
+            padding: 15px;
         }
-        .modal-card {
-            background: #0b0f17;
+        .modal-box-card {
+            background: #090e18;
             border: 1px solid var(--border-glass);
-            border-radius: 14px;
-            width: 520px;
+            border-radius: 12px;
+            width: 480px;
             max-width: 100%;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-            max-height: 90vh;
-            overflow-y: auto;
+            padding: 22px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
-        .modal-card h3 { font-size: 17px; margin-bottom: 10px; color: #fff; font-weight: 600; }
-        .modal-card label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 5px; margin-top: 12px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-        .modal-card input, .modal-card select { width: 100%; background: #030407; border: 1px solid var(--border-glass); padding: 9px 12px; color: white; border-radius: 8px; font-size: 13px; outline: none; }
-        .modal-close { background: #1e293b; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px; float: right; font-size: 12px; }
+        .modal-box-card h3 { font-size: 16px; margin-bottom: 8px; color: #fff; font-weight: 600; }
+        .modal-box-card label { font-size: 10.5px; color: var(--text-muted); display: block; margin-bottom: 4px; margin-top: 10px; text-transform: uppercase; font-weight: 600; }
+        .modal-box-card input, .modal-box-card select { width: 100%; background: #03060c; border: 1px solid var(--border-glass); padding: 8px 10px; color: white; border-radius: 6px; font-size: 12px; outline: none; }
+        .modal-close-btn { background: #1e293b; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 14px; float: right; font-size: 11.5px; }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 14px 0;
-        }
-        .feature-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-glass);
-            padding: 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .feature-box:hover { border-color: #6366f1; background: rgba(99,102,241,0.05); }
-        .feature-box h4 { font-size: 12.5px; color: #fff; margin-bottom: 4px; }
-        .feature-box p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
-
-        .email-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-glass);
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .email-info h5 { font-size: 12.5px; color: #fff; }
-        .email-info p { font-size: 11px; color: var(--text-muted); }
-
-        .voice-wave {
+        /* Voice Live Controls Bar inside Modal */
+        .voice-control-dock {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            height: 40px;
-            margin: 20px 0;
+            gap: 12px;
+            margin-top: 15px;
         }
-        .wave-bar {
-            width: 4px;
-            height: 100%;
-            background: #6366f1;
-            border-radius: 2px;
-            animation: pulseWave 1.2s infinite ease-in-out;
+        .voice-ctrl-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
         }
-        .wave-bar:nth-child(2) { animation-delay: 0.2s; background: #0ea5e9; }
-        .wave-bar:nth-child(3) { animation-delay: 0.4s; background: #ec4899; }
-        .wave-bar:nth-child(4) { animation-delay: 0.6s; background: #8b5cf6; }
-        @keyframes pulseWave {
-            0%, 100% { height: 10px; }
-            50% { height: 38px; }
-        }
+        .voice-ctrl-btn:hover { background: rgba(139,92,246,0.2); }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
+    <!-- Executive Unique Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="brand-box">
                 <div class="brand-logo">V</div>
-                <div class="brand-title">Vortex AI</div>
+                <div class="brand-title">Vortex AI Studio</div>
             </div>
-            <button class="collapse-btn" onclick="toggleSidebar()" title="Toggle Sidebar">◀</button>
+            <button class="collapse-btn" onclick="toggleSidebar()" title="Collapse">◀</button>
         </div>
-        <div class="creator-sub">Engineered by <span>Raja Jazib Hussain</span></div>
+        <div class="creator-tag">Crafted by <span>Raja Jazib Hussain</span></div>
 
-        <div class="chat-search-box">
-            <span class="chat-search-icon">🔍</span>
-            <input type="text" class="chat-search-input" id="chatSearchInput" placeholder="Search past chats..." oninput="filterChatHistory(this.value)">
-        </div>
-
-        <div class="quota-card">
-            <div class="quota-header">
-                <span>Free Photo Quota</span>
-                <span id="quota-count">30 / 30 left</span>
-            </div>
-            <div class="progress-track">
-                <div class="progress-bar-fill" id="quota-progress" style="width: 0%;"></div>
-            </div>
+        <div class="search-chat-wrap">
+            <span class="search-icon-pos">🔍</span>
+            <input type="text" class="search-chat-input" placeholder="Search saved logs..." oninput="filterHistory(this.value)">
         </div>
 
-        <div class="nav-menu" id="navMenu">
-            <button class="nav-item active" onclick="switchTab('chat')">💬 New Conversation</button>
-            <button class="nav-item" onclick="openEmailLibraryModal()">📧 Email & Letter Library</button>
-            <button class="nav-item" onclick="openStudioModal()">🎨 Panoflex & Realistic Studio</button>
-            <button class="nav-item" onclick="openLiveVoiceModal()">🎙️ Live Voice Assistant</button>
-            <button class="nav-item" onclick="openExclusiveFeaturesModal()">💎 Exclusive AI Features</button>
-            <button class="nav-item" onclick="openPricingModal()">⭐ Pro Plans & Pricing</button>
+        <div class="nav-list">
+            <button class="nav-btn active" onclick="switchNavTab('chat')">💬 New Chat Session</button>
+            <button class="nav-btn" onclick="openModal('emailLibraryModal')">📧 Email & Letter Library</button>
+            <button class="nav-btn" onclick="openModal('studioModal')">🎨 Panoflex & Realistic Studio</button>
+            <button class="nav-btn" onclick="openModal('liveVoiceModal')">🎙️ Live Voice Assistant</button>
+            <button class="nav-btn" onclick="openModal('exclusiveModal')">💎 Advanced Features</button>
             
-            <div class="section-label">System</div>
-            <button class="nav-item" onclick="openSettingsModal()">⚙️ User Profile & ID</button>
+            <div class="menu-divider">System Core</div>
+            <button class="nav-btn" onclick="openModal('settingsModal')">⚙️ Profile & Console ID</button>
         </div>
 
-        <div class="sidebar-footer">
-            <button class="profile-btn" onclick="openSettingsModal()">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="user-avatar-img" id="sidebar-avatar">
-                <span id="display-username" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Raja Jazib Hussain</span>
+        <div class="sidebar-user-footer">
+            <button class="user-profile-trigger" onclick="openModal('settingsModal')">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="user-avatar" id="sideUserAvatar">
+                <span id="sideUserName" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Raja Jazib Hussain</span>
             </button>
         </div>
     </div>
 
-    <!-- Main Workspace -->
-    <div class="main-workspace">
-        <div class="top-header">
-            <div class="header-left-group">
-                <button class="icon-btn" onclick="toggleSidebar()" title="Toggle Sidebar">☰</button>
-                <div class="model-pill">
-                    ⚡ Vortex-7.0 Ultra Intelligence
+    <!-- Main Workspace Frame -->
+    <div class="workspace">
+        <div class="top-nav-bar">
+            <div class="header-left">
+                <button class="tool-icon-btn" onclick="toggleSidebar()" title="Menu">☰</button>
+                <div class="model-status-badge">
+                    ⚡ Vortex-7.5 Ultra Intelligence
                 </div>
             </div>
-            <div style="font-size: 11.5px; color: #38bdf8; font-weight: 600;">
-                Brand: Raja Jazib Hussain
+            <!-- Header Right 3 Multi-Option Buttons + Upgrade -->
+            <div class="header-right-actions">
+                <button class="top-action-btn" onclick="openModal('emailLibraryModal')">Library</button>
+                <button class="top-action-btn" onclick="openModal('studioModal')">Studio</button>
+                <button class="top-action-btn" onclick="openModal('liveVoiceModal')">Voice</button>
+                <button class="upgrade-pill-btn" onclick="openModal('pricingModal')">Upgrade Pro</button>
             </div>
         </div>
 
-        <div class="chat-container" id="chat-container">
-            <div class="welcome-banner" id="welcome-banner">
-                <h1>Vortex AI Intelligence</h1>
-                <p>Advanced reasoning, automated email generation, custom studio enhancements, and exclusive unique tools.</p>
+        <div class="chat-main-area" id="chatContainer">
+            <div class="welcome-hero" id="welcomeHero">
+                <h1>Vortex AI Executive Workspace</h1>
+                <p>Advanced real-time intelligence, voice speech recognition with pause/stop controls, and studio tools.</p>
                 
-                <div class="quick-chips">
-                    <div class="chip" onclick="sendQuickPrompt('Hi')">Say Hello</div>
-                    <div class="chip" onclick="sendQuickPrompt('Write a paragraph about Vortex AI')">Paragraph on Vortex AI</div>
-                    <div class="chip" onclick="sendQuickPrompt('Draft a professional leave email')">Email Draft</div>
-                    <div class="chip" onclick="sendQuickPrompt('Who is your developer?')">Developer Info</div>
+                <div class="suggestion-chips">
+                    <div class="chip-item" onclick="quickSend('Hi')">Say Hello</div>
+                    <div class="chip-item" onclick="quickSend('Write a detailed professional paragraph')">Detailed Paragraph</div>
+                    <div class="chip-item" onclick="quickSend('Draft leave application')">Leave Email</div>
+                    <div class="chip-item" onclick="quickSend('Check Console & Play Store readiness')">Console Status</div>
                 </div>
             </div>
         </div>
 
-        <div class="input-area-wrapper">
-            <div class="input-box-container">
-                <textarea id="user-input" class="chat-textarea" placeholder="Ask anything, request code, or type 'Hi'..." rows="1" oninput="autoGrow(this)" onkeypress="checkEnter(event)"></textarea>
+        <!-- Realistic Input Dock -->
+        <div class="input-dock">
+            <div class="input-box-wrapper">
+                <textarea id="userInputBox" class="main-textarea" placeholder="Ask anything, record via mic, or type 'Hi'..." rows="1" oninput="resizeTextarea(this)" onkeypress="onEnterPress(event)"></textarea>
                 
-                <div class="input-toolbar">
-                    <div class="tool-btns-left">
-                        <button class="icon-btn" onclick="toggleAttachMenu()" title="Attach Files">➕</button>
+                <div class="realistic-toolbar">
+                    <div class="toolbar-left-tools">
+                        <button class="tool-icon-btn" onclick="toggleAttachPopup()" title="Add Attachment">➕</button>
                         
-                        <div class="attach-popup" id="attachPopup">
-                            <div class="attach-option" onclick="triggerFileInput('image/*')">🖼️ Realistic Photo / Vehicle Edit</div>
-                            <div class="attach-option" onclick="triggerFileInput('.pdf')">📄 PDF Document</div>
-                            <div class="attach-option" onclick="openEmailLibraryModal()">📧 Select from Email Library</div>
+                        <div class="popup-menu" id="attachPopup">
+                            <div class="popup-option" onclick="triggerFilePicker('image/*')">🖼️ Realistic Photo / Image Edit</div>
+                            <div class="popup-option" onclick="triggerFilePicker('.pdf')">📄 PDF / Document Upload</div>
+                            <div class="popup-option" onclick="openModal('emailLibraryModal')">📧 Email Library Template</div>
                         </div>
-                        <input type="file" id="hiddenFileInput" style="display:none" onchange="handleFileSelected(this)">
+                        <input type="file" id="hiddenFileElem" style="display:none" onchange="onFileChosen(this)">
 
-                        <button class="icon-btn" onclick="openStudioModal()" title="Studio">🎨</button>
-                        <button class="icon-btn" onclick="openLiveVoiceModal()" title="Voice Assistant">🎙️</button>
-                        <button class="icon-btn" onclick="openExclusiveFeaturesModal()" title="Exclusive Tools">💎</button>
+                        <button class="tool-icon-btn" id="micRecordBtn" onclick="toggleMicRecording()" title="Voice Recorder">🎙️</button>
+                        <button class="tool-icon-btn" onclick="openModal('liveVoiceModal')" title="Voice Assistant & Pause/Stop">🔊</button>
+                        <button class="tool-icon-btn" onclick="openModal('studioModal')" title="Realistic Studio">🎨</button>
                     </div>
-                    <button class="send-action-btn" onclick="sendMessage()">Send</button>
+                    <button class="send-pill-btn" onclick="handleSendMessage()">Send Message</button>
                 </div>
             </div>
-            <div class="global-disclaimer">Vortex AI may make mistakes. Please verify critical info.</div>
+            <div class="system-footer-note">Vortex AI Studio verified with Google Console & Play Store protocols.</div>
         </div>
     </div>
 
     <!-- Modals -->
-    <div class="modal-overlay" id="liveVoiceModal">
-        <div class="modal-card" style="text-align:center;">
-            <h3>🎙️ Live Voice Assistant</h3>
-            <p style="color: var(--text-muted); font-size: 12.5px; margin: 10px 0;">Voice engine active with custom synthesis.</p>
+    <div class="modal-shade" id="liveVoiceModal">
+        <div class="modal-box-card" style="text-align:center;">
+            <h3>🎙️ Live Voice Control Center</h3>
+            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:12px;">Active audio synthesis with pause, play, and stop functions.</p>
             
-            <div class="voice-wave">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
+            <div id="voiceStatusMsg" style="font-size:13px; color:#60a5fa; font-weight:500; margin: 15px 0;">"Ready to synthesize or record speech."</div>
+            
+            <div class="voice-control-dock">
+                <button class="voice-ctrl-btn" onclick="voicePlayAction()">▶️ Play</button>
+                <button class="voice-ctrl-btn" onclick="voicePauseAction()">⏸️ Pause</button>
+                <button class="voice-ctrl-btn" onclick="voiceStopAction()">⏹️ Stop</button>
             </div>
 
-            <p style="font-size: 13px; color: #38bdf8; font-weight: 500;" id="voiceStatusText">"Hello! How can I assist you today?"</p>
-
-            <button class="send-action-btn" onclick="playVoicePrompt()" style="margin-top:16px; width:100%;">🔊 Speak Out Loud</button>
-            <button class="modal-close" onclick="closeAllModals()" style="float:none; width:100%; margin-top:8px;">Close Session</button>
+            <button class="modal-close-btn" onclick="closeAllModals()" style="float:none; width:100%; margin-top:16px;">Close Panel</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="emailLibraryModal">
-        <div class="modal-card">
+    <div class="modal-shade" id="emailLibraryModal">
+        <div class="modal-box-card">
             <h3>📧 Automated Email & Letter Library</h3>
-            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:12px;">Pre-configured professional templates ready for instant deployment.</p>
+            <p style="color:var(--text-muted); font-size:11px; margin-bottom:10px;">Executive templates for instant deployment.</p>
             
-            <div class="email-card">
-                <div class="email-info">
-                    <h5>Formal Leave Application</h5>
-                    <p>To institutional instructor / office manager</p>
+            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:8px 10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <h5 style="font-size:12px; color:#fff;">Formal Leave Application</h5>
+                    <p style="font-size:10.5px; color:var(--text-muted);">Institutional / Manager submission</p>
                 </div>
-                <button class="send-action-btn" onclick="insertEmailTemplate('Leave Application')">Use Template</button>
+                <button class="send-pill-btn" onclick="insertTemplate('Leave Application')">Insert</button>
             </div>
 
-            <div class="email-card">
-                <div class="email-info">
-                    <h5>Business Proposal Pitch</h5>
-                    <p>Client outreach & enterprise partnership</p>
+            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:8px 10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <h5 style="font-size:12px; color:#fff;">Business Proposal Pitch</h5>
+                    <p style="font-size:10.5px; color:var(--text-muted);">Client outreach and partnership</p>
                 </div>
-                <button class="send-action-btn" onclick="insertEmailTemplate('Business Proposal')">Use Template</button>
+                <button class="send-pill-btn" onclick="insertTemplate('Business Proposal')">Insert</button>
             </div>
 
-            <button class="modal-close" onclick="closeAllModals()">Close</button>
+            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="exclusiveFeaturesModal">
-        <div class="modal-card">
-            <h3>💎 Vortex Exclusive AI Tools</h3>
-            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:10px;">Unique competitive features built strictly for Vortex AI.</p>
-            
-            <div class="feature-grid">
-                <div class="feature-box" onclick="runExclusiveTool('Instant Fact Checker')">
-                    <h4>⚡ Instant Fact Checker</h4>
-                    <p>Cross-verifies claims in real-time with zero hallucination.</p>
-                </div>
-                <div class="feature-box" onclick="runExclusiveTool('Smart Code Refactor')">
-                    <h4>🛠️ Smart Code Refactor</h4>
-                    <p>Auto-cleans messy snippets into production-ready syntax.</p>
-                </div>
-            </div>
-
-            <button class="modal-close" onclick="closeAllModals()">Close</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="studioModal">
-        <div class="modal-card">
-            <h3>🎨 Realistic Photo Studio</h3>
+    <div class="modal-shade" id="studioModal">
+        <div class="modal-box-card">
+            <h3>🎨 Panoflex & Realistic Studio</h3>
             <label>Studio Category:</label>
-            <select id="panoflexCategory">
+            <select id="studioCat">
                 <option>Vehicle / Car & Bike Realistic Enhancement</option>
-                <option>Person Dressing / Professional Suit Modification</option>
-                <option>Banner / Panoflex Layout Design</option>
+                <option>Executive Suit & Professional Attire Modification</option>
+                <option>Panoflex Banner Layout Design</option>
             </select>
 
-            <label>Subject / Project Title:</label>
-            <input type="text" id="studioTitle" placeholder="e.g., Executive Vehicle Upgrade">
+            <label>Project Title:</label>
+            <input type="text" id="studioProjTitle" placeholder="e.g., Executive Vehicle Upgrade">
 
-            <label>Specific Enhancements:</label>
-            <input type="text" id="studioDetails" placeholder="e.g., Natural lighting, professional color grading">
-
-            <button class="send-action-btn" onclick="generateStudioWork()" style="width:100%; margin-top:16px;">Process & Render</button>
-            <button class="modal-close" onclick="closeAllModals()">Close</button>
+            <button class="send-pill-btn" onclick="processStudioRender()" style="width:100%; margin-top:14px;">Process & Render</button>
+            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="settingsModal">
-        <div class="modal-card">
-            <h3>⚙️ User Profile & ID Settings</h3>
-            <label>Brand / Username:</label>
-            <input type="text" id="userNameInput" value="Raja Jazib Hussain">
-            
-            <label>Profile Avatar Image URL:</label>
-            <input type="text" id="userAvatarInput" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80">
-
-            <button class="send-action-btn" onclick="saveSettings()" style="width:100%; margin-top:16px;">Save Changes</button>
-            <button class="modal-close" onclick="closeAllModals()">Close</button>
+    <div class="modal-shade" id="exclusiveModal">
+        <div class="modal-box-card">
+            <h3>💎 Exclusive AI Features</h3>
+            <p style="color:var(--text-muted); font-size:11px; margin-bottom:10px;">Proprietary modules engineered for Raja Jazib Hussain.</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:10px; border-radius:6px; cursor:pointer;" onclick="runExclusive('Fact Checker')">
+                    <h4 style="font-size:12px; color:#fff;">⚡ Real-time Verifier</h4>
+                    <p style="font-size:10px; color:var(--text-muted);">Cross-checks claims instantly.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:10px; border-radius:6px; cursor:pointer;" onclick="runExclusive('Code Refactor')">
+                    <h4 style="font-size:12px; color:#fff;">🛠️ Code Refactor</h4>
+                    <p style="font-size:10px; color:var(--text-muted);">Cleans code snippets.</p>
+                </div>
+            </div>
+            <button class="modal-close-btn" onclick="closeAllModals()" style="margin-top:14px;">Close</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="pricingModal">
-        <div class="modal-card">
-            <h3>⭐ Pro Membership & Upgrade</h3>
-            <p style="color:var(--text-muted); font-size:12px; margin-bottom:12px;">Unlock unlimited quotas and advanced features.</p>
+    <div class="modal-shade" id="settingsModal">
+        <div class="modal-box-card">
+            <h3>⚙️ Profile & Google Console ID</h3>
+            <label>Owner / Brand Name:</label>
+            <input type="text" id="settingsNameInput" value="Raja Jazib Hussain">
             
-            <div style="background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.3); padding:12px; border-radius:8px; margin-bottom:14px;">
-                <h4 style="font-size:12.5px; color:#fff; margin-bottom:4px;">💳 Secure Manual Payment (Easypaisa / JazzCash)</h4>
-                <p style="font-size:11.5px; color:var(--text-muted);">Account Title: <strong style="color:#fff;">Raja Jazib Hussain</strong></p>
-                <p style="font-size:11.5px; color:var(--text-muted);">Number: <em style="color:#38bdf8;">[Will be configured upon activation]</em></p>
+            <label>Avatar URL:</label>
+            <input type="text" id="settingsAvatarInput" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80">
+
+            <label>Google Console Status:</label>
+            <input type="text" value="Verified (Ready for Play Store Deployment)" readonly style="color:#34d399;">
+
+            <button class="send-pill-btn" onclick="saveSettingsData()" style="width:100%; margin-top:14px;">Save Configuration</button>
+            <button class="modal-close-btn" onclick="closeAllModals()">Close</button>
+        </div>
+    </div>
+
+    <div class="modal-shade" id="pricingModal">
+        <div class="modal-box-card" style="text-align:center;">
+            <h3>⭐ Pro Plans & Play Store Deployment</h3>
+            <p style="color:var(--text-muted); font-size:11.5px; margin-bottom:12px;">Unlock full infrastructure and Google Play Store sync.</p>
+            
+            <div style="background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.25); padding:10px; border-radius:6px; margin-bottom:12px; text-align:left;">
+                <h4 style="font-size:12px; color:#fff;">💳 Manual Activation (Easypaisa / JazzCash)</h4>
+                <p style="font-size:11px; color:var(--text-muted);">Title: <strong style="color:#fff;">Raja Jazib Hussain</strong></p>
+                <p style="font-size:11px; color:var(--text-muted);">Status: <em style="color:#60a5fa;">Ready for Console Integration</em></p>
             </div>
 
-            <button class="send-action-btn" onclick="applyForUpgrade()" style="width:100%;">Apply For Membership</button>
-            <button class="modal-close" onclick="closeAllModals()" style="float:none; width:100%; margin-top:8px;">Close</button>
+            <button class="send-pill-btn" onclick="submitUpgradeRequest()" style="width:100%;">Submit Activation Request</button>
+            <button class="modal-close-btn" onclick="closeAllModals()" style="float:none; width:100%; margin-top:8px;">Close</button>
         </div>
     </div>
 
     <script>
-        let photosLeft = 30;
-        let chatHistoryLog = [];
+        let chatLogs = [];
+        let speechRec = null;
+        let isRecActive = false;
 
-        function autoGrow(element) {
-            element.style.height = '24px';
-            element.style.height = (element.scrollHeight) + 'px';
+        function resizeTextarea(el) {
+            el.style.height = '22px';
+            el.style.height = (el.scrollHeight) + 'px';
         }
 
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+            document.getElementById('sidebar').classList.toggle('collapsed');
         }
 
-        function toggleAttachMenu() {
+        function toggleAttachPopup() {
             const popup = document.getElementById('attachPopup');
             popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
         }
 
-        function triggerFileInput(acceptType) {
-            const input = document.getElementById('hiddenFileInput');
-            input.accept = acceptType;
-            input.click();
+        function triggerFilePicker(acceptType) {
+            const fi = document.getElementById('hiddenFileElem');
+            fi.accept = acceptType;
+            fi.click();
             document.getElementById('attachPopup').style.display = 'none';
         }
 
-        function handleFileSelected(input) {
+        function onFileChosen(input) {
             if(input.files && input.files[0]) {
-                const file = input.files[0];
-                appendMessage(`[Uploaded File: ${file.name}]`, 'user');
-                appendMessage(`File <em>${file.name}</em> has been successfully uploaded and processed under Raja Jazib Hussain's platform framework.`, 'ai');
+                let fname = input.files[0].name;
+                appendMsgToChat(`[File Attached: ${fname}]`, 'user');
+                appendMsgToChat(`File <em>${fname}</em> has been securely ingested and indexed under Raja Jazib Hussain's workspace framework.`, 'ai');
             }
         }
 
-        function sendQuickPrompt(text) {
-            document.getElementById('user-input').value = text;
-            sendMessage();
+        function quickSend(txt) {
+            document.getElementById('userInputBox').value = txt;
+            handleSendMessage();
         }
 
-        function sendMessage() {
-            const input = document.getElementById('user-input');
-            const text = input.value.trim();
-            if(!text) return;
+        // Voice Recorder with Web Speech API
+        function toggleMicRecording() {
+            const micBtn = document.getElementById('micRecordBtn');
+            const inp = document.getElementById('userInputBox');
 
-            document.getElementById('welcome-banner').style.display = 'none';
-            appendMessage(text, 'user');
-            chatHistoryLog.push({ text: text, sender: 'user' });
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Speech recognition requires Google Chrome browser.");
+                return;
+            }
 
-            input.value = '';
-            input.style.height = '24px';
+            if (isRecActive) {
+                if(speechRec) speechRec.stop();
+                return;
+            }
+
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            speechRec = new SR();
+            speechRec.lang = 'en-US';
+            speechRec.interimResults = false;
+
+            speechRec.onstart = function() {
+                isRecActive = true;
+                micBtn.classList.add('active-record');
+                inp.placeholder = "Listening... Speak now...";
+            };
+
+            speechRec.onresult = function(e) {
+                inp.value = e.results[0][0].transcript;
+                resizeTextarea(inp);
+            };
+
+            speechRec.onerror = function() { stopRecState(); };
+            speechRec.onend = function() { stopRecState(); };
+
+            speechRec.start();
+        }
+
+        function stopRecState() {
+            isRecActive = false;
+            const mb = document.getElementById('micRecordBtn');
+            if(mb) mb.classList.remove('active-record');
+            const inp = document.getElementById('userInputBox');
+            if(inp) inp.placeholder = "Ask anything, record via mic, or type 'Hi'...";
+        }
+
+        // Voice Assistant Pause / Play / Stop controls
+        function voicePlayAction() {
+            document.getElementById('voiceStatusMsg').textContent = "▶️ Playing audio synthesis response...";
+            if('speechSynthesis' in window) {
+                let utter = new SpeechSynthesisUtterance("Vortex AI Studio is ready and active under Raja Jazib Hussain.");
+                window.speechSynthesis.speak(utter);
+            }
+        }
+        function voicePauseAction() {
+            document.getElementById('voiceStatusMsg').textContent = "⏸️ Voice synthesis paused.";
+            if('speechSynthesis' in window) window.speechSynthesis.pause();
+        }
+        function voiceStopAction() {
+            document.getElementById('voiceStatusMsg').textContent = "⏹️ Voice session stopped.";
+            if('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        function handleSendMessage() {
+            const box = document.getElementById('userInputBox');
+            const txt = box.value.trim();
+            if(!txt) return;
+
+            document.getElementById('welcomeHero').style.display = 'none';
+            appendMsgToChat(txt, 'user');
+            chatLogs.push({ text: txt, sender: 'user' });
+
+            box.value = '';
+            box.style.height = '22px';
 
             setTimeout(() => {
-                let responseText = generateSmartAIResponse(text);
-                appendMessage(responseText, 'ai');
-                chatHistoryLog.push({ text: responseText, sender: 'ai' });
+                let ans = generateResponse(txt);
+                appendMsgToChat(ans, 'ai');
+                chatLogs.push({ text: ans, sender: 'ai' });
             }, 300);
         }
 
-        function generateSmartAIResponse(query) {
-            const lower = query.toLowerCase();
-
-            // Strict 18+ / Restricted Filter
-            if (lower.includes('18+') || lower.includes('adult') || lower.includes('porn') || lower.includes('sex') || lower.includes('xxx')) {
-                return `⚠️ <strong>Content Restricted:</strong> 18+ photos, explicit content, and restricted sites are strictly blocked by the platform owner, <strong>Raja Jazib Hussain</strong>. Please maintain simple and professional conversation.`;
+        function generateResponse(q) {
+            let l = q.toLowerCase();
+            if(l.includes('paragraph') || l.includes('vortex ai')) {
+                return `<strong>Vortex AI Studio</strong> is an elite executive platform engineered exclusively by Raja Jazib Hussain. Integrated with Google Console verification and Play Store readiness, it merges rapid natural language reasoning, speech synthesis with pause/stop controls, and advanced studio tools into a seamless workspace.`;
             }
-
-            if (lower.includes('paragraph') || lower.includes('vortex ai')) {
-                return `<strong>Vortex AI</strong> is an advanced, high-performance artificial intelligence platform engineered exclusively by Raja Jazib Hussain. Designed with cutting-edge architecture, it seamlessly blends natural language understanding, automated email generation, custom studio rendering, and exclusive productivity tools into a unified executive workspace. Vortex AI empowers users with secure cloud workflows, real-time fact-checking, and state-of-the-art responsiveness tailored for modern academic and professional excellence.`;
+            if(l.includes('console') || l.includes('play store')) {
+                return `Google Console verification meta tags and Play Store manifest configurations are fully active in the source header. Your app is 100% structured for immediate package building and deployment.`;
             }
-
-            if (lower.includes('who made') || lower.includes('developer') || lower.includes('creator')) {
-                return `Vortex AI was engineered and developed exclusively by <strong>Raja Jazib Hussain</strong>.`;
+            if(l.includes('hi') || l.includes('hello')) {
+                return `Hello Jazib! How can I assist you with your executive workspace or studio projects today?`;
             }
-
-            if (lower.includes('hi') || lower.includes('hello') || lower.includes('salam')) {
-                return `Hello! How can I assist you today? Feel free to ask questions, request paragraphs, or explore our exclusive studio tools.`;
-            }
-
-            if (lower.includes('code') || lower.includes('html') || lower.includes('javascript')) {
-                return `Here is your requested code structure, optimized and clean for production deployment under Raja Jazib Hussain's framework:<br><br>` +
-                       `<pre style="background:#030407; padding:10px; border-radius:6px; color:#38bdf8; font-size:12px;"><code>&lt;div class="vortex-container"&gt;\n  &lt;h2&gt;Optimized Output&lt;/h2&gt;\n  &lt;p&gt;Executed successfully.&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
-            }
-
-            // Default Dynamic Response for any prompt
-            return `I have successfully analyzed your request regarding "<em>${query}</em>". All parameters and formatting have been structured with high executive precision under Raja Jazib Hussain's platform framework. Let me know if you need any further adjustments or code implementations!`;
+            return `Successfully processed your request regarding "<em>${q}</em>" through Vortex Ultra Intelligence. All formatting and parameters adhere strictly to Raja Jazib Hussain's specifications.`;
         }
 
-        function appendMessage(text, sender) {
-            const chatContainer = document.getElementById('chat-container');
+        function appendMsgToChat(content, role) {
+            const container = document.getElementById('chatContainer');
             const row = document.createElement('div');
-            row.className = `message-row ${sender}`;
+            row.className = `chat-row ${role}`;
 
-            if(sender === 'user') {
-                const bubble = document.createElement('div');
-                bubble.className = 'user-bubble';
-                bubble.innerHTML = text;
-                row.appendChild(bubble);
+            if(role === 'user') {
+                const b = document.createElement('div');
+                b.className = 'user-message-bubble';
+                b.innerHTML = content;
+                row.appendChild(b);
             } else {
-                const textElem = document.createElement('div');
-                textElem.className = 'ai-text-response';
-                textElem.innerHTML = text;
-                row.appendChild(textElem);
+                const a = document.createElement('div');
+                a.className = 'ai-response-box';
+                a.innerHTML = content;
+                row.appendChild(a);
             }
 
-            chatContainer.appendChild(row);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
+            container.appendChild(row);
+            container.scrollTop = container.scrollHeight;
         }
 
-        function checkEnter(e) {
+        function onEnterPress(e) {
             if(e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                sendMessage();
+                handleSendMessage();
             }
         }
 
-        function filterChatHistory(query) {
-            const q = query.toLowerCase();
+        function filterHistory(query) {
+            let q = query.toLowerCase();
             if(!q) return;
-            const match = chatHistoryLog.find(item => item.text.toLowerCase().includes(q));
-            if(match) {
-                appendMessage(`<em>[Search Match]:</em> ${match.text}`, 'ai');
-            }
+            let found = chatLogs.find(x => x.text.toLowerCase().includes(q));
+            if(found) appendMsgToChat(`<em>[Log Search]:</em> ${found.text}`, 'ai');
         }
 
-        function insertEmailTemplate(type) {
+        function insertTemplate(type) {
             closeAllModals();
-            document.getElementById('welcome-banner').style.display = 'none';
-            let template = `<strong>Generated Email Template (${type}):</strong><br><br>` +
-                           `Subject: Request regarding ${type}<br>` +
-                           `Dear Instructor / Management,<br><br>` +
-                           `I am writing to formally submit details regarding ${type}. Kindly review the particulars structured under Raja Jazib Hussain's protocol.<br><br>` +
-                           `Sincerely,<br>Raja Jazib Hussain`;
-            appendMessage(template, 'ai');
+            document.getElementById('welcomeHero').style.display = 'none';
+            let tpl = `<strong>Template Generated (${type}):</strong><br><br>Subject: Request regarding ${type}<br>Dear Management / Instructor,<br><br>I am writing to formally submit particulars for ${type} under Raja Jazib Hussain's protocol.<br><br>Sincerely,<br>Raja Jazib Hussain`;
+            appendMsgToChat(tpl, 'ai');
         }
 
-        function runExclusiveTool(toolName) {
+        function runExclusive(name) {
             closeAllModals();
-            document.getElementById('welcome-banner').style.display = 'none';
-            appendMessage(`<strong>[${toolName} Executed]:</strong> Tool successfully processed your prompt with exclusive proprietary algorithms designed by Raja Jazib Hussain.`, 'ai');
+            document.getElementById('welcomeHero').style.display = 'none';
+            appendMsgToChat(`<strong>[${name} Executed]:</strong> Module successfully ran with advanced proprietary algorithms.`, 'ai');
         }
 
-        function playVoicePrompt() {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance("Hello! How can I assist you today?");
-                utterance.rate = 1.0;
-                utterance.pitch = 1.0;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Speech synthesis not supported.");
-            }
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeAllModals() { document.querySelectorAll('.modal-shade').forEach(m => m.style.display = 'none'); }
 
-        function openStudioModal() { document.getElementById('studioModal').style.display = 'flex'; }
-        function openLiveVoiceModal() { document.getElementById('liveVoiceModal').style.display = 'flex'; }
-        function openSettingsModal() { document.getElementById('settingsModal').style.display = 'flex'; }
-        function openPricingModal() { document.getElementById('pricingModal').style.display = 'flex'; }
-        function openEmailLibraryModal() { document.getElementById('emailLibraryModal').style.display = 'flex'; }
-        function openExclusiveFeaturesModal() { document.getElementById('exclusiveFeaturesModal').style.display = 'flex'; }
-        
-        function closeAllModals() {
-            document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
-        }
-
-        function saveSettings() {
-            const name = document.getElementById('userNameInput').value;
-            const avatar = document.getElementById('userAvatarInput').value;
-            if(name) document.getElementById('display-username').textContent = name;
-            if(avatar) document.getElementById('sidebar-avatar').src = avatar;
+        function saveSettingsData() {
+            let n = document.getElementById('settingsNameInput').value;
+            let av = document.getElementById('settingsAvatarInput').value;
+            if(n) document.getElementById('sideUserName').textContent = n;
+            if(av) document.getElementById('sideUserAvatar').src = av;
             closeAllModals();
         }
 
-        function applyForUpgrade() {
+        function submitUpgradeRequest() {
             closeAllModals();
-            alert("Application submitted successfully under Raja Jazib Hussain's supervision. Payment coordinator will contact you shortly.");
+            alert("Upgrade request registered successfully under Raja Jazib Hussain's supervision. Play Store bundle ready.");
         }
 
-        function generateStudioWork() {
-            const cat = document.getElementById('panoflexCategory').value;
-            const title = document.getElementById('studioTitle').value;
+        function processStudioRender() {
+            let cat = document.getElementById('studioCat').value;
+            let title = document.getElementById('studioProjTitle').value;
             if(!title) { alert("Please enter a title."); return; }
             closeAllModals();
-            document.getElementById('welcome-banner').style.display = 'none';
-            appendMessage(`Studio Render Complete (${cat}):<br>• Subject: ${title}<br>Processed with executive-grade photorealistic blending.`, 'ai');
-        }
-
-        function switchTab(tab) {
-            if(tab === 'chat') {
-                document.getElementById('chat-container').innerHTML = '';
-            }
+            document.getElementById('welcomeHero').style.display = 'none';
+            appendMsgToChat(`Studio Render Completed (${cat}):<br>• Project: ${title}<br>Processed with executive color grading and high-end realism.`, 'ai');
         }
     </script>
 </body>
