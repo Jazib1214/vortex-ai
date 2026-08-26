@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex AI - The Ultimate Problem Solver & Poster Studio</title>
-    <!-- SEO Meta Tags taake Google par "Vortex AI" search karne par website rank kare -->
-    <meta name="description" content="Vortex AI is the most advanced problem-solving AI platform featuring instant Poster Studio, Jazib Voice, and smart assistant tools.">
-    <meta name="keywords" content="Vortex AI, Jazib AI, Poster Studio, AI problem solver Pakistan, JazzCash AI subscription">
-    <meta name="author" content="Vortex AI Official">
+    <title>Vortex AI - Created by Raja Jazib Hussain</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Vortex AI is the most advanced problem-solving AI platform featuring instant Poster Studio, Jazib Voice, and smart assistant tools by Raja Jazib Hussain.">
+    <meta name="keywords" content="Vortex AI, Raja Jazib Hussain, Jazib AI, Poster Studio, AI problem solver Pakistan">
+    <meta name="author" content="Raja Jazib Hussain">
     
     <style>
         :root {
@@ -37,7 +37,7 @@
             overflow: hidden;
         }
 
-        /* Responsive Sidebar */
+        /* Sidebar */
         .sidebar {
             width: 280px;
             background-color: var(--sidebar-bg);
@@ -49,15 +49,26 @@
         }
 
         .logo-area {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: var(--accent-color);
-            margin-bottom: 25px;
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
             gap: 10px;
             letter-spacing: 0.5px;
             text-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .creator-tag {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .creator-tag span {
+            color: #34d399;
         }
 
         .nav-btn {
@@ -191,7 +202,7 @@
             border-bottom: 1px solid var(--border-color);
             background-color: rgba(17, 24, 39, 0.8);
             backdrop-filter: blur(10px);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
@@ -394,6 +405,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo-area">⚡ Vortex AI</div>
+        <div class="creator-tag">Created by <span>Raja Jazib Hussain</span></div>
+
         <button class="nav-btn" onclick="clearChat()">💬 New Conversation</button>
         <button class="nav-btn" onclick="openPosterStudio()">🎨 Poster Studio</button>
         <button class="nav-btn" onclick="openPricing()">⭐ Pro Plans</button>
@@ -417,12 +430,12 @@
     <!-- Main Container -->
     <div class="main-container">
         <div class="chat-header">
-            <span>Vortex AI - Search & Problem Solver</span>
+            <span>Vortex AI - Developed by Raja Jazib Hussain</span>
             <span id="voice-status" style="font-size:12px; color:#a5b4fc; font-weight:normal;">Voice: Standard AI</span>
         </div>
         
         <div class="chat-body" id="chat-body">
-            <div class="message ai">Welcome to Vortex AI! Type any complex question or tap the (+) button to generate professional event posters and Muharram cards instantly.</div>
+            <div class="message ai">Welcome to Vortex AI, created by Raja Jazib Hussain! Type any complex question or tap the (+) button to generate professional event posters and Muharram cards instantly.</div>
         </div>
 
         <div class="chat-input-area">
@@ -442,7 +455,7 @@
             <input type="text" id="eventTitle" placeholder="e.g., Majlis-e-Aza">
             
             <label>Speaker / Organizer:</label>
-            <input type="text" id="speakerName" placeholder="e.g., Allama Zameer Naqvi">
+            <input type="text" id="speakerName" placeholder="e.g., Raja Jazib Hussain">
             
             <label>Date, Time & Location:</label>
             <input type="text" id="eventDateTime" placeholder="e.g., 10th Muharram, 8:00 PM">
@@ -471,7 +484,7 @@
             </div>
 
             <p style="font-size:12px; background:var(--bg-color); padding:12px; border-radius:8px; border:1px solid var(--border-color); line-height:1.5;">
-                <strong>JazzCash / EasyPaisa:</strong> 0300-XXXXXXX (Jazib)<br>
+                <strong>JazzCash / EasyPaisa:</strong> 0300-XXXXXXX (Raja Jazib Hussain)<br>
                 <em>Send payment and share transaction screenshot for instant activation.</em>
             </p>
 
@@ -516,9 +529,9 @@
                 aiMsg.className = 'message ai';
                 
                 if (jazibVoiceActive) {
-                    aiMsg.innerHTML = `<strong>🎙️ [Jazib Voice Output]:</strong><br>Bhai, aapka yeh sawal ("${text}") bilkul durust hai. Vortex AI ki logic ke mutabiq iska behtareen hal yeh hai...`;
+                    aiMsg.innerHTML = `<strong>🎙️ [Jazib Voice Output - Raja Jazib Hussain]:</strong><br>Bhai, aapka yeh sawal ("${text}") bilkul durust hai. Vortex AI ki logic ke mutabiq iska behtareen hal yeh hai...`;
                 } else {
-                    aiMsg.textContent = "Vortex AI response: Successfully processed '" + text + "' with high precision and zero-error intelligence.";
+                    aiMsg.textContent = "Vortex AI response: Successfully processed '" + text + "' with high precision under Raja Jazib Hussain's AI framework.";
                 }
 
                 chatBody.appendChild(aiMsg);
@@ -558,9 +571,9 @@
             const chatBody = document.getElementById('chat-body');
             const aiMsg = document.createElement('div');
             aiMsg.className = 'message ai';
-            aiMsg.innerHTML = `<strong>🎨 Vortex Poster Studio - Rendered:</strong><br>` +
+            aiMsg.innerHTML = `<strong>🎨 Vortex Poster Studio (Created by Raja Jazib Hussain):</strong><br>` +
                               `• <strong>Event:</strong> ${title}<br>` +
-                              `• <strong>Speaker:</strong> ${speaker || 'N/A'}<br>` +
+                              `• <strong>Speaker/Organizer:</strong> ${speaker || 'N/A'}<br>` +
                               `• <strong>Details:</strong> ${dateTime || 'N/A'}<br>` +
                               `<em>Stunning poster layout successfully generated!</em>`;
             chatBody.appendChild(aiMsg);
