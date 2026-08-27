@@ -896,12 +896,15 @@
             `;
         }
 
-        // SMART ENGLISH CONTENT & CODE GENERATOR WITH THINKING SIMULATION
+        // IMPROVED CONVERSATIONAL & SMART CONTENT GENERATOR
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
             if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'salam') {
                 return "Hello Jazib! I am Vortex AI. How can I assist you with your workspace tasks, writing projects, or coding queries today?";
+            }
+            else if (q === 'ok' || q === 'okay' || q === 'cool' || q === 'thanks' || q === 'great' || q === 'awesome') {
+                return "Glad to hear that! What would you like to explore or build next?";
             }
             else if (q.includes('vortex ai')) {
                 return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis and mechanical engineering simulations. Built with an intuitive obsidian glassmorphism interface, it empowers developers, researchers, and creators to execute high-value tasks with exceptional speed and precision.";
@@ -913,7 +916,7 @@
                 return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre><br>Let me know if you need any adjustments or further enhancements to this snippet!`;
             }
             else {
-                return `Regarding your query <b>"${query}"</b>, here is the detailed breakdown and solution:<br><br>The active workspace has fully analyzed your parameters. The requested topic has been processed through our primary synthesis engine, providing you with targeted insights, clean structural formatting, and precise execution details. Feel free to ask if you need further refinement!`;
+                return `Here is the response to your query <b>"${query}"</b>:<br><br>The active workspace has processed your instructions. Let me know if you need any code adjustments, content expansion, or formatting changes!`;
             }
         }
 
