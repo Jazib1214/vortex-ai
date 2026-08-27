@@ -593,7 +593,6 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="appSidebar">
         <div class="sidebar-header">
             <div class="brand-box">
@@ -637,7 +636,6 @@
         </div>
     </div>
 
-    <!-- Main Workspace -->
     <div class="main-workspace">
         <div class="top-navbar">
             <div class="top-left">
@@ -671,7 +669,6 @@
             </div>
         </div>
 
-        <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
                 <div class="upload-popup" id="uploadPopup">
@@ -706,7 +703,6 @@
         </div>
     </div>
 
-    <!-- Modals -->
     <div class="modal-overlay" id="voiceModal">
         <div class="modal-box">
             <h3>🎙️ Jazib Voice Speech Engine</h3>
@@ -896,7 +892,7 @@
             `;
         }
 
-        // SMARTER CONVERSATIONAL ENGINE (HANDLES SIMPLE WORDS, YES, OK, ETC.)
+        // FULLY UPDATED INTELLIGENT CONVERSATIONAL ENGINE
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -907,19 +903,25 @@
                 return "Glad to hear that! What would you like to explore or build next?";
             }
             else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
-                return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface. Let me know what specific part you want me to explain further!";
+                return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface.";
+            }
+            else if ((q.includes('samsung') && q.includes('vivo')) || q.includes('a05') || q.includes('y20')) {
+                return `Comparing devices like in <b>"${query}"</b>: Generally, the <b>Samsung Galaxy A05</b> comes with a newer processor and Android version out of the box compared to the older Vivo Y20. Overall, for raw performance, Galaxy A05 has the edge!`;
+            }
+            else if (q.includes('samsung') && q.includes('apple')) {
+                return `Regarding <b>"${query}"</b>: Both brands lead the market. Samsung offers incredible hardware versatility, customizability, foldable options, and diverse price points, whereas Apple (iPhone) is renowned for its seamless iOS ecosystem, long-term software support, and powerful custom chips. It really depends on whether you prefer Android flexibility or the Apple ecosystem!`;
             }
             else if (q.includes('vortex ai')) {
-                return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis and mechanical engineering simulations. Built with an intuitive obsidian glassmorphism interface, it empowers developers, researchers, and creators to execute high-value tasks with exceptional speed and precision.";
+                return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis.";
             }
             else if (q.includes('paragraph') || q.includes('write')) {
-                return `Here is a professionally structured paragraph based on your request for <b>"${query}"</b>:<br><br>In contemporary digital environments, efficient content creation relies heavily on advanced computational models and automated structuring tools. By leveraging high-throughput text synthesis pipelines, developers and writers can seamlessly bridge the gap between raw data input and polished textual output, ensuring both clarity and structural depth across diverse applications.`;
+                return `Here is a professionally structured paragraph based on your request for <b>"${query}"</b>:<br><br>In contemporary digital environments, efficient content creation relies heavily on advanced computational models and automated structuring tools to bridge the gap between raw data and polished output.`;
             }
             else if (q.includes('code') || q.includes('html') || q.includes('css') || q.includes('javascript')) {
-                return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre><br>Let me know if you need any adjustments or further enhancements to this snippet!`;
+                return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
             }
             else {
-                return `Got it, Jazib! Regarding <b>"${query}"</b>, everything in your workspace is running smoothly. Would you like me to write a detailed paragraph on this topic, or generate a specific code snippet?`;
+                return `That's a great question, Jazib: <i>"${query}"</i>. While my core engine is custom-built for high-speed coding, document structuring, and workspace automation, I can analyze this topic or help you draft an executive summary about it right here. What specific angle would you like to explore?`;
             }
         }
 
@@ -933,7 +935,6 @@
 
             const inner = document.getElementById('chatContentInner');
             
-            // 1. Append User Message
             const userRowID = 'msg-' + Date.now();
             inner.insertAdjacentHTML('beforeend', `
                 <div class="message-row" id="${userRowID}">
@@ -958,7 +959,6 @@
             const container = document.getElementById('chatContainer');
             container.scrollTop = container.scrollHeight;
 
-            // 2. Simulate AI Thinking Process (1.2 seconds delay with thinking dots)
             setTimeout(() => {
                 const aiBubble = document.getElementById(`ai-resp-${userRowID}`);
                 if(aiBubble) {
@@ -975,7 +975,7 @@
             }
         }
 
-        document.getElementById('sendBtn').appendEventListener ? null : document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        document.getElementById('sendBtn').addEventListener('click', sendMessage);
 
         window.onclick = function(event) {
             if (!event.target.matches('.tool-icon-btn') && !event.target.closest('.upload-popup')) {
