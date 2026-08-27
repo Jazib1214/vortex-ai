@@ -896,7 +896,7 @@
             `;
         }
 
-        // IMPROVED CONVERSATIONAL & SMART CONTENT GENERATOR
+        // SMARTER CONVERSATIONAL ENGINE (HANDLES SIMPLE WORDS, YES, OK, ETC.)
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -905,6 +905,9 @@
             }
             else if (q === 'ok' || q === 'okay' || q === 'cool' || q === 'thanks' || q === 'great' || q === 'awesome') {
                 return "Glad to hear that! What would you like to explore or build next?";
+            }
+            else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
+                return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface. Let me know what specific part you want me to explain further!";
             }
             else if (q.includes('vortex ai')) {
                 return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis and mechanical engineering simulations. Built with an intuitive obsidian glassmorphism interface, it empowers developers, researchers, and creators to execute high-value tasks with exceptional speed and precision.";
@@ -916,7 +919,7 @@
                 return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre><br>Let me know if you need any adjustments or further enhancements to this snippet!`;
             }
             else {
-                return `Here is the response to your query <b>"${query}"</b>:<br><br>The active workspace has processed your instructions. Let me know if you need any code adjustments, content expansion, or formatting changes!`;
+                return `Got it, Jazib! Regarding <b>"${query}"</b>, everything in your workspace is running smoothly. Would you like me to write a detailed paragraph on this topic, or generate a specific code snippet?`;
             }
         }
 
@@ -972,7 +975,7 @@
             }
         }
 
-        document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        document.getElementById('sendBtn').appendEventListener ? null : document.getElementById('sendBtn').addEventListener('click', sendMessage);
 
         window.onclick = function(event) {
             if (!event.target.matches('.tool-icon-btn') && !event.target.closest('.upload-popup')) {
