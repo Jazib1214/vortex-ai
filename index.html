@@ -349,24 +349,16 @@
             font-weight: 500;
         }
 
-        .message-bubble {
+        /* Message Styling - Clean Flow */
+        .message-row {
             display: flex;
             flex-direction: column;
             width: 100%;
-            gap: 4px;
-        }
-        
-        /* Proper alignment: User right, AI left */
-        .message-bubble.user { 
-            align-items: flex-end; 
-        }
-        
-        .message-bubble.ai { 
-            align-items: flex-start; 
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .bubble-card {
-            background: var(--bg-panel);
+        .msg-bubble {
             padding: 16px 20px;
             border-radius: 18px;
             font-size: 14.5px;
@@ -376,10 +368,18 @@
             border: 1px solid var(--border-glass);
         }
 
-        .message-bubble.user .bubble-card {
+        .msg-bubble.user {
             background: var(--accent-color);
             color: #fff;
-            border-color: transparent;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-bubble.ai {
+            background: var(--bg-panel);
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
         }
 
         /* Input Section */
@@ -759,8 +759,10 @@
 
             const inner = document.getElementById('chatContentInner');
             inner.insertAdjacentHTML('beforeend', `
-                <div class="message-bubble user"><div class="bubble-card">Menu Action: ${action}</div></div>
-                <div class="message-bubble ai"><div class="bubble-card"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div></div>
+                <div class="message-row">
+                    <div class="msg-bubble user">Menu Action: ${action}</div>
+                    <div class="msg-bubble ai"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div>
+                </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
@@ -772,8 +774,10 @@
 
             const inner = document.getElementById('chatContentInner');
             inner.insertAdjacentHTML('beforeend', `
-                <div class="message-bubble user"><div class="bubble-card">Selected tool: [${type}]</div></div>
-                <div class="message-bubble ai"><div class="bubble-card"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div></div>
+                <div class="message-row">
+                    <div class="msg-bubble user">Selected tool: [${type}]</div>
+                    <div class="msg-bubble ai"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div>
+                </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
@@ -794,8 +798,10 @@
             }
 
             inner.insertAdjacentHTML('beforeend', `
-                <div class="message-bubble user"><div class="bubble-card">Activated feature: ${featureName}</div></div>
-                <div class="message-bubble ai"><div class="bubble-card">${featureResponse}</div></div>
+                <div class="message-row">
+                    <div class="msg-bubble user">Activated feature: ${featureName}</div>
+                    <div class="msg-bubble ai">${featureResponse}</div>
+                </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
@@ -851,8 +857,10 @@
 
             const inner = document.getElementById('chatContentInner');
             inner.innerHTML = `
-                <div class="message-bubble user"><div class="bubble-card">Load history: ${title}</div></div>
-                <div class="message-bubble ai"><div class="bubble-card">Successfully loaded <b>${title}</b>. All paragraph writing engines, file upload tools, and Jazib Voice scripts are fully online.</div></div>
+                <div class="message-row">
+                    <div class="msg-bubble user">Load history: ${title}</div>
+                    <div class="msg-bubble ai">Successfully loaded <b>${title}</b>. All paragraph writing engines, file upload tools, and Jazib Voice scripts are fully online.</div>
+                </div>
             `;
         }
 
@@ -866,14 +874,17 @@
 
             const inner = document.getElementById('chatContentInner');
             
-            const userHTML = `<div class="message-bubble user"><div class="bubble-card">${text}</div></div>`;
-            
             let aiReply = `Here is the generated response and detailed structural analysis for your query regarding <b>"${text}"</b>:<br><br>`;
             aiReply += `Vortex AI's specialized executive engine has successfully processed your parameters. All inputs, text queries, and automated features are fully functional.`;
             
-            const aiHTML = `<div class="message-bubble ai"><div class="bubble-card">${aiReply}</div></div>`;
+            const rowHTML = `
+                <div class="message-row">
+                    <div class="msg-bubble user">${text}</div>
+                    <div class="msg-bubble ai">${aiReply}</div>
+                </div>
+            `;
 
-            inner.insertAdjacentHTML('beforeend', userHTML + aiHTML);
+            inner.insertAdjacentHTML('beforeend', rowHTML);
 
             input.value = '';
             input.style.height = '24px';
