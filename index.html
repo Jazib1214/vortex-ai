@@ -82,10 +82,12 @@
         }
 
         .brand-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: -0.2px;
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 20%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .icon-btn {
@@ -124,7 +126,7 @@
             flex-direction: column;
             gap: 4px;
             margin-bottom: 16px;
-            max-height: 280px;
+            max-height: 260px;
             overflow-y: auto;
         }
 
@@ -242,6 +244,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            position: relative;
         }
 
         .upgrade-pro-btn {
@@ -274,6 +277,39 @@
             transition: 0.2s;
         }
         .top-three-dots:hover { background: var(--surface-hover); border-color: var(--accent-color); }
+
+        /* Gemini Style Three Dots Dropdown */
+        .dots-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            width: 240px;
+            padding: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            z-index: 300;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .dots-option {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .dots-option:hover { background: var(--surface-hover); color: #818cf8; }
 
         /* Chat Container */
         .chat-container {
@@ -453,7 +489,7 @@
         }
         .send-action-btn:hover { opacity: 0.9; transform: scale(1.05); }
 
-        /* Upload Popup Menu */
+        /* Advanced Plus (+) Popup Menu */
         .upload-popup {
             display: none;
             position: absolute;
@@ -462,18 +498,18 @@
             background: var(--bg-sidebar);
             border: 1px solid var(--border-glass);
             border-radius: 16px;
-            width: 240px;
+            width: 260px;
             padding: 8px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.7);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
             z-index: 200;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
         .upload-option {
             background: transparent;
             border: none;
             color: var(--text-main);
-            padding: 11px 14px;
+            padding: 10px 14px;
             text-align: left;
             font-size: 13px;
             border-radius: 10px;
@@ -484,7 +520,7 @@
             font-weight: 500;
             transition: 0.2s;
         }
-        .upload-option:hover { background: var(--surface-hover); color: var(--accent-color); }
+        .upload-option:hover { background: var(--surface-hover); color: #818cf8; }
 
         /* Modals */
         .modal-overlay {
@@ -546,8 +582,6 @@
             <button class="menu-item-link" onclick="executeFeature('Images')">🖼️ Images</button>
             <button class="menu-item-link" onclick="executeFeature('Quantum Paragraph Engine')">⚡ Quantum Paragraph Engine</button>
             <button class="menu-item-link" onclick="executeFeature('Smart Code Refiner')">🛠️ Smart Code Refiner</button>
-            
-            <!-- Requested New Features -->
             <button class="menu-item-link" onclick="executeFeature('PhD Mechanical Engineering Suite')">⚙️ PhD Mechanical Engineering Suite</button>
             <button class="menu-item-link" onclick="executeFeature('Advanced Code Synthesizer')">💻 Advanced Code Synthesizer</button>
             <button class="menu-item-link" onclick="executeFeature('Academic Thesis Outline Generator')">📄 Academic Thesis Outline Generator</button>
@@ -583,7 +617,19 @@
             
             <div class="top-right">
                 <button class="upgrade-pro-btn" onclick="openModal('upgradeModal')">✨ Upgrade Pro</button>
-                <button class="top-three-dots" onclick="openModal('settingsModal')" title="More Options (⋮)">⋮</button>
+                <button class="top-three-dots" onclick="toggleDotsDropdown(event)" title="More Options (⋮)">⋮</button>
+
+                <!-- Gemini Style Three Dots Dropdown -->
+                <div class="dots-dropdown" id="dotsDropdown">
+                    <button class="dots-option" onclick="handleMenuAction('Share Conversation')">🔗 Share conversation</button>
+                    <button class="dots-option" onclick="handleMenuAction('Find in Chat')">🔍 Find in chat</button>
+                    <button class="dots-option" onclick="handleMenuAction('Pin')">📌 Pin conversation</button>
+                    <button class="dots-option" onclick="handleMenuAction('Rename')">✏️ Rename</button>
+                    <button class="dots-option" onclick="handleMenuAction('Download')">📥 Download</button>
+                    <button class="dots-option" onclick="handleMenuAction('Export to Docs')">📄 Export to Docs</button>
+                    <button class="dots-option" onclick="handleMenuAction('Add to Notebook')">📓 Add to Notebook</button>
+                    <button class="dots-option" onclick="handleMenuAction('Delete')">🗑️ Delete</button>
+                </div>
             </div>
         </div>
 
@@ -599,12 +645,16 @@
         <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
-                <!-- Upload Popup Menu inside Input Box -->
+                <!-- Advanced Plus (+) Popup Menu -->
                 <div class="upload-popup" id="uploadPopup">
-                    <button class="upload-option" onclick="handleUpload('PDF Document')">📄 Upload PDF</button>
-                    <button class="upload-option" onclick="handleUpload('Word/Text Document')">📑 Upload Document</button>
-                    <button class="upload-option" onclick="handleUpload('Image File')">🖼️ Upload Image</button>
-                    <button class="upload-option" onclick="handleUpload('Video File')">🎥 Upload Video</button>
+                    <button class="upload-option" onclick="handleUpload('Upload a File')">📄 Upload a file</button>
+                    <button class="upload-option" onclick="handleUpload('Add from Drive')">📁 Add from Drive</button>
+                    <button class="upload-option" onclick="handleUpload('More Uploads')">➕ More uploads</button>
+                    <button class="upload-option" onclick="handleUpload('Create Image')">🖼️ Create Image</button>
+                    <button class="upload-option" onclick="handleUpload('Create Music')">🎵 Create Music</button>
+                    <button class="upload-option" onclick="handleUpload('Canva Integration')">🎨 Canva Integration</button>
+                    <button class="upload-option" onclick="handleUpload('Guided Learning')">💡 Guided Learning</button>
+                    <button class="upload-option" onclick="handleUpload('More Tools')">🛠️ More Tools</button>
                 </div>
 
                 <textarea class="chat-textarea" id="userInput" placeholder="Ask Vortex AI or type a topic..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
@@ -631,7 +681,7 @@
         </div>
     </div>
 
-    <!-- Voice Modal -->
+    <!-- Modals -->
     <div class="modal-overlay" id="voiceModal">
         <div class="modal-box">
             <h3>🎙️ Jazib Voice Speech Engine</h3>
@@ -641,7 +691,6 @@
         </div>
     </div>
 
-    <!-- Studio Modal -->
     <div class="modal-overlay" id="studioModal">
         <div class="modal-box">
             <h3>🎨 Vortex Studio & Layout</h3>
@@ -650,21 +699,19 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-box">
             <h3>⚙️ Console & Web Verification</h3>
-            <p style="font-size: 13px; color: var(--text-muted);">Active Owner: <b>Jazib</b><br>Theme: Ultra-Deep Obsidian Glassmorphism</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Active Owner: <b>Jazib (PRO)</b><br>Theme: Ultra-Deep Obsidian Glassmorphism</p>
             <button class="modal-close" onclick="closeModal('settingsModal')">Close</button>
         </div>
     </div>
 
-    <!-- Upgrade Modal -->
     <div class="modal-overlay" id="upgradeModal">
         <div class="modal-box">
-            <h3>✨ Upgrade to Vortex AI Pro</h3>
-            <p style="font-size: 13px; color: var(--text-main);">Unlock unlimited paragraph generation, custom Jazib Voice cloning, and direct APK/App publishing tools.</p>
-            <button class="modal-close" onclick="closeModal('upgradeModal')" style="background: var(--accent-gradient); color: #fff; border: none;">Active Pro Owner Account</button>
+            <h3>✨ Vortex AI Pro (Owner Status)</h3>
+            <p style="font-size: 13px; color: var(--text-main);">You are currently running the <b>PRO</b> tier with unlimited access to all AI engines, mechanical suites, and voice modules.</p>
+            <button class="modal-close" onclick="closeModal('upgradeModal')" style="background: var(--accent-gradient); color: #fff; border: none;">Active Pro Account</button>
         </div>
     </div>
 
@@ -688,8 +735,35 @@
 
         function toggleUploadPopup(event) {
             if(event) event.stopPropagation();
+            closeDotsDropdown();
             const popup = document.getElementById('uploadPopup');
             popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function toggleDotsDropdown(event) {
+            if(event) event.stopPropagation();
+            const uploadPopup = document.getElementById('uploadPopup');
+            if(uploadPopup) uploadPopup.style.display = 'none';
+            const dropdown = document.getElementById('dotsDropdown');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeDotsDropdown() {
+            const dropdown = document.getElementById('dotsDropdown');
+            if(dropdown) dropdown.style.display = 'none';
+        }
+
+        function handleMenuAction(action) {
+            closeDotsDropdown();
+            const center = document.getElementById('welcomeCenter');
+            if(center) center.style.display = 'none';
+
+            const inner = document.getElementById('chatContentInner');
+            inner.innerHTML += `
+                <div class="message-bubble user"><div class="bubble-card">Menu Action: ${action}</div></div>
+                <div class="message-bubble ai"><div class="bubble-card"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div></div>
+            `;
+            document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
 
         function handleUpload(type) {
@@ -699,8 +773,8 @@
 
             const inner = document.getElementById('chatContentInner');
             inner.innerHTML += `
-                <div class="message-bubble user"><div class="bubble-card">Attached file: [${type}]</div></div>
-                <div class="message-bubble ai"><div class="bubble-card"><b>[File Processing]:</b> Your ${type} has been successfully uploaded to the Vortex workspace. You can now ask questions or request summarization based on this file.</div></div>
+                <div class="message-bubble user"><div class="bubble-card">Selected tool: [${type}]</div></div>
+                <div class="message-bubble ai"><div class="bubble-card"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div></div>
             `;
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
@@ -727,7 +801,6 @@
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
 
-        // Real Browser Speech Recognition (Jazib Voice Recorder)
         function startJazibVoice() {
             try {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -750,9 +823,8 @@
                     input.placeholder = "Ask Vortex AI or type a topic...";
                 };
 
-                recognition.onerror = function(event) {
+                recognition.onerror = function() {
                     input.placeholder = "Ask Vortex AI or type a topic...";
-                    alert("Voice recording error or microphone permission denied.");
                 };
 
                 recognition.onend = function() {
@@ -804,7 +876,7 @@
             input.value = '';
             input.style.height = '24px';
 
-            // Detailed AI Response simulation
+            // Immediate responsive AI reply generator
             setTimeout(() => {
                 let aiReply = `Here is the generated response and detailed structural analysis for your query regarding <b>"${text}"</b>:<br><br>`;
                 aiReply += `Vortex AI's specialized executive engine has successfully processed your parameters. All inputs, text queries, and automated features are fully functional.`;
@@ -816,7 +888,7 @@
                 `;
                 const container = document.getElementById('chatContainer');
                 container.scrollTop = container.scrollHeight;
-            }, 300);
+            }, 250);
         }
 
         function handleKeyPress(e) {
@@ -826,13 +898,16 @@
             }
         }
 
-        // Close upload popup when clicking outside
+        // Close popups when clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.tool-icon-btn') && !event.target.closest('.upload-popup')) {
                 const popup = document.getElementById('uploadPopup');
                 if (popup && popup.style.display === 'flex') {
                     popup.style.display = 'none';
                 }
+            }
+            if (!event.target.matches('.top-three-dots') && !event.target.closest('.dots-dropdown')) {
+                closeDotsDropdown();
             }
         }
     </script>
