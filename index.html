@@ -892,7 +892,7 @@
             `;
         }
 
-        // FULLY UPDATED INTELLIGENT CONVERSATIONAL ENGINE
+        // FULLY UPDATED INTELLIGENT GRAMMAR & TOPIC ENGINE
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -905,11 +905,17 @@
             else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
                 return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface.";
             }
+            else if (q.includes('subject') && q.includes('predicate')) {
+                return `Here is the clear difference regarding <b>"${query}"</b>:<br><br>• <b>The Subject</b> is the part of a sentence that names the person, place, thing, or idea that is doing or being something (e.g., in "<b>The dog</b> barks", "The dog" is the subject).<br><br>• <b>The Predicate</b> is the part that tells us something about the subject, containing the action or state of being (e.g., in "The dog <b>barks</b>", "barks" is the predicate).`;
+            }
+            else if (q.includes('grammar') || q.includes('noun') || q.includes('verb') || q.includes('clause')) {
+                return `Regarding your grammar query on <b>"${query}"</b>: In structured English composition, understanding parts of speech and sentence structure is essential for building clear clauses and meaningful expressions. Let me know if you want extra example sentences or a chapter summary for this!`;
+            }
             else if ((q.includes('samsung') && q.includes('vivo')) || q.includes('a05') || q.includes('y20')) {
                 return `Comparing devices like in <b>"${query}"</b>: Generally, the <b>Samsung Galaxy A05</b> comes with a newer processor and Android version out of the box compared to the older Vivo Y20. Overall, for raw performance, Galaxy A05 has the edge!`;
             }
             else if (q.includes('samsung') && q.includes('apple')) {
-                return `Regarding <b>"${query}"</b>: Both brands lead the market. Samsung offers incredible hardware versatility, customizability, foldable options, and diverse price points, whereas Apple (iPhone) is renowned for its seamless iOS ecosystem, long-term software support, and powerful custom chips. It really depends on whether you prefer Android flexibility or the Apple ecosystem!`;
+                return `Regarding <b>"${query}"</b>: Both brands lead the market. Samsung offers hardware versatility and customizability, while Apple is renowned for its seamless iOS ecosystem and powerful custom chips.`;
             }
             else if (q.includes('vortex ai')) {
                 return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis.";
