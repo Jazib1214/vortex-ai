@@ -47,7 +47,7 @@ function handleMenuAction(action) {
                 <div class="msg-bubble user">Menu Action: ${action}</div>
             </div>
             <div class="msg-wrapper-ai">
-                <div class="msg-bubble ai">Successfully executed <b>${action}</b> for your active session. All parameters have been updated.</div>
+                <div class="msg-bubble ai">Aapke active session ke liye <b>${action}</b> successfully execute kar diya gaya hai. Saare parameters update ho chuke hain, Jazib!</div>
             </div>
         </div>
     `);
@@ -66,7 +66,7 @@ function handleUpload(type) {
                 <div class="msg-bubble user">Selected tool: [${type}]</div>
             </div>
             <div class="msg-wrapper-ai">
-                <div class="msg-bubble ai">The <b>${type}</b> module has been successfully loaded into your workspace. Ready for your instructions.</div>
+                <div class="msg-bubble ai"><b>${type}</b> module aapke workspace mein successfully load ho chuka hai. Ab aap apni instructions de sakte hain.</div>
             </div>
         </div>
     `);
@@ -84,7 +84,7 @@ function executeFeature(featureName) {
                 <div class="msg-bubble user">Activated feature: ${featureName}</div>
             </div>
             <div class="msg-wrapper-ai">
-                <div class="msg-bubble ai">Vortex AI has successfully initialized the <b>${featureName}</b> module. You can now execute advanced queries and analyses under this mode.</div>
+                <div class="msg-bubble ai">Vortex AI ne <b>${featureName}</b> module successfully initialize kar diya hai. Aap is mode ke andar advanced queries aur analysis run kar sakte hain.</div>
             </div>
         </div>
     `);
@@ -131,7 +131,7 @@ function startNewChat() {
     document.getElementById('chatContentInner').innerHTML = `
         <div class="welcome-center" id="welcomeCenter">
             <h1>New Chat Session.</h1>
-            <p>What would you like to create, Jazib?</p>
+            <p>Aaj aap kya create karna chahte hain, Jazib?</p>
         </div>
     `;
 }
@@ -147,57 +147,42 @@ function loadHistory(title) {
                 <div class="msg-bubble user">Load history: ${title}</div>
             </div>
             <div class="msg-wrapper-ai">
-                <div class="msg-bubble ai">Successfully loaded <b>${title}</b> session history. All writing and code tools are online.</div>
+                <div class="msg-bubble ai"><b>${title}</b> ki session history successfully load ho chuki hai. Saare writing aur code tools active hain.</div>
             </div>
         </div>
     `;
 }
 
-// INTELLIGENT QUERY ROUTER & PARSER
-function generateEnglishResponse(query) {
+// INTELLIGENT QUERY ROUTER & PARSER (URDU / ROMAN URDU SUPPORTED)
+function generateResponse(query) {
     const q = query.toLowerCase().trim();
 
-    if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'salam') {
-        return "Hello Jazib! I am Vortex AI. How can I assist you with your workspace tasks, writing projects, or coding queries today?";
+    if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'salam' || q === 'assalam o alaikum') {
+        return "Walaikum Assalam Jazib! Main Vortex AI hoon. Aaj aapke workspace tasks, writing projects ya coding queries mein kis tarah madad kar sakta hoon?";
     }
-    else if (q === 'ok' || q === 'okay' || q === 'cool' || q === 'thanks' || q === 'great' || q === 'awesome') {
-        return "Glad to hear that! What would you like to explore or build next?";
+    else if (q === 'ok' || q === 'okay' || q === 'cool' || q === 'thanks' || q === 'great' || q === 'theek hai') {
+        return "Bohat khoob, Jazib! Ab aap agla kya explore ya build karna chahenge?";
     }
-    else if (q.includes('who made it') || q.includes('who created you') || q.includes('who built this')) {
-        return "This elite Vortex AI workspace was built and created by <b>Jazib</b>! It is fully custom-designed to handle high-speed coding, document structuring, and smart task automation.";
+    else if (q.includes('who made it') || q.includes('who created you') || q.includes('kis ne banaya') || q.includes('kisne banaya')) {
+        return "Yeh elite Vortex AI workspace <b>Jazib</b> ne khud design aur create kiya hai! Yeh high-speed coding, document structuring, aur task automation ke liye custom-built hai.";
     }
-    else if (q.includes('download') || q.includes('save image') || q.includes('where to download')) {
-        return `To download your generated asset or canvas output, Jazib, simply click on the <b>Three Dots (⋮)</b> in the top right navbar and select <b>Download</b>, or right-click directly on the media studio canvas to save it to your device!`;
+    else if (q.includes('download') || q.includes('save') || q.includes('save image')) {
+        return `Apni generated file ya asset ko download karne ke liye, Jazib, upar right corner mein maujood <b>Three Dots (⋮)</b> par click karein aur <b>Download</b> select karein, ya seedha canvas par right-click karke save kar lein!`;
     }
-    else if (q.includes('image') || q.includes('picture') || q.includes('generate image') || q.includes('create image')) {
-        return `Image generation request received, Jazib! Processing prompt: <i>"${query}"</i>.<br><br><div style="margin-top:10px; padding:20px; background:#090a0f; border:1px solid var(--border-glass); border-radius:12px; text-align:center;"><span style="color:#818cf8; font-weight:700;">🖼️ Nano Banana Image Studio</span><br><p style="font-size:13px; color:var(--text-muted); margin-top:6px;">Your visual prompt has been rendered successfully through the workspace media canvas. Ready for refinement or download!</p></div>`;
+    else if (q.includes('image') || q.includes('picture') || q.includes('tasveer') || q.includes('banao')) {
+        return `Image generation ki request mil chuki hai, Jazib! Prompt process ho raha hai: <i>"${query}"</i>.<br><br><div style="margin-top:10px; padding:20px; background:#090a0f; border:1px solid var(--border-glass); border-radius:12px; text-align:center;"><span style="color:#818cf8; font-weight:700;">🖼️ Nano Banana Image Studio</span><br><p style="font-size:13px; color:var(--text-muted); margin-top:6px;">Aapka visual prompt workspace canvas par successfully render ho gaya hai. Mazeed refinement ya download ke liye tayyar hai!</p></div>`;
     }
-    else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
-        return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface.";
+    else if (q.includes('difference') || q.includes('vs') || q.includes('compare') || q.includes('farq')) {
+        return `Detailed analytical comparison request receive ho gayi hai, Jazib: <i>"${query}"</i>.<br><br>• <b>Core Architecture:</b> Donon entities ke darmiyan farq samajhne ke liye unke core hardware specs, release tiers aur primary use cases ko dekhna zaroori hai.<br>• <b>Performance & Metrics:</b> Ek high-efficiency rendering aur modern integration par focus karta hai, jabke doosra balanced performance aur everyday reliability ke liye hai.<br><br><b>Analytical Verdict:</b> Donon bilkul alag target segments ke liye hain. Agar aapko iska koi specific tabular breakdown ya metric chahiye toh mujhe batayein!`;
     }
-    else if (q.includes('a31') || (q.includes('a05') && q.includes('a31'))) {
-        return `Here is the precise comparison between the <b>Samsung Galaxy A05</b> and the <b>Samsung Galaxy A31</b>:<br><br>• <b>Display & Build:</b> The Galaxy A31 features a superior <b>Super AMOLED</b> display (6.4 inches) with Full HD+ resolution, whereas the Galaxy A05 uses a basic <b>PLS LCD</b> (6.7 inches) with HD+ resolution.<br>• <b>Cameras:</b> The A31 comes with a versatile quad-camera setup (48MP main + 8MP ultrawide + macro + depth), while the A05 features a simpler dual-camera setup (50MP main + 2MP depth) without an ultrawide lens.<br>• <b>Processor & Performance:</b> The A05 runs on a newer MediaTek Helio G85 chipset which handles basic everyday tasks efficiently, while the A31 is powered by the Helio P65.<br>• <b>Battery & Charging:</b> Both feature a 5,000 mAh battery, but the A05 supports 25W fast charging compared to the A31's 15W charging.<br><br><b>Summary:</b> Choose the <b>A31</b> for a much better screen quality and ultrawide camera, or the <b>A05</b> for a newer processor and faster charging support!`;
-    }
-    else if (q.includes('difference') || q.includes('vs') || q.includes('compare')) {
-        return `Detailed analytical comparison request received, Jazib: <i>"${query}"</i>.<br><br>• <b>Core Architecture:</b> Comparing these distinct entities requires evaluating their core hardware specifications, release tiers, and primary use cases.<br>• <b>Performance & Metrics:</b> While one focuses on high-efficiency rendering and modern component integration, the other is tailored for balanced performance and everyday reliability.<br><br><b>Analytical Verdict:</b> Both serve entirely different target segments. Let me know if you would like a detailed tabular breakdown or specific metric highlights for this comparison!`;
-    }
-    else if (q.includes('subject') && q.includes('predicate')) {
-        return `Here is the clear difference regarding <b>"${query}"</b>:<br><br>• <b>The Subject</b> is the part of a sentence that names the person, place, thing, or idea that is doing or being something.<br>• <b>The Predicate</b> is the part that tells us something about the subject, containing the action or state of being.`;
-    }
-    else if (q.includes('grammar') || q.includes('noun') || q.includes('verb') || q.includes('clause')) {
-        return `Regarding your grammar query on <b>"${query}"</b>: In structured English composition, understanding parts of speech and sentence structure is essential for building clear clauses and meaningful expressions.`;
-    }
-    else if (q.includes('vortex ai')) {
-        return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis.";
-    }
-    else if (q.includes('paragraph') || q.includes('write') || q.includes('hypertext')) {
-        return `Here is a detailed and professionally structured response for <b>"${query}"</b>:<br><br>Hypertext is a foundational concept in modern digital information systems, referring to text displayed on a computer or other electronic device with references (hyperlinks) to other text that the reader can immediately access. Unlike traditional printed media, it introduces a dynamic, non-linear architecture where users can seamlessly navigate between interconnected nodes of information.`;
+    else if (q.includes('mechanical') || q.includes('engineer') || q.includes('pdf') || q.includes('design')) {
+        return `Mechanical engineering suite aur PDF workflow ke hawale se aapka sawal note kar liya hai, Jazib. Is module ke zariye aap complex calculations, structural blueprints aur technical reports ko aasani se manage kar sakte hain. Bataiye isme mazeed kya detail add karni hai?`;
     }
     else if (q.includes('code') || q.includes('html') || q.includes('css') || q.includes('javascript')) {
-        return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
+        return `Yeh lijiye aapke maange gaye code ka solution, Jazib:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
     }
     else {
-        return `Comprehensive analysis generated for your query, Jazib: <i>"${query}"</i>.<br><br>Based on your input parameters, this topic spans advanced technical concepts and multi-variable criteria. Within this modular workspace configuration, the engine evaluates structural variables, comparative parameters, and contextual syntax to provide an optimal response. Let me know if you would like me to expand further on any specific sub-section!`;
+        return `Aapke sawal par comprehensive analysis generate kar di gayi hai, Jazib: <i>"${query}"</i>.<br><br>Aapke input parameters ke mutabiq, yeh topic advanced technical concepts aur multi-variable criteria par mushtamil hai. Is modular workspace configuration ke andar engine structural variables aur comparative parameters ko evaluate karke behtareen response deta hai. Agar aapko isme kisi specific hissay par mazeed tafseel chahiye toh zaroor batayein!`;
     }
 }
 
@@ -238,13 +223,14 @@ function sendMessage() {
     setTimeout(() => {
         const aiBubble = document.getElementById(`ai-resp-${userRowID}`);
         if(aiBubble) {
-            aiBubble.innerHTML = generateEnglishResponse(text);
+            aiBubble.innerHTML = generateResponse(text);
             container.scrollTop = container.scrollHeight;
         }
     }, 1200);
 }
 
 function handleKeyPress(e) {
+    e.stopPropagation();
     if(e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
