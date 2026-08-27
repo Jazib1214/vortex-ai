@@ -896,7 +896,7 @@
             `;
         }
 
-        // FULLY UPDATED INTELLIGENT ENGINE (ADDED IMAGE GENERATION SUPPORT)
+        // FULLY UPDATED INTELLIGENT ENGINE (ADDED DOWNLOAD & IMAGE SUPPORT)
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -908,6 +908,9 @@
             }
             else if (q.includes('who made it') || q.includes('who created you') || q.includes('who built this')) {
                 return "This elite Vortex AI workspace was built and created by <b>Jazib</b>! It is fully custom-designed to handle high-speed coding, document structuring, and smart task automation.";
+            }
+            else if (q.includes('download') || q.includes('save image') || q.includes('where to download')) {
+                return `To download your generated asset or canvas output, Jazib, simply click on the <b>Three Dots (⋮)</b> in the top right navbar and select <b>Download</b>, or right-click directly on the media studio canvas to save it to your device!`;
             }
             else if (q.includes('image') || q.includes('picture') || q.includes('generate image') || q.includes('create image')) {
                 return `Image generation request received, Jazib! Processing prompt: <i>"${query}"</i>.<br><br><div style="margin-top:10px; padding:20px; background:#090a0f; border:1px solid var(--border-glass); border-radius:12px; text-align:center;"><span style="color:#818cf8; font-weight:700;">🖼️ Nano Banana Image Studio</span><br><p style="font-size:13px; color:var(--text-muted); margin-top:6px;">Your visual prompt has been rendered successfully through the workspace media canvas. Ready for refinement or download!</p></div>`;
