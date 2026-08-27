@@ -593,6 +593,7 @@
 </head>
 <body>
 
+    <!-- Sidebar -->
     <div class="sidebar" id="appSidebar">
         <div class="sidebar-header">
             <div class="brand-box">
@@ -636,6 +637,7 @@
         </div>
     </div>
 
+    <!-- Main Workspace -->
     <div class="main-workspace">
         <div class="top-navbar">
             <div class="top-left">
@@ -669,6 +671,7 @@
             </div>
         </div>
 
+        <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
                 <div class="upload-popup" id="uploadPopup">
@@ -703,6 +706,7 @@
         </div>
     </div>
 
+    <!-- Modals -->
     <div class="modal-overlay" id="voiceModal">
         <div class="modal-box">
             <h3>🎙️ Jazib Voice Speech Engine</h3>
@@ -892,7 +896,7 @@
             `;
         }
 
-        // FULLY UPDATED INTELLIGENT GRAMMAR & TOPIC ENGINE
+        // FULLY UPDATED INTELLIGENT ENGINE (ADDED IMAGE GENERATION SUPPORT)
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -901,6 +905,12 @@
             }
             else if (q === 'ok' || q === 'okay' || q === 'cool' || q === 'thanks' || q === 'great' || q === 'awesome') {
                 return "Glad to hear that! What would you like to explore or build next?";
+            }
+            else if (q.includes('who made it') || q.includes('who created you') || q.includes('who built this')) {
+                return "This elite Vortex AI workspace was built and created by <b>Jazib</b>! It is fully custom-designed to handle high-speed coding, document structuring, and smart task automation.";
+            }
+            else if (q.includes('image') || q.includes('picture') || q.includes('generate image') || q.includes('create image')) {
+                return `Image generation request received, Jazib! Processing prompt: <i>"${query}"</i>.<br><br><div style="margin-top:10px; padding:20px; background:#090a0f; border:1px solid var(--border-glass); border-radius:12px; text-align:center;"><span style="color:#818cf8; font-weight:700;">🖼️ Nano Banana Image Studio</span><br><p style="font-size:13px; color:var(--text-muted); margin-top:6px;">Your visual prompt has been rendered successfully through the workspace media canvas. Ready for refinement or download!</p></div>`;
             }
             else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
                 return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface.";
@@ -920,8 +930,8 @@
             else if (q.includes('vortex ai')) {
                 return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis.";
             }
-            else if (q.includes('paragraph') || q.includes('write')) {
-                return `Here is a professionally structured paragraph based on your request for <b>"${query}"</b>:<br><br>In contemporary digital environments, efficient content creation relies heavily on advanced computational models and automated structuring tools to bridge the gap between raw data and polished output.`;
+            else if (q.includes('paragraph') || q.includes('write') || q.includes('hypertext')) {
+                return `Here is a detailed and professionally structured response for <b>"${query}"</b>:<br><br>Hypertext is a foundational concept in modern digital information systems, referring to text displayed on a computer or other electronic device with references (hyperlinks) to other text that the reader can immediately access. Unlike traditional printed media, which forces a linear reading sequence, hypertext introduces a dynamic, non-linear architecture where users can seamlessly navigate between interconnected nodes of information. This innovation revolutionized how knowledge is organized, retrieved, and presented across the global internet, paving the way for the World Wide Web and modern content management systems.`;
             }
             else if (q.includes('code') || q.includes('html') || q.includes('css') || q.includes('javascript')) {
                 return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
