@@ -111,9 +111,31 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
         .new-chat-btn:hover { background: var(--surface-hover); }
+
+        .sidebar-menu-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 14px;
+        }
+
+        .menu-item-link {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 9px 12px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-item-link:hover { background: var(--surface-hover); color: #fff; }
 
         .section-title {
             font-size: 11px;
@@ -148,15 +170,33 @@
         }
         .history-item:hover { background: var(--surface-hover); color: #fff; }
 
+        /* Footer Controls inside Sidebar above owner tag */
         .sidebar-footer {
             border-top: 1px solid var(--border-glass);
-            padding-top: 12px;
-            font-size: 12px;
-            color: var(--text-muted);
+            padding-top: 10px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
+
+        .footer-action-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .footer-chip {
+            flex: 1;
+            background: var(--surface-hover);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 6px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+        }
+        .footer-chip:hover { border-color: var(--accent-color); }
 
         /* Main Workspace */
         .main-workspace {
@@ -188,7 +228,7 @@
         .top-right {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .upgrade-pro-btn {
@@ -202,18 +242,6 @@
             cursor: pointer;
         }
         .upgrade-pro-btn:hover { opacity: 0.9; }
-
-        .top-action-chip {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-glass);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .top-action-chip:hover { background: var(--surface-hover); color: #fff; }
 
         /* Chat Container */
         .chat-container {
@@ -457,14 +485,29 @@
             <span>＋</span> New Chat
         </button>
 
+        <!-- Sidebar Navigation Features -->
+        <div class="sidebar-menu-group">
+            <button class="menu-item-link" onclick="executeFeature('Search Chat')">🔍 Search Chat</button>
+            <button class="menu-item-link" onclick="executeFeature('Library')">📚 Library</button>
+            <button class="menu-item-link" onclick="executeFeature('Images')">🖼️ Images</button>
+            <button class="menu-item-link" onclick="executeFeature('Quantum Paragraph Engine')">⚡ Quantum Paragraph Engine</button>
+            <button class="menu-item-link" onclick="executeFeature('Smart Code Refiner')">🛠️ Smart Code Refiner</button>
+        </div>
+
         <div class="section-title">Recent Chats</div>
         <div class="history-list">
             <button class="history-item" onclick="loadHistory('Paragraph Writer Studio')">Paragraph Writer Studio</button>
             <button class="history-item" onclick="loadHistory('Jazib Voice Assistant')">Jazib Voice Assistant</button>
         </div>
 
+        <!-- Sidebar Footer Layout: Jazib Voice, Studio, Settings right above Owner Row -->
         <div class="sidebar-footer">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 4px 8px;">
+            <div class="footer-action-row">
+                <button class="footer-chip" onclick="openModal('voiceModal')">🎙️ Voice</button>
+                <button class="footer-chip" onclick="openModal('studioModal')">🎨 Studio</button>
+                <button class="footer-chip" onclick="openModal('settingsModal')">⚙️ Settings</button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 0 4px; font-size: 12px; color: var(--text-muted);">
                 <span>👤 Jazib (Owner)</span>
                 <span style="color: #8ab4f8; font-weight: bold;">PRO</span>
             </div>
@@ -481,10 +524,7 @@
             
             <div class="top-right">
                 <button class="upgrade-pro-btn" onclick="openModal('upgradeModal')">✨ Upgrade Pro</button>
-                <button class="top-action-chip" onclick="openModal('voiceModal')">🎙️ Jazib Voice</button>
-                <button class="top-action-chip" onclick="openModal('studioModal')">Studio</button>
-                <button class="top-action-chip" onclick="openModal('settingsModal')">Settings</button>
-                <button class="icon-btn" onclick="openModal('settingsModal')" title="More Options">⋮</button>
+                <button class="icon-btn" onclick="openModal('settingsModal')" title="More Options (⋮)">⋮</button>
             </div>
         </div>
 
@@ -597,6 +637,18 @@
             inner.innerHTML += `
                 <div class="message-bubble user"><div class="bubble-card">Attached file: [${type}]</div></div>
                 <div class="message-bubble ai"><div class="bubble-card"><b>[File Processing]:</b> Your ${type} has been successfully uploaded to the Vortex workspace. You can now ask questions or request paragraph summarization based on this file.</div></div>
+            `;
+            document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer'].scrollHeight;
+        }
+
+        function executeFeature(featureName) {
+            const center = document.getElementById('welcomeCenter');
+            if(center) center.style.display = 'none';
+
+            const inner = document.getElementById('chatContentInner');
+            inner.innerHTML += `
+                <div class="message-bubble user"><div class="bubble-card">Activated feature: ${featureName}</div></div>
+                <div class="message-bubble ai"><div class="bubble-card"><b>[${featureName} Online]:</b> Vortex AI has successfully initialized the <b>${featureName}</b> module. You can now execute advanced queries, analyze documents, or build outputs under this mode.</div></div>
             `;
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer'].scrollHeight;
         }
