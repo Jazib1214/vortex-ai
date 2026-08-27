@@ -326,7 +326,7 @@
             max-width: 800px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
         }
 
         .welcome-center {
@@ -442,7 +442,6 @@
         }
         .tool-icon-btn:hover { background: #2d3142; border-color: var(--accent-color); }
 
-        /* Gemini Style Voice Recorder Button right beside Plus */
         .gemini-voice-btn {
             background: rgba(99, 102, 241, 0.15);
             border: 1px solid rgba(99, 102, 241, 0.4);
@@ -489,7 +488,6 @@
         }
         .send-action-btn:hover { opacity: 0.9; transform: scale(1.05); }
 
-        /* Advanced Plus (+) Popup Menu */
         .upload-popup {
             display: none;
             position: absolute;
@@ -575,7 +573,6 @@
             <span>＋</span> New Chat
         </button>
 
-        <!-- Sidebar Navigation Features -->
         <div class="sidebar-menu-group">
             <button class="menu-item-link" onclick="executeFeature('Search Chat')">🔍 Search Chat</button>
             <button class="menu-item-link" onclick="executeFeature('Library')">📚 Library</button>
@@ -593,7 +590,6 @@
             <button class="history-item" onclick="loadHistory('Jazib Voice Assistant')">Jazib Voice Assistant</button>
         </div>
 
-        <!-- Sidebar Footer -->
         <div class="sidebar-footer">
             <div class="footer-action-row">
                 <button class="footer-chip" onclick="openModal('voiceModal')">🎙️ Voice</button>
@@ -619,7 +615,6 @@
                 <button class="upgrade-pro-btn" onclick="openModal('upgradeModal')">✨ Upgrade Pro</button>
                 <button class="top-three-dots" onclick="toggleDotsDropdown(event)" title="More Options (⋮)">⋮</button>
 
-                <!-- Gemini Style Three Dots Dropdown -->
                 <div class="dots-dropdown" id="dotsDropdown">
                     <button class="dots-option" onclick="handleMenuAction('Share Conversation')">🔗 Share conversation</button>
                     <button class="dots-option" onclick="handleMenuAction('Find in Chat')">🔍 Find in chat</button>
@@ -645,7 +640,6 @@
         <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
-                <!-- Advanced Plus (+) Popup Menu -->
                 <div class="upload-popup" id="uploadPopup">
                     <button class="upload-option" onclick="handleUpload('Upload a File')">📄 Upload a file</button>
                     <button class="upload-option" onclick="handleUpload('Add from Drive')">📁 Add from Drive</button>
@@ -661,10 +655,7 @@
                 
                 <div class="input-toolbar">
                     <div class="toolbar-left">
-                        <!-- Plus Attachment Button -->
                         <button class="tool-icon-btn" id="plusUploadBtn" onclick="toggleUploadPopup(event)" title="Add attachments">＋</button>
-                        
-                        <!-- Gemini Style Voice Recorder Button right beside Plus -->
                         <button class="gemini-voice-btn" onclick="startJazibVoice()" title="Click to Speak">
                             <div style="display: flex; gap: 2px; align-items: center;">
                                 <div class="wave-bar"></div>
@@ -890,10 +881,8 @@
             }
         }
 
-        // Direct event binding to guarantee send button works on click
         document.getElementById('sendBtn').addEventListener('click', sendMessage);
 
-        // Close popups when clicking outside
         window.onclick = function(event) {
             if (!event.target.matches('.tool-icon-btn') && !event.target.closest('.upload-popup')) {
                 const popup = document.getElementById('uploadPopup');
