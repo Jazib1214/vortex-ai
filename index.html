@@ -896,7 +896,7 @@
             `;
         }
 
-        // FULLY UPDATED INTELLIGENT ENGINE (ADDED DOWNLOAD & IMAGE SUPPORT)
+        // FULLY UPDATED ENGINE WITH SAMSUNG A05 VS A31 SUPPORT
         function generateEnglishResponse(query) {
             const q = query.toLowerCase().trim();
 
@@ -918,23 +918,23 @@
             else if (q.includes('simple words') || q.includes('in simple') || q.includes('simpler')) {
                 return "Sure thing, Jazib! Let me break it down in much simpler terms: Vortex AI is basically a smart digital helper on your screen that lets you write paragraphs, code websites, and handle tasks easily using a clean dark-mode interface.";
             }
+            else if (q.includes('a31') || (q.includes('a05') && q.includes('a31'))) {
+                return `Apologies for the previous mix-up, Jazib! Here is the precise comparison between the <b>Samsung Galaxy A05</b> and the <b>Samsung Galaxy A31</b>:<br><br>• <b>Display & Build:</b> The Galaxy A31 features a superior <b>Super AMOLED</b> display (6.4 inches) with Full HD+ resolution, whereas the Galaxy A05 uses a basic <b>PLS LCD</b> (6.7 inches) with HD+ resolution.<br>• <b>Cameras:</b> The A31 comes with a versatile quad-camera setup (48MP main + 8MP ultrawide + macro + depth), while the A05 features a simpler dual-camera setup (50MP main + 2MP depth) without an ultrawide lens.<br>• <b>Processor & Performance:</b> The A05 runs on a newer MediaTek Helio G85 chipset which handles basic everyday tasks efficiently, while the A31 is powered by the Helio P65.<br>• <b>Battery & Charging:</b> Both feature a 5,000 mAh battery, but the A05 supports 25W fast charging compared to the A31's 15W charging.<br><br><b>Summary:</b> Choose the <b>A31</b> for a much better screen quality and ultrawide camera, or the <b>A05</b> for a newer processor and faster charging support!`;
+            }
+            else if (q.includes('i said samsung a31') || q.includes('said a31')) {
+                return `Got it, Jazib! My apologies for referencing the Vivo Y20 earlier. As detailed above, the Samsung Galaxy A31 stands out with its gorgeous Super AMOLED display and quad-cameras compared to the A05. Let me know if you want a specs table or anything else added!`;
+            }
             else if (q.includes('subject') && q.includes('predicate')) {
-                return `Here is the clear difference regarding <b>"${query}"</b>:<br><br>• <b>The Subject</b> is the part of a sentence that names the person, place, thing, or idea that is doing or being something (e.g., in "<b>The dog</b> barks", "The dog" is the subject).<br><br>• <b>The Predicate</b> is the part that tells us something about the subject, containing the action or state of being (e.g., in "The dog <b>barks</b>", "barks" is the predicate).`;
+                return `Here is the clear difference regarding <b>"${query}"</b>:<br><br>• <b>The Subject</b> is the part of a sentence that names the person, place, thing, or idea that is doing or being something.<br>• <b>The Predicate</b> is the part that tells us something about the subject, containing the action or state of being.`;
             }
             else if (q.includes('grammar') || q.includes('noun') || q.includes('verb') || q.includes('clause')) {
-                return `Regarding your grammar query on <b>"${query}"</b>: In structured English composition, understanding parts of speech and sentence structure is essential for building clear clauses and meaningful expressions. Let me know if you want extra example sentences or a chapter summary for this!`;
-            }
-            else if ((q.includes('samsung') && q.includes('vivo')) || q.includes('a05') || q.includes('y20')) {
-                return `Comparing devices like in <b>"${query}"</b>: Generally, the <b>Samsung Galaxy A05</b> comes with a newer processor and Android version out of the box compared to the older Vivo Y20. Overall, for raw performance, Galaxy A05 has the edge!`;
-            }
-            else if (q.includes('samsung') && q.includes('apple')) {
-                return `Regarding <b>"${query}"</b>: Both brands lead the market. Samsung offers hardware versatility and customizability, while Apple is renowned for its seamless iOS ecosystem and powerful custom chips.`;
+                return `Regarding your grammar query on <b>"${query}"</b>: In structured English composition, understanding parts of speech and sentence structure is essential for building clear clauses and meaningful expressions.`;
             }
             else if (q.includes('vortex ai')) {
                 return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis.";
             }
             else if (q.includes('paragraph') || q.includes('write') || q.includes('hypertext')) {
-                return `Here is a detailed and professionally structured response for <b>"${query}"</b>:<br><br>Hypertext is a foundational concept in modern digital information systems, referring to text displayed on a computer or other electronic device with references (hyperlinks) to other text that the reader can immediately access. Unlike traditional printed media, which forces a linear reading sequence, hypertext introduces a dynamic, non-linear architecture where users can seamlessly navigate between interconnected nodes of information. This innovation revolutionized how knowledge is organized, retrieved, and presented across the global internet, paving the way for the World Wide Web and modern content management systems.`;
+                return `Here is a detailed and professionally structured response for <b>"${query}"</b>:<br><br>Hypertext is a foundational concept in modern digital information systems, referring to text displayed on a computer or other electronic device with references (hyperlinks) to other text that the reader can immediately access. Unlike traditional printed media, it introduces a dynamic, non-linear architecture where users can seamlessly navigate between interconnected nodes of information.`;
             }
             else if (q.includes('code') || q.includes('html') || q.includes('css') || q.includes('javascript')) {
                 return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre>`;
