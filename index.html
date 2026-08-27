@@ -349,13 +349,25 @@
             font-weight: 500;
         }
 
-        /* Message Styling - Clean Flow */
+        /* Perfect Alignment Wrappers */
         .message-row {
             display: flex;
             flex-direction: column;
             width: 100%;
             gap: 12px;
             margin-bottom: 16px;
+        }
+
+        .msg-wrapper-user {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .msg-wrapper-ai {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
         }
 
         .msg-bubble {
@@ -371,14 +383,12 @@
         .msg-bubble.user {
             background: var(--accent-color);
             color: #fff;
-            align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
 
         .msg-bubble.ai {
             background: var(--bg-panel);
             color: var(--text-main);
-            align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
 
@@ -567,7 +577,6 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="appSidebar">
         <div class="sidebar-header">
             <div class="brand-box">
@@ -611,7 +620,6 @@
         </div>
     </div>
 
-    <!-- Main Workspace -->
     <div class="main-workspace">
         <div class="top-navbar">
             <div class="top-left">
@@ -645,7 +653,6 @@
             </div>
         </div>
 
-        <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
                 <div class="upload-popup" id="uploadPopup">
@@ -680,7 +687,6 @@
         </div>
     </div>
 
-    <!-- Modals -->
     <div class="modal-overlay" id="voiceModal">
         <div class="modal-box">
             <h3>🎙️ Jazib Voice Speech Engine</h3>
@@ -760,8 +766,12 @@
             const inner = document.getElementById('chatContentInner');
             inner.insertAdjacentHTML('beforeend', `
                 <div class="message-row">
-                    <div class="msg-bubble user">Menu Action: ${action}</div>
-                    <div class="msg-bubble ai"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div>
+                    <div class="msg-wrapper-user">
+                        <div class="msg-bubble user">Menu Action: ${action}</div>
+                    </div>
+                    <div class="msg-wrapper-ai">
+                        <div class="msg-bubble ai"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div>
+                    </div>
                 </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
@@ -775,8 +785,12 @@
             const inner = document.getElementById('chatContentInner');
             inner.insertAdjacentHTML('beforeend', `
                 <div class="message-row">
-                    <div class="msg-bubble user">Selected tool: [${type}]</div>
-                    <div class="msg-bubble ai"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div>
+                    <div class="msg-wrapper-user">
+                        <div class="msg-bubble user">Selected tool: [${type}]</div>
+                    </div>
+                    <div class="msg-wrapper-ai">
+                        <div class="msg-bubble ai"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div>
+                    </div>
                 </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
@@ -799,8 +813,12 @@
 
             inner.insertAdjacentHTML('beforeend', `
                 <div class="message-row">
-                    <div class="msg-bubble user">Activated feature: ${featureName}</div>
-                    <div class="msg-bubble ai">${featureResponse}</div>
+                    <div class="msg-wrapper-user">
+                        <div class="msg-bubble user">Activated feature: ${featureName}</div>
+                    </div>
+                    <div class="msg-wrapper-ai">
+                        <div class="msg-bubble ai">${featureResponse}</div>
+                    </div>
                 </div>
             `);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
@@ -858,8 +876,12 @@
             const inner = document.getElementById('chatContentInner');
             inner.innerHTML = `
                 <div class="message-row">
-                    <div class="msg-bubble user">Load history: ${title}</div>
-                    <div class="msg-bubble ai">Successfully loaded <b>${title}</b>. All paragraph writing engines, file upload tools, and Jazib Voice scripts are fully online.</div>
+                    <div class="msg-wrapper-user">
+                        <div class="msg-bubble user">Load history: ${title}</div>
+                    </div>
+                    <div class="msg-wrapper-ai">
+                        <div class="msg-bubble ai">Successfully loaded <b>${title}</b>. All paragraph writing engines, file upload tools, and Jazib Voice scripts are fully online.</div>
+                    </div>
                 </div>
             `;
         }
@@ -879,8 +901,12 @@
             
             const rowHTML = `
                 <div class="message-row">
-                    <div class="msg-bubble user">${text}</div>
-                    <div class="msg-bubble ai">${aiReply}</div>
+                    <div class="msg-wrapper-user">
+                        <div class="msg-bubble user">${text}</div>
+                    </div>
+                    <div class="msg-wrapper-ai">
+                        <div class="msg-bubble ai">${aiReply}</div>
+                    </div>
                 </div>
             `;
 
