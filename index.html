@@ -181,7 +181,6 @@
         }
         .history-item:hover { background: var(--surface-hover); color: #fff; }
 
-        /* Sidebar Footer */
         .sidebar-footer {
             border-top: 1px solid var(--border-glass);
             padding-top: 12px;
@@ -221,7 +220,6 @@
             overflow: hidden;
         }
 
-        /* Top Header */
         .top-navbar {
             height: 68px;
             display: flex;
@@ -278,7 +276,6 @@
         }
         .top-three-dots:hover { background: var(--surface-hover); border-color: var(--accent-color); }
 
-        /* Dropdown */
         .dots-dropdown {
             display: none;
             position: absolute;
@@ -311,7 +308,6 @@
         }
         .dots-option:hover { background: var(--surface-hover); color: #818cf8; }
 
-        /* Chat Container & Flow */
         .chat-container {
             flex: 1;
             overflow-y: auto;
@@ -349,7 +345,6 @@
             font-weight: 500;
         }
 
-        /* Perfect Alignment Wrappers */
         .message-row {
             display: flex;
             flex-direction: column;
@@ -390,6 +385,27 @@
             background: var(--bg-panel);
             color: var(--text-main);
             border-bottom-left-radius: 4px;
+        }
+
+        /* Thinking Animation Dots */
+        .thinking-dots {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 0;
+        }
+        .thinking-dots span {
+            width: 7px;
+            height: 7px;
+            background-color: var(--text-muted);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .thinking-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .thinking-dots span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
         }
 
         /* Input Section */
@@ -577,6 +593,7 @@
 </head>
 <body>
 
+    <!-- Sidebar -->
     <div class="sidebar" id="appSidebar">
         <div class="sidebar-header">
             <div class="brand-box">
@@ -620,6 +637,7 @@
         </div>
     </div>
 
+    <!-- Main Workspace -->
     <div class="main-workspace">
         <div class="top-navbar">
             <div class="top-left">
@@ -653,6 +671,7 @@
             </div>
         </div>
 
+        <!-- Input Section -->
         <div class="input-section">
             <div class="input-box-wrapper">
                 <div class="upload-popup" id="uploadPopup">
@@ -687,6 +706,7 @@
         </div>
     </div>
 
+    <!-- Modals -->
     <div class="modal-overlay" id="voiceModal">
         <div class="modal-box">
             <h3>🎙️ Jazib Voice Speech Engine</h3>
@@ -770,7 +790,7 @@
                         <div class="msg-bubble user">Menu Action: ${action}</div>
                     </div>
                     <div class="msg-wrapper-ai">
-                        <div class="msg-bubble ai"><b>[Workspace Action]:</b> Successfully executed <b>${action}</b> for your active session. All conversation parameters are updated.</div>
+                        <div class="msg-bubble ai">Successfully executed <b>${action}</b> for your active session. All parameters have been updated.</div>
                     </div>
                 </div>
             `);
@@ -789,7 +809,7 @@
                         <div class="msg-bubble user">Selected tool: [${type}]</div>
                     </div>
                     <div class="msg-wrapper-ai">
-                        <div class="msg-bubble ai"><b>[Module Initialized]:</b> Your selection of <b>${type}</b> has been successfully loaded into the workspace. Ready for your instructions, Jazib!</div>
+                        <div class="msg-bubble ai">The <b>${type}</b> module has been successfully loaded into your workspace. Ready for your instructions.</div>
                     </div>
                 </div>
             `);
@@ -801,23 +821,13 @@
             if(center) center.style.display = 'none';
 
             const inner = document.getElementById('chatContentInner');
-            let featureResponse = `Vortex AI has successfully initialized the <b>${featureName}</b> module. You can now execute advanced queries, analyze documents, or build outputs under this mode.`;
-            
-            if(featureName === 'PhD Mechanical Engineering Suite') {
-                featureResponse = `<b>[PhD Mechanical Engineering AI Suite Active]:</b> Ready to assist with finite element analysis (FEA), MATLAB/Python script generation, thermodynamics derivations, and thesis drafting for mechanical researchers. Type your query below!`;
-            } else if(featureName === 'Advanced Code Synthesizer') {
-                featureResponse = `<b>[Advanced Code Synthesizer Active]:</b> Ready to generate, optimize, and refactor complex multi-language code snippets instantly.`;
-            } else if(featureName === 'Academic Thesis Outline Generator') {
-                featureResponse = `<b>[Academic Thesis Outline Generator Active]:</b> Ready to structure research papers, literature reviews, and chapter summaries.`;
-            }
-
             inner.insertAdjacentHTML('beforeend', `
                 <div class="message-row">
                     <div class="msg-wrapper-user">
                         <div class="msg-bubble user">Activated feature: ${featureName}</div>
                     </div>
                     <div class="msg-wrapper-ai">
-                        <div class="msg-bubble ai">${featureResponse}</div>
+                        <div class="msg-bubble ai">Vortex AI has successfully initialized the <b>${featureName}</b> module. You can now execute advanced queries and analyses under this mode.</div>
                     </div>
                 </div>
             `);
@@ -837,7 +847,7 @@
                 recognition.maxAlternatives = 1;
 
                 const input = document.getElementById('userInput');
-                input.placeholder = "Listening... Speak now, Jazib...";
+                input.placeholder = "Listening... Speak now...";
 
                 recognition.onresult = function(event) {
                     const speechResult = event.results[0][0].transcript;
@@ -880,28 +890,30 @@
                         <div class="msg-bubble user">Load history: ${title}</div>
                     </div>
                     <div class="msg-wrapper-ai">
-                        <div class="msg-bubble ai">Successfully loaded <b>${title}</b>. All paragraph writing engines, file upload tools, and Jazib Voice scripts are fully online.</div>
+                        <div class="msg-bubble ai">Successfully loaded <b>${title}</b> session history. All writing and code tools are online.</div>
                     </div>
                 </div>
             `;
         }
 
-        // SMART CONVERSATIONAL LOGIC FOR REAL CHAT REPLIES
-        function getSmartAIResponse(userText) {
-            const cleanText = userText.toLowerCase().trim();
+        // SMART ENGLISH CONTENT & CODE GENERATOR WITH THINKING SIMULATION
+        function generateEnglishResponse(query) {
+            const q = query.toLowerCase().trim();
 
-            if (cleanText === 'hi' || cleanText === 'hello' || cleanText === 'salam' || cleanText === 'hey') {
-                return "Hello Jazib! Main Vortex AI hoon. Bataiye aaj main aap ki kya madad kar sakta hoon? Koi code likhwana hai ya koi article/paragraph taiyar karna hai?";
-            } 
-            else if (cleanText.includes('how are you') || cleanText.includes('kesa ho')) {
-                return "Main bilkul theek hoon Jazib! Aap batayein, aap ka workspace kaisa chal raha hai?";
+            if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'salam') {
+                return "Hello Jazib! I am Vortex AI. How can I assist you with your workspace tasks, writing projects, or coding queries today?";
             }
-            else if (cleanText.includes('code') || cleanText.includes('html') || cleanText.includes('css')) {
-                return `Aap ne code ke hawale se pucha hai: <b>"${userText}"</b>. Yeh lijiye aap ka requested code snippet ya solution ready hai. Mazeed kisi refinement ki zarurat ho toh batayein!`;
+            else if (q.includes('vortex ai')) {
+                return "<b>Vortex AI</b> is an advanced, high-performance executive workspace designed to streamline multi-disciplinary workflows, ranging from deep content writing and academic thesis generation to complex code synthesis and mechanical engineering simulations. Built with an intuitive obsidian glassmorphism interface, it empowers developers, researchers, and creators to execute high-value tasks with exceptional speed and precision.";
+            }
+            else if (q.includes('paragraph') || q.includes('write')) {
+                return `Here is a professionally structured paragraph based on your request for <b>"${query}"</b>:<br><br>In contemporary digital environments, efficient content creation relies heavily on advanced computational models and automated structuring tools. By leveraging high-throughput text synthesis pipelines, developers and writers can seamlessly bridge the gap between raw data input and polished textual output, ensuring both clarity and structural depth across diverse applications.`;
+            }
+            else if (q.includes('code') || q.includes('html') || q.includes('css') || q.includes('javascript')) {
+                return `Here is the requested code solution for <b>"${query}"</b>:<br><br><pre style="background:#090a0f; padding:12px; border-radius:8px; overflow-x:auto; font-family:'JetBrains Mono', monospace; font-size:13px; color:#a855f7;"><code>&lt;!-- Optimized Vortex Component --&gt;\n&lt;div class="vortex-container"&gt;\n    &lt;h2&gt;Workspace Active&lt;/h2&gt;\n    &lt;p&gt;Successfully compiled for Jazib (PRO)&lt;/p&gt;\n&lt;/div&gt;</code></pre><br>Let me know if you need any adjustments or further enhancements to this snippet!`;
             }
             else {
-                // General smart conversational reply matching user's input naturally
-                return `Jazib, aap ke is sawal <b>"${userText}"</b> par hamari AI engines kaam kar rahi hain. Yeh raha iska behtareen response aur solution:<br><br>Aap ke diye gaye topic par workspace पुरी tarah optimized hai. Isme mazeed details ya koi specific formatting chahiye toh fauran bataiye!`;
+                return `Regarding your query <b>"${query}"</b>, here is the detailed breakdown and solution:<br><br>The active workspace has fully analyzed your parameters. The requested topic has been processed through our primary synthesis engine, providing you with targeted insights, clean structural formatting, and precise execution details. Feel free to ask if you need further refinement!`;
             }
         }
 
@@ -915,27 +927,39 @@
 
             const inner = document.getElementById('chatContentInner');
             
-            // Get smart natural response instead of rigid boring sentence
-            const aiReply = getSmartAIResponse(text);
-            
-            const rowHTML = `
-                <div class="message-row">
+            // 1. Append User Message
+            const userRowID = 'msg-' + Date.now();
+            inner.insertAdjacentHTML('beforeend', `
+                <div class="message-row" id="${userRowID}">
                     <div class="msg-wrapper-user">
                         <div class="msg-bubble user">${text}</div>
                     </div>
                     <div class="msg-wrapper-ai">
-                        <div class="msg-bubble ai">${aiReply}</div>
+                        <div class="msg-bubble ai" id="ai-resp-${userRowID}">
+                            <div class="thinking-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            `;
-
-            inner.insertAdjacentHTML('beforeend', rowHTML);
+            `);
 
             input.value = '';
             input.style.height = '24px';
 
             const container = document.getElementById('chatContainer');
             container.scrollTop = container.scrollHeight;
+
+            // 2. Simulate AI Thinking Process (1.2 seconds delay with thinking dots)
+            setTimeout(() => {
+                const aiBubble = document.getElementById(`ai-resp-${userRowID}`);
+                if(aiBubble) {
+                    aiBubble.innerHTML = generateEnglishResponse(text);
+                    container.scrollTop = container.scrollHeight;
+                }
+            }, 1200);
         }
 
         function handleKeyPress(e) {
