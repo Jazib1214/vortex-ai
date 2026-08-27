@@ -278,7 +278,7 @@
         }
         .top-three-dots:hover { background: var(--surface-hover); border-color: var(--accent-color); }
 
-        /* Gemini Style Three Dots Dropdown */
+        /* Dropdown */
         .dots-dropdown {
             display: none;
             position: absolute;
@@ -311,7 +311,7 @@
         }
         .dots-option:hover { background: var(--surface-hover); color: #818cf8; }
 
-        /* Chat Container */
+        /* Chat Container & Flow */
         .chat-container {
             flex: 1;
             overflow-y: auto;
@@ -355,8 +355,15 @@
             width: 100%;
             gap: 4px;
         }
-        .message-bubble.user { align-items: flex-end; }
-        .message-bubble.ai { align-items: flex-start; }
+        
+        /* Proper alignment: User right, AI left */
+        .message-bubble.user { 
+            align-items: flex-end; 
+        }
+        
+        .message-bubble.ai { 
+            align-items: flex-start; 
+        }
 
         .bubble-card {
             background: var(--bg-panel);
@@ -368,6 +375,7 @@
             word-break: break-word;
             border: 1px solid var(--border-glass);
         }
+
         .message-bubble.user .bubble-card {
             background: var(--accent-color);
             color: #fff;
