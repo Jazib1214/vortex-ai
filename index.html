@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Console Verification Tag -->
     <meta name="google-site-verification" content="vortex-ai-verification-raja-jazib-console">
     <title>Vortex AI - Executive Workspace</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #05070b;
-            --bg-sidebar: #090d16;
-            --bg-panel: #0e1422;
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.25);
+            --bg-base: #131314;
+            --bg-sidebar: #1e1f20;
+            --bg-panel: #1e1f20;
+            --surface-hover: #2d2e30;
+            --border-glass: #333537;
+            --text-main: #e3e3e3;
+            --text-muted: #c4c7c5;
+            --accent-color: #8ab4f8;
+            --accent-glow: rgba(138, 180, 248, 0.15);
             --sidebar-width: 280px;
         }
 
@@ -24,8 +24,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
@@ -36,14 +35,14 @@
             overflow: hidden;
         }
 
-        /* Sidebar Styles */
+        /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
             background-color: var(--bg-sidebar);
             border-right: 1px solid var(--border-glass);
             display: flex;
             flex-direction: column;
-            padding: 20px 16px;
+            padding: 14px;
             transition: transform 0.3s ease, width 0.3s ease;
             z-index: 100;
         }
@@ -52,6 +51,7 @@
             transform: translateX(calc(-1 * var(--sidebar-width)));
             width: 0;
             padding: 0;
+            overflow: hidden;
             border: none;
         }
 
@@ -59,262 +59,253 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .brand-box {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #6366f1 0%, #0ea5e9 100%);
-            border-radius: 12px;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #8ab4f8 0%, #c58af9 100%);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 18px;
-            color: white;
-            box-shadow: 0 0 20px var(--accent-glow);
+            font-weight: 700;
+            font-size: 14px;
+            color: #111;
         }
 
         .brand-title {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
         }
 
-        .collapse-btn {
+        .icon-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 18px;
-            padding: 4px;
-            border-radius: 6px;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .collapse-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .icon-btn:hover { background: var(--surface-hover); color: #fff; }
 
-        .creator-tag {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            padding-left: 48px;
-        }
-        .creator-tag span { color: #38bdf8; font-weight: 600; }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
+        .new-chat-btn {
+            background: #282a2c;
+            border: 1px solid var(--border-glass);
             color: var(--text-main);
-            padding: 10px 12px;
-            border-radius: 10px;
-            text-align: left;
+            padding: 10px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            margin-bottom: 6px;
-            transition: all 0.2s ease;
-        }
-        .nav-btn:hover, .nav-btn.active {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-        }
-
-        .menu-section {
             margin-bottom: 20px;
+            transition: 0.2s;
         }
+        .new-chat-btn:hover { background: var(--surface-hover); }
+
         .section-title {
-            font-size: 10px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.5px;
             color: var(--text-muted);
-            margin: 16px 0 8px 12px;
-            font-weight: 700;
+            margin-bottom: 8px;
+            padding-left: 8px;
+            font-weight: 600;
         }
 
         .history-list {
             flex: 1;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
         .history-list::-webkit-scrollbar { width: 4px; }
-        .history-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-        
+        .history-list::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
         .history-item {
-            padding: 8px 12px;
-            font-size: 12px;
+            background: transparent;
+            border: none;
             color: var(--text-muted);
+            padding: 9px 12px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 13px;
+            cursor: pointer;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            cursor: pointer;
-            border-radius: 6px;
         }
-        .history-item:hover { background: rgba(255,255,255,0.03); color: #fff; }
+        .history-item:hover { background: var(--surface-hover); color: #fff; }
 
         .sidebar-footer {
-            margin-top: auto;
             border-top: 1px solid var(--border-glass);
-            padding-top: 16px;
+            padding-top: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        /* Workspace Styles */
+        /* Main Workspace */
         .main-workspace {
             flex: 1;
             display: flex;
             flex-direction: column;
             background-color: var(--bg-base);
             position: relative;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* Top Header */
-        .top-header {
+        .top-navbar {
             height: 60px;
-            border-bottom: 1px solid var(--border-glass);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
-            background-color: var(--bg-base);
+            padding: 0 20px;
+            flex-shrink: 0;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .menu-icon {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            cursor: pointer;
-            font-size: 20px;
-        }
-        .header-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #38bdf8;
-        }
-
-        .header-right {
+        .top-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .top-icon-btn {
-            background: transparent;
-            border: 1px solid var(--border-glass);
-            color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+
+        .top-right {
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 13px;
+            gap: 10px;
         }
-        .top-icon-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        
-        .upgrade-btn {
-            background: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+
+        .upgrade-pro-btn {
+            background: linear-gradient(90deg, #8ab4f8, #c58af9);
+            color: #111;
             border: none;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 16px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px var(--accent-glow);
+            box-shadow: 0 2px 8px rgba(138,180,248,0.3);
         }
+        .upgrade-pro-btn:hover { opacity: 0.9; }
+
+        .top-action-chip {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .top-action-chip:hover { background: var(--surface-hover); color: #fff; }
 
         /* Chat Container */
         .chat-container {
             flex: 1;
             overflow-y: auto;
-            padding: 40px 24px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
+        }
+
+        .chat-content-inner {
+            width: 100%;
+            max-width: 760px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .welcome-center {
             text-align: center;
             margin: auto;
+            padding: 40px 0;
         }
         .welcome-center h1 {
-            font-size: 40px;
+            font-size: 38px;
             font-weight: 700;
-            background: linear-gradient(90deg, #f8fafc, #94a3b8);
+            background: linear-gradient(90deg, #8ab4f8, #c58af9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .welcome-center p {
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 15px;
         }
 
-        .bubble {
-            max-width: 800px;
+        .message-bubble {
+            display: flex;
+            flex-direction: column;
             width: 100%;
-            line-height: 1.6;
-            font-size: 14px;
+            gap: 4px;
         }
-        .bubble.user {
-            text-align: right;
-        }
-        .bubble-content {
-            display: inline-block;
-            padding: 12px 16px;
-            border-radius: 12px;
-            text-align: left;
-        }
-        .bubble.user .bubble-content {
+        .message-bubble.user { align-items: flex-end; }
+        .message-bubble.ai { align-items: flex-start; }
+
+        .bubble-card {
             background: var(--bg-panel);
-            color: #fff;
-            border-bottom-right-radius: 2px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 85%;
+            word-break: break-word;
+            border: 1px solid var(--border-glass);
         }
-        .bubble.ai .bubble-content {
-            background: transparent;
-            color: var(--text-main);
+        .message-bubble.user .bubble-card {
+            background: #282a2c;
+            color: #fff;
         }
 
         /* Input Area */
-        .input-wrapper {
-            padding: 20px 24px;
-            background-color: var(--bg-base);
-            border-top: 1px solid var(--border-glass);
+        .input-section {
+            padding: 16px 20px 24px;
+            display: flex;
+            justify-content: center;
+            background: var(--bg-base);
+            flex-shrink: 0;
         }
-        .input-box {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--bg-panel);
+
+        .input-box-wrapper {
+            width: 100%;
+            max-width: 760px;
+            background: var(--bg-panel);
             border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 24px;
+            padding: 12px 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            transition: 0.3s;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
-        .input-box:focus-within {
+        .input-box-wrapper:focus-within {
             border-color: var(--accent-color);
-            box-shadow: 0 0 15px var(--accent-glow);
         }
-        
-        .textarea-el {
+
+        .chat-textarea {
             width: 100%;
             background: transparent;
             border: none;
@@ -326,84 +317,385 @@
             max-height: 120px;
         }
 
-        .toolbar {
+        .input-toolbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .tools-left {
+
+        .toolbar-left {
             display: flex;
+            align-items: center;
             gap: 8px;
         }
-        .tool-icon {
+
+        .tool-icon-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            cursor: pointer;
-            font-size: 16px;
             width: 36px;
             height: 36px;
-            border-radius: 8px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
-        }
-        .tool-icon:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        
-        .mic-icon.recording {
-            color: #ef4444;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        .send-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
             cursor: pointer;
+            font-size: 16px;
+        }
+        .tool-icon-btn:hover { background: var(--surface-hover); color: #fff; }
+
+        .voice-trigger-btn {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 6px 10px;
+            background: rgba(138, 180, 248, 0.1);
+            border: 1px solid rgba(138, 180, 248, 0.3);
+            border-radius: 16px;
+            cursor: pointer;
+        }
+        .wave-line {
+            width: 2.5px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            animation: wavePulse 1s infinite alternate;
+        }
+        .wave-line:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+        .wave-line:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+        @keyframes wavePulse { 0% { transform: scaleY(0.4); } 100% { transform: scaleY(1.2); } }
+
+        .send-action-btn {
+            background: var(--accent-color);
+            color: #111;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: 0.2s;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
         }
-        .send-btn:hover { background: #4f46e5; }
+        .send-action-btn:hover { opacity: 0.9; }
 
         /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.75);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
-        .modal-content {
+        .modal-box {
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border-glass);
+            width: 440px;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .modal-box h3 { font-size: 18px; color: #fff; }
+        .modal-option {
             background: var(--bg-panel);
             border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            width: 500px;
-            max-width: 100%;
-            padding: 24px;
-            animation: slideIn 0.3s ease;
-        }
-        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-        }
-        .modal-title { font-size: 18px; font-weight: 600; color: #fff; }
-        .close-modal { background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 18px; }
-
-        .tool-option {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-glass);
-            padding: 16px;
+            padding: 12px 16px;
             border-radius: 12px;
-            margin-bottom: 12px;
-            cursor: pointer
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+        .modal-option:hover { background: var(--surface-hover); border-color: var(--accent-color); }
+        .modal-close {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="appSidebar">
+        <div class="sidebar-header">
+            <div class="brand-box">
+                <div class="brand-logo">V</div>
+                <div class="brand-title">Vortex AI</div>
+            </div>
+            <button class="icon-btn" onclick="toggleSidebar()" title="Collapse">☰</button>
+        </div>
+
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <span>＋</span> New Chat
+        </button>
+
+        <div class="section-title">Recent Chats</div>
+        <div class="history-list" id="historyList">
+            <button class="history-item" onclick="loadHistory('Advanced Paragraph Writing Studio')">Advanced Paragraph Writing</button>
+            <button class="history-item" onclick="loadHistory('Jazib Voice Assistant Test')">Jazib Voice Assistant Test</button>
+            <button class="history-item" onclick="loadHistory('AI Engine Pro Parameters')">AI Engine Pro Parameters</button>
+        </div>
+
+        <div class="sidebar-footer">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 4px 8px;">
+                <span>👤 Jazib (Pro Owner)</span>
+                <span style="color: #8ab4f8; font-weight: bold;">PRO</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="main-workspace">
+        <div class="top-navbar">
+            <div class="top-left">
+                <button class="icon-btn" onclick="toggleSidebar()" title="Toggle Menu">☰</button>
+                <div style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Executive Workspace</div>
+            </div>
+            
+            <div class="top-right">
+                <button class="upgrade-pro-btn" onclick="openUpgradeModal()">✨ Upgrade Pro</button>
+                <button class="top-action-chip" onclick="openModal('voiceModal')">🎙️ Jazib Voice</button>
+                <button class="top-action-chip" onclick="openModal('studioModal')">Studio</button>
+                <button class="top-action-chip" onclick="openModal('settingsModal')">Settings</button>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-content-inner" id="chatContentInner">
+                <div class="welcome-center" id="welcomeCenter">
+                    <h1>Hello, Jazib.</h1>
+                    <p>What would you like to build or write today?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-box-wrapper">
+                <textarea class="chat-textarea" id="userInput" placeholder="Ask Vortex AI or type a topic for paragraph writing..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
+                
+                <div class="input-toolbar">
+                    <div class="toolbar-left">
+                        <button class="tool-icon-btn" onclick="openModal('featuresModal')" title="Pro Tools & Paragraph Writer">＋</button>
+                        <button class="tool-icon-btn" onclick="insertParagraphTool()" title="Paragraph Generator Mode">📝</button>
+                        
+                        <!-- Jazib Voice Wave Trigger -->
+                        <div class="voice-trigger-btn" onclick="openModal('voiceModal')" title="Jazib Voice Recording">
+                            <div class="wave-line"></div>
+                            <div class="wave-line"></div>
+                            <div class="wave-line"></div>
+                        </div>
+                    </div>
+                    <button class="send-action-btn" onclick="sendMessage()">↑</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Profile Modal -->
+    <div class="modal-overlay" id="voiceModal">
+        <div class="modal-box">
+            <h3>🎙️ Jazib Voice Synthesizer</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Select your active voice model for real-time speech interaction:</p>
+            
+            <div class="modal-option" onclick="selectVoice('Jazib Custom Pro Voice (Active)')">
+                <span>🎤 Jazib Custom Pro Voice</span>
+                <span style="color: var(--accent-color); font-size: 11px; font-weight: bold;">Active</span>
+            </div>
+            <div class="modal-option" onclick="selectVoice('Executive Neural Assistant')">
+                <span>🔊 Executive Neural Tone</span>
+            </div>
+
+            <button class="modal-close" onclick="closeModal('voiceModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Pro Features & Paragraph Writer Modal -->
+    <div class="modal-overlay" id="featuresModal">
+        <div class="modal-box">
+            <h3>⚡ Vortex Unique Pro Features</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Exclusive AI writing & generation tools:</p>
+            
+            <div class="modal-option" onclick="runFeature('paragraph')">
+                <span>📝 Advanced Paragraph Writer & Enhancer</span>
+                <span style="color: #8ab4f8; font-size: 11px;">Pro Only</span>
+            </div>
+            <div class="modal-option" onclick="runFeature('factcheck')">
+                <span>🔍 Deep Research & Fact Checker</span>
+                <span style="color: #8ab4f8; font-size: 11px;">Pro Only</span>
+            </div>
+            <div class="modal-option" onclick="runFeature('codeoptimizer')">
+                <span>💻 Clean Code Refactor Engine</span>
+                <span style="color: #8ab4f8; font-size: 11px;">Pro Only</span>
+            </div>
+
+            <button class="modal-close" onclick="closeModal('featuresModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Studio Modal -->
+    <div class="modal-overlay" id="studioModal">
+        <div class="modal-box">
+            <h3>🎨 Vortex Studio & Layout</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Manage design themes, custom fonts, and workspace layout configurations.</p>
+            <button class="modal-close" onclick="closeModal('studioModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-box">
+            <h3>⚙️ Console & Web Verification</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Google Site Verification Tag: <br><code style="color: #8ab4f8;">vortex-ai-verification-raja-jazib-console</code></p>
+            <p style="font-size: 12px; color: var(--text-muted);">Status: Ready for GitHub Pages & Play Store Webview wrap.</p>
+            <button class="modal-close" onclick="closeModal('settingsModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Upgrade Pro Modal -->
+    <div class="modal-overlay" id="upgradeModal">
+        <div class="modal-box">
+            <h3>✨ Upgrade to Vortex AI Pro</h3>
+            <p style="font-size: 13px; color: var(--text-main);">Unlock unlimited paragraph generation, custom Jazib Voice cloning, priority cloud response speed, and direct APK/App publishing tools.</p>
+            <div style="background: rgba(138,180,248,0.1); padding: 12px; border-radius: 10px; border: 1px solid rgba(138,180,248,0.3); font-size: 12px; color: #8ab4f8;">
+                ✓ Lifetime Access for Jazib Workspace
+            </div>
+            <button class="modal-close" onclick="closeModal('upgradeModal')" style="background: var(--accent-color); color: #111;">Active Owner Account</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('appSidebar').classList.toggle('collapsed');
+        }
+
+        function autoGrow(element) {
+            element.style.height = '24px';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function openUpgradeModal() {
+            openModal('upgradeModal');
+        }
+
+        function selectVoice(name) {
+            alert("Voice Profile Activated: " + name);
+            closeModal('voiceModal');
+        }
+
+        function startNewChat() {
+            const inner = document.getElementById('chatContentInner');
+            inner.innerHTML = `
+                <div class="welcome-center" id="welcomeCenter">
+                    <h1>New Chat Session.</h1>
+                    <p>What would you like to create, Jazib?</p>
+                </div>
+            `;
+        }
+
+        function loadHistory(title) {
+            const center = document.getElementById('welcomeCenter');
+            if(center) center.style.display = 'none';
+
+            const inner = document.getElementById('chatContentInner');
+            inner.innerHTML = `
+                <div class="message-bubble user"><div class="bubble-card">Load workspace history: ${title}</div></div>
+                <div class="message-bubble ai"><div class="bubble-card">Successfully loaded history for <b>${title}</b>. All custom parameters, paragraph writing configurations, and Jazib Voice scripts are fully initialized and synced.</div></div>
+            `;
+        }
+
+        function insertParagraphTool() {
+            const input = document.getElementById('userInput');
+            input.value = "Write a professional, high-impact paragraph about: ";
+            input.focus();
+            autoGrow(input);
+        }
+
+        function runFeature(type) {
+            closeModal('featuresModal');
+            const inner = document.getElementById('chatContentInner');
+            const center = document.getElementById('welcomeCenter');
+            if(center) center.style.display = 'none';
+
+            let responseText = "";
+            if(type === 'paragraph') {
+                responseText = "<b>[Advanced Paragraph Generator Pro]:</b> Vortex AI's dedicated writing engine is designed to formulate structured, clear, and context-aware paragraphs instantly. Just input your topic or keywords, and the system synthesizes professional prose tailored for academic reports, executive summaries, or publishing content.";
+            } else if(type === 'factcheck') {
+                responseText = "<b>[Deep Research & Fact Checker]:</b> Verified against high-precision data indices. All references and structural elements are cross-checked for maximum accuracy and clarity.";
+            } else {
+                responseText = "<b>[Clean Code Refactor Engine]:</b> Optimized workspace script compiled successfully with zero syntax blocks or execution latency.";
+            }
+
+            inner.innerHTML += `
+                <div class="message-bubble user"><div class="bubble-card">Executed Pro Feature: ${type}</div></div>
+                <div class="message-bubble ai"><div class="bubble-card">${responseText}</div></div>
+            `;
+            document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const center = document.getElementById('welcomeCenter');
+            if(center) center.style.display = 'none';
+
+            const inner = document.getElementById('chatContentInner');
+            
+            inner.innerHTML += `
+                <div class="message-bubble user">
+                    <div class="bubble-card">${text}</div>
+                </div>
+            `;
+
+            input.value = '';
+            input.style.height = '24px';
+
+            // Smart contextual response simulation (No robotic/stuck replies)
+            setTimeout(() => {
+                let aiReply = `Here is the structured analysis and response for your query regarding "${text}":<br><br>`;
+                aiReply += `Vortex AI has processed your parameters using the advanced executive engine. Whether you are drafting academic material, writing professional paragraphs, or configuring your app workspace, this layout delivers optimal performance and clean readability.`;
+
+                inner.innerHTML += `
+                    <div class="message-bubble ai">
+                        <div class="bubble-card">${aiReply}</div>
+                    </div>
+                `;
+                const container = document.getElementById('chatContainer');
+                container.scrollTop = container.scrollHeight;
+            }, 400);
+        }
+
+        function handleKeyPress(e) {
+            if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
