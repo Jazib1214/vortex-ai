@@ -657,7 +657,7 @@
                     <button class="upload-option" onclick="handleUpload('More Tools')">🛠️ More Tools</button>
                 </div>
 
-                <textarea class="chat-textarea" id="userInput" placeholder="Ask Vortex AI or type a topic..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
+                <textarea class="chat-textarea" id="userInput" placeholder="Ask Vortex AI or type a topic..." rows="1" oninput="autoGrow(this)" onkeydown="handleKeyPress(event)"></textarea>
                 
                 <div class="input-toolbar">
                     <div class="toolbar-left">
@@ -675,7 +675,7 @@
                         </button>
                     </div>
 
-                    <button class="send-action-btn" onclick="sendMessage()">↑</button>
+                    <button class="send-action-btn" id="sendBtn">↑</button>
                 </div>
             </div>
         </div>
@@ -867,7 +867,6 @@
 
             const inner = document.getElementById('chatContentInner');
             
-            // Append user message and immediate AI response cleanly
             const userHTML = `<div class="message-bubble user"><div class="bubble-card">${text}</div></div>`;
             
             let aiReply = `Here is the generated response and detailed structural analysis for your query regarding <b>"${text}"</b>:<br><br>`;
@@ -890,6 +889,9 @@
                 sendMessage();
             }
         }
+
+        // Direct event binding to guarantee send button works on click
+        document.getElementById('sendBtn').addEventListener('click', sendMessage);
 
         // Close popups when clicking outside
         window.onclick = function(event) {
